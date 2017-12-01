@@ -47,6 +47,10 @@
         </form>
         <script>
           $(document).ready(function() {
+            var searObj = G.searchToObj();
+            if(searObj.enquiry) {
+              $('#enquire-dialog').fadeIn(400);
+            }
             $('#enquiry-dialog-form').validate({
               rules: {
                 email: {
