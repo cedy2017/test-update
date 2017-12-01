@@ -1,0 +1,225 @@
+<div class="list-gallery" style="margin-top: 36px;">
+  <div class="btn-wrapper">
+    <!-- <div id="btn-agent" class="btn-agent active">{{__('SOLE AGENTS')}}</div> -->
+    <div id="btn-list" class="btn-list active">{{__('NEW LISTINGS')}}</div>
+  </div>
+  <div class="content-wrapper">
+    <!-- <div id="tab-agent">
+      <div class="list-wrapper">
+        <div id="agent-left-btn" class="side-btn left">
+          
+        </div>
+        <div id="agent-right-btn" class="side-btn right">
+          
+        </div>
+        <div class="silder-wrapper">
+          <ul id="agent-silder" class="silder">
+          {% for item in soleAgents %}
+            <li>
+              <div class="card">
+                <div class="img" style="background-image:url({{item.url}})"></div>
+                <a href="/property-detail">
+                  <div class="name">{{item.name}}</div>
+                  <div class="location">{{item.location}}</div>
+                  <div class="price">{{item.price}}</div>
+                  <div class="time">{{item.time}}</div>
+                  <div class="avatar" style="background-image:url(/public/images/avatar.png)"></div>
+                </a>
+              </div>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+        <script>
+          ;(function(){
+            var $root = $('#agent-silder'),
+                $lbtn = $('#agent-left-btn'),
+                $rbtn = $('#agent-right-btn'),
+                rootParentWidth = $root.parent().width(),
+                offset = 0,
+                rootWidth = $root.width(),
+                $children = $root.children(),
+                childWidth,
+                totalWidth;
+            childWidth = (rootParentWidth) / 3;
+            if(rootParentWidth < 1040) {
+              childWidth = (rootParentWidth) / 2;
+            }
+            if(rootParentWidth < 704) {
+              childWidth = (rootParentWidth) / 2;
+            }
+            totalWidth = childWidth * $children.length;
+
+            $(window).resize(function() {
+              rootParentWidth = $root.parent().width();
+              rootWidth = $root.width();
+              childWidth = (rootParentWidth) / 3;
+             
+              if(rootParentWidth < 1040) {
+                childWidth = (rootParentWidth) / 2;
+              }
+              if(rootParentWidth < 704) {
+                childWidth = rootParentWidth;
+              } 
+              totalWidth = childWidth * $children.length;
+              $root.css('width', totalWidth + 'px');
+              $.each($children, function(index, li) {
+                $(li).css('width', childWidth + 'px');
+              });
+              offset = 0;
+              $root.css('transform', 'translateX(' + offset + 'px)')
+            });
+            $root.css('width', totalWidth + 'px');
+            $.each($children, function(index, li) {
+              $(li).css('width', childWidth + 'px');
+            });
+            $lbtn.click(function(e) {
+              offset += childWidth;
+              if (offset > 0) {
+                offset = 0;
+              }
+              $root.css('transform', 'translateX(' + offset + 'px)');
+            });
+            $rbtn.click(function(e) {
+              offset -= childWidth;
+              var offsetNum = 1;
+              if(rootParentWidth >= 1040) {
+                offsetNum = 3;
+              }
+              if (offset <= -(childWidth * ($children.length - offsetNum))) {
+                offset = -totalWidth + rootParentWidth;
+              }
+              $root.css('transform', 'translateX(' + offset + 'px)')
+            });
+          })();
+        </script>
+      </div>
+    </div> -->
+    <div style="display: block;" id="tab-list">
+      <div class="list-wrapper">
+        <div id="list-left-btn" class="side-btn left">
+          
+        </div>
+        <div id="list-right-btn" class="side-btn right">
+            
+        </div>
+        <div class="silder-wrapper">
+          <ul id="list-silder" class="silder">
+          {% for item in newListing %}
+            <li>
+              <div class="card">
+                <a href="/property-detail?search_type={{item.type}}&id={{item.id}}">
+                  <div class="img" style="background-image:url(https://www.listsothebysrealtyhk.com{{item.url}})"></div>
+                  <div class="name">{{item.name}}</div>
+                  <div class="location">{{item.location}}</div>
+                  <div class="price">{{item.sqft}} (SQ FT.)|HKD {{item.price}}</div>
+                  <!-- <div class="time">{{item.time}}</div> -->
+                </a>
+              </div>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+        <script>
+          ;(function(){
+            var $root = $('#list-silder'),
+                $lbtn = $('#list-left-btn'),
+                $rbtn = $('#list-right-btn'),
+                rootParentWidth = $root.parent().width(),
+                offset = 0,
+                rootWidth = $root.width(),
+                $children = $root.children(),
+                childWidth,
+                totalWidth;
+            childWidth = (rootParentWidth) / 3;
+
+            $('.img', '#list-silder').height(childWidth * 2 / 3);
+            $('.card', '#list-silder').height(childWidth * 2 / 3 + 70);
+
+            if(rootParentWidth < 1040) {
+              childWidth = (rootParentWidth) / 2;
+            }
+            if(rootParentWidth < 704) {
+              childWidth = (rootParentWidth) / 2;
+            }
+            totalWidth = childWidth * $children.length;
+
+            $(window).resize(function() {
+              rootParentWidth = $root.parent().width();
+              rootWidth = $root.width();
+              childWidth = (rootParentWidth) / 3;
+
+              if(rootParentWidth < 1040) {
+                childWidth = (rootParentWidth) / 2;
+              }
+              if(rootParentWidth < 704) {
+                childWidth = rootParentWidth;
+              } 
+              totalWidth = childWidth * $children.length;
+              $root.css('width', totalWidth + 'px');
+              $.each($children, function(index, li) {
+                $(li).css('width', childWidth + 'px');
+              });
+              offset = 0;
+
+              $('.img', '#list-silder').height(childWidth * 2 / 3);
+              $('.card', '#list-silder').height(childWidth * 2 / 3 + 70);
+
+              $root.css('transform', 'translateX(' + offset + 'px)')
+            });
+            $root.css('width', totalWidth + 'px');
+            $.each($children, function(index, li) {
+              $(li).css('width', childWidth + 'px');
+            });
+            $lbtn.click(function(e) {
+              offset += childWidth;
+              if (offset > 0) {
+                offset = 0;
+              }
+              $root.css('transform', 'translateX(' + offset + 'px)');
+            });
+            $rbtn.click(function(e) {
+              offset -= childWidth;
+              var offsetNum = 1;
+              if(rootParentWidth >= 1040) {
+                offsetNum = 3;
+              }
+              if (offset <= -(childWidth * ($children.length - offsetNum))) {
+                offset = -totalWidth + rootParentWidth;
+              }
+              $root.css('transform', 'translateX(' + offset + 'px)')
+            });
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+  <script>
+    ;(function() {
+      var $btnAgent = $('#btn-agent'),
+          $btnList = $('#btn-list'),
+          $tabAgent = $('#tab-agent'),
+          $tabList = $('#tab-list');
+      //$tabList.fadeOut(0);
+      $btnAgent.on('click', function(e){
+        setTimeout(function() {
+          $(window).resize();
+        });
+        $btnAgent.addClass('active');
+        $btnList.removeClass('active');
+        $tabList.fadeOut(0);
+        $tabAgent.fadeIn(500);
+      });
+      $btnList.on('click', function(e) {
+        // 重新触发 list 计算
+        setTimeout(function() {
+          $(window).resize();
+        });
+        $btnList.addClass('active');
+        $btnAgent.removeClass('active');
+        $tabAgent.fadeOut(0);
+        $tabList.fadeIn(500);
+      });
+    })();
+  </script>
+</div>

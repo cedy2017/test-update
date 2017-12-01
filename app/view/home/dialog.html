@@ -1,0 +1,25 @@
+<div id="pricay-dialog" class="dialog-wrapper">
+  <div class="dialog-scroll">
+    <div class="dialog">
+      <div class="dialog-header">
+        <div class="dialog-close"><i class="fa fa-times"></i></div>
+      </div>
+      <div class="dialog-body">
+        <div class="terms-btns">
+          <div class="btn active">Privacy Policy</div>
+          <div class="btn">Trems & Conditions</div>
+        </div>
+        <div class="terms">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function openDialog() {
+    $("#website-privacy").fadeIn(400);
+  }
+  $('.dialog-close').click(function(e){
+    $(e.target).closest('.dialog-wrapper').fadeOut(400);
+  });
+</script>

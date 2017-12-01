@@ -1,0 +1,195 @@
+<div id="enquire-dialog" class="dialog-wrapper">
+  <div class="dialog-scroll">
+    <div class="dialog">
+    
+      <div class="dialog-header">
+        <div class="dialog-close"><i class="fa fa-times"></i></div>
+      </div>
+      <div class="dialog-body">
+        <form id="enquiry-form" onsubmit="return false;">
+            <div class="container enq_dialog">
+              <div class="row">
+                <div class="col-md-12 enq_header">
+                  ENQUIRY
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 house_detail">
+                  <div class="img" style="background-image: url({{property.gallery[0].image}});" ></div>
+                  <div class="name">{{property.name}}</div>
+                  <div class="location">{{property.address}}</div>
+                  <div class="price">{{property.areaSqft}} (SQ FT) | HKD {{property.sale.price or property.rent.price}}</div>
+                </div>
+                <div class="col-md-6">
+                  {{forms.field('email', 'EMAIL')}}
+                  {{forms.field('name', 'NAME')}}
+                  {{forms.field('mobile', 'MOBILE')}}
+                  {{forms.textarea('message', 'MESSAGE')}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="clo-md-12">
+                  <div class="btn_wrapper text-center">
+                    <button id="submit-enquiry" class="common-btn">SUBMIT</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <script>
+            $(document).ready(function() {
+              $('#enquiry-form').validate({
+                rules: {
+                  email: {
+                    required: true,
+                    email: true
+                  },
+                  name: {
+                    required: true
+                  },
+                  mobile: {
+                    mobile: true
+                  }
+                }
+              });
+              $('#submit-enquiry').click(function() {
+                if($('#enquiry-form').valid()) {
+                  var data = {
+                    name: $('input[name="name"]').val().trim(),
+                    mobile: $('input[name="mobile"]').val().trim(),
+                    email: $('input[name="email"]').val().trim(),
+                    message: $('textarea[name="message"]').val().trim(),
+                  };
+                  $.ajax({
+                    method: 'post',
+                    data: data,
+                    dataType: 'json',
+                    url: '/api/enquiry/',
+                    success: function() {
+                      G.mNotic('Sent Successfully');
+                    },
+                    error: function(err) {
+                      G.mNotic('Sent Error.' + err.responseText, 'error');
+                    }
+                  });
+                }
+              });
+            });
+          </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="share-dialog" class="dialog-wrapper">
+    <div class="dialog-scroll">
+      <div class="dialog">
+      
+        <div class="dialog-header">
+          <div class="dialog-close"><i class="fa fa-times"></i></div>
+        </div>
+        <div class="dialog-body">
+          <div class="container enq_dialog">
+            <div class="row">
+              <div class="col-md-12 enq_header">
+                SHARE
+              </div>
+            </div>
+            <div class="share_btn_wrapper">
+              <div class="share_btn fb" id="share-to-fb" data-toggle="tooltip" data-placement="top" title="Share to facebook"></div>
+              {% if isMobile %}
+              <a href="whatsapp://send?text={{pageUrl}}" class="share_btn what_app"  data-toggle="tooltip" data-placement="top" title="Share to whatsapp"></a>
+              <div id="share-wechat" data-clipboard-text data-dialog='wechat-dialog' class="share_btn wechat" data-toggle="tooltip" data-placement="top" title="Share to wechat"></div>
+              {% endif %}
+              <a href="mailto:?subject={{property.name}}&body={{pageUrl}}" class="share_btn email" id="share-email" data-toggle="tooltip" data-placement="top" title="Email to friends"></a>
+              <div class="share_btn link copy-link" id="copy-link" data-toggle="tooltip" data-placement="top" title="Copy link" data-clipboard-text></div>
+              <script>
+                (function() {
+                  $('[data-clipboard-text]').attr('data-clipboard-text', window.location.href);
+                  new Clipboard('.copy-link').on('success', function(e) {
+                    G.mNotic('Copy link success.')
+                    e.clearSelection();
+                  });
+                  new Clipboard('#share-wechat');
+                  // $('#share-email').click(function() {
+                  //   window.open('mailto:?subject=subject&body=<a href="www.google.com">G</a>');
+                  // });
+                  $('#share-to-fb').click(function() {
+                    window.open('https://www.facebook.com/sharer/sharer.php?u={{pageUrl}}');
+                  });
+                })()
+                
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=1949168102024628';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+<div id="images-dialog" class="dialog-wrapper">
+  <div class="dialog-scroll">
+    <div class="dialog">
+    
+      <div class="dialog-header">
+        <div class="dialog-close"><i class="fa fa-times"></i></div>
+      </div>
+      <div class="dialog-body">
+        <div id="full-image-view"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="wechat-dialog" class="dialog-wrapper">
+  <div class="dialog-scroll">
+    <div class="dialog">
+    
+      <div class="dialog-header">
+        <h2>Link has been generated</h2>
+        <div class="dialog-close"><i class="fa fa-times"></i></div>
+      </div>
+      <div class="dialog-body">
+        <div class="wechat-link-wrapper" id="wechat-link-wrapper">
+
+        </div>
+        <script>
+          $('#wechat-link-wrapper').text(window.location.href);
+        </script>
+      </div>
+      <div class="to-wechat-wrapper">
+        <a href="weixin://" style="" class="common-btn">Open Wechat paste url</a>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+<!-- <div id="video-dialog" class="dialog-wrapper">
+  <div class="dialog-scroll">
+    <div class="dialog">
+    
+      <div class="dialog-header">
+        <div id="close-full-dialog" class="dialog-close"><i class="fa fa-times"></i></div>
+      </div>
+      <div class="dialog-body">
+        <div id="full-video-view">
+          <video controls style="width: 100%;" id="video-el">
+            <source src="" preload="auto" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+

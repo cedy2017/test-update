@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Video</title>
+  {% include "../base/base.html" %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+</head>
+<body>
+  {% include "../base/header.html" %}
+  <div class="">
+    <div class="video-wrapper text-center">
+      <div id="video-type-switcher" class="vider-type">
+        <div data-type="brand" class="item active">
+          Brand Video
+        </div>
+        <div data-type="live" class="item">
+          LIVE
+        </div>
+        <div data-type="angles" class="item">
+          Extraordinary Angles
+        </div>
+        <div data-type="lifestyle" class="item">
+          Lifestyle Videos
+        </div>
+        <div data-type="houseguest" class="item">
+          HOUSEGUEST
+        </div>
+      </div>
+      <div class="video-list">
+        {% for name, arrs in video %}
+          <div class="tab-item s-container" id="tab-{{name}}">
+            <div class="row">
+            {% for item in arrs %}
+              <div
+                data-total="{{loop.length}}"
+                data-index="{{loop.index0}}"
+                data-id="{{item.hash}}"
+                data-type="{{name}}"
+                class="col-md-3 col-sm-6 col-xs-6"
+                data-poster="/public/sotheby_videos/thumbnails/{{item.thumbnail_fn}}"
+                data-video="/public/sotheby_videos/videos/{{item.video_fn}}"
+              >
+                <div
+                  data-{{name}}-id="{{item.hash}}"
+                  class="video-box"
+                >
+                  <span class="name">{{item.title}}</span>
+                  <span class="desc" style="display: none;">{{item.description|safe}}</span>
+                  <img src="/public/sotheby_videos/thumbnails/{{item.thumbnail_fn}}" alt="{{item.name}}">
+                  <span class="length">{{item.length}}</span>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+        <div id="video-play-wrapper" class="video-play-wrapper">
+          <div class="s-container video-play-body">
+            <div class="close" id="close-video">
+              <i class="fa fa-times"></i>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <video
+                  autobuffer
+                  preload="auto"
+                  controls
+                  style="width: 100%;"
+                  class="video-area"
+                  id="video-el"
+                  poster="/public/sotheby_videos/thumbnails/jvm726ed21ablcp_blcp97908f191tlpj_thumbnail16x9.png"
+                >
+                  <source src="" preload="auto" type="video/mp4">
+                </video>
+              </div>
+              <div class="col-md-4">
+                <div id="video-info-switcher" class="video-info">
+                  <div data-type="overview" class="item active">
+                    Overview
+                  </div>
+                  <div data-type="share" class="item">
+                    Share
+                  </div>
+                </div>
+                <div>
+                  <div class="info-tab active" id="video-overview">
+                    <h2 class="title video-play-name">LIVE FASHION</h2>
+                    <p id="video-play-desc" class="desc">Your best life begins with a home that inspires you.</p>
+                  </div>
+                  <div class="info-tab" id="video-share">
+                    <h2 class="title video-play-name">LIVE FASHION</h2>
+                    <div id="share-type-box" class="share-type-box">
+                      <div data-type="link" class="share">
+                        <div class="header">
+                          Link
+                          <ul class="links">
+                            <li><a id="share-to-fb" class="share-icon fb" href="#"></a></li>
+                            <li><a id="share-to-ins" class="share-icon ins" href="#"></a></li>
+                            <li><a id="share-to-linkin" class="share-icon linkin" href="#"></a></li>
+                            {% if isMobile %}
+                            <li><div data-dialog='wechat-dialog' data-clipboard-text id="share-to-wechat" class="share-icon wechat"></div></li>
+                            {% endif %}
+                          </ul>
+                        </div>
+                        <div class="share-content">
+                          <input id="share-link-input-value" class="input" type="text">
+                          <button id="share-link-button-value" class="common-btn btn copy-link">Copy</button>
+                        </div>
+                      </div>
+                      <div data-type="email" class="share">
+                        <div class="header">Email</div>
+                        <div class="share-content">
+                          <input id="share-value-name" class="input" placeholder="Your Name*" type="text">
+                          <input id="share-value-email" class="input" placeholder="Recipient's Email address*" type="text">
+                          <input id="share-value-text" class="input" placeholder="I thought you might enjoy this." type="text">
+                          <button id="send-mail-btn" class="common-btn btn">Send</button>
+                        </div>
+                      </div>
+                      <!-- <div data-type="embed" class="share">
+                        <div class="header">Embed</div>
+                        <div class="share-content">
+                          <input class="input" type="text">
+                          <button class="common-btn btn">Copy</button>
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="wechat-dialog" class="dialog-wrapper">
+    <div class="dialog-scroll">
+      <div class="dialog">
+      
+        <div class="dialog-header">
+          <h2>Link has been generated</h2>
+          <div class="dialog-close"><i class="fa fa-times"></i></div>
+        </div>
+        <div class="dialog-body">
+          <div class="wechat-link-wrapper" id="wechat-link-wrapper">
+  
+          </div>
+        </div>
+        <div class="to-wechat-wrapper">
+          <a href="weixin://" style="" class="common-btn">Open Wechat paste url</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+
+      var _videoEl = document.getElementById('video-el'),
+          _sources = _videoEl.getElementsByTagName('source');
+
+      _videoEl.onloadeddata = function() {
+        $('.holder').css('height', $('#video-play-wrapper').height());  
+      }
+
+      $("#video-type-switcher").click(function(e) {
+        closeVideo();
+        var $items = $('#video-type-switcher').find('.item');
+        $items.removeClass('active');
+        var $curr = $(e.target).closest('.item');
+        var type = $curr.data('type');
+        $curr.addClass('active');
+        $('.tab-item').removeClass('active');
+        $('#tab-' + type).addClass('active');
+      });
+
+      setTimeout(function() {
+        $('#tab-brand').addClass('active');
+      });
+
+      $('.video-box').click(function(e) {
+        // 加判断高度
+        var height = 600;
+        var $row = $(e.target).closest('.row');
+        var $col = $(e.target).closest('.col-md-3');
+        var clickIndex = $col.data('index');
+        var total = $col.data('total');
+        var indexEl = getLastEl(clickIndex, total);
+
+        $('.video-box').removeClass('selected');
+        $col.find('.video-box').addClass('selected');
+        $('.holder').remove();
+        showVideo($col);
+        $row.find('[data-index="'+ (indexEl - 1) +'"]').after('<div class="col-md-12 clear holder">&nbsp;</div>');
+        $('.holder').css('height', $('#video-play-wrapper').height());  
+      });
+
+      $(window).resize(function() {
+        //closeVideo();
+      });
+      
+      function getLastEl(i, total) {
+        var numOfRow = 4;
+        var calIndex = (Math.floor(i / numOfRow) + 1) * numOfRow;
+        return calIndex >= total ? total : calIndex;
+      }
+
+      function showVideo($col) {
+        var top = $col.position().top + $col.height() - 20;
+        $('#video-play-wrapper').css('top', top).css('display', 'block');
+
+        var videoPath = $col.data('video'),
+            id = $col.data('id'),
+            type = $col.data('type'),
+            poster = $col.data('poster'),
+            name = $col.find('.name').text(),
+            desc = $col.find('.desc').html();
+        $('.video-play-name').text(name);
+        $('#video-play-desc').append(desc);
+
+        var shareUrl = location.origin + location.pathname + '?id=' + id + '&type=' + type;
+
+        $('#share-link-input-value').val(shareUrl);
+        $('#share-link-button-value').attr('data-clipboard-text', shareUrl);
+        $('#send-mail-btn').attr('data-url', shareUrl);
+        $('#share-to-fb').attr('data-url', shareUrl);
+        $('#share-to-ins').attr('data-url', shareUrl);
+        $('#share-to-linkin').attr('data-url', shareUrl);
+
+        $('#wechat-link-wrapper').text(shareUrl);
+        $('[data-clipboard-text]').attr('data-clipboard-text', shareUrl);
+
+        $('#video-play-desc').height($('#video-play-wrapper').height()/2);
+        $(_videoEl).attr('poster', poster);
+        _sources[0].src = videoPath;
+        _videoEl.load();
+        _videoEl.play();
+        
+      }
+
+      function closeVideo() {
+        $('.video-box').removeClass('selected');
+        $('#video-play-wrapper').hide();
+        _videoEl.pause();
+        $('.holder').remove();
+      }
+
+      $('#close-video').click(function(){
+        closeVideo();
+      });
+
+      $("#video-info-switcher").click(function(e) {
+        var $items = $('#video-info-switcher').find('.item');
+        $items.removeClass('active');
+        var $curr = $(e.target).closest('.item');
+        var type = $curr.data('type');
+        $curr.addClass('active');
+        $('.info-tab').removeClass('active');
+        $('#video-' + type).addClass('active');
+      });
+
+      $('#share-type-box').click(function(e){
+        if($(e.target).hasClass('header')) {
+          var type = $(e.target).closest('.share').data('type');
+          $('.share-content','#share-type-box').slideUp(250);
+          $('[data-type="'+ type +'"]','#share-type-box').find('.share-content').slideDown(250);
+        }
+      });
+    });
+
+    //share
+    // copy-link
+    new Clipboard('.copy-link').on('success', function(e) {
+      G.mNotic('Copy link success.')
+      e.clearSelection();
+    });
+
+    $('#share-to-fb').click(function() {
+      var url = $(this).data('url');
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + url);
+    });
+
+    $('#share-to-ins').click(function() {
+
+    });
+
+    $('#share-to-linkin').click(function() {
+
+    });
+
+    $('#share-to-wechat').click(function(){
+      new Clipboard('#share-to-wechat');
+    });
+
+    // send email
+    $('#send-mail-btn').click(function() {
+      var name = $('#share-value-name').val(),
+          email = $('#share-value-email').val(),
+          text = $('#share-value-text').val(),
+          link = $(this).data('url');
+      if(!email && !(/^[a-zA-Z0-9_.-]{1,63}@([a-zA-Z0-9_-]{1,63}\.)+[a-zA-Z0-9_-]{1,63}$/).test(email)) {
+        return alert('Please input valid email address.');
+      }
+      var emailBody = 'mailto:' + email + '?subject=' + name +
+                    '&body=' + encodeURIComponent(text + '\n' + link);
+
+      window.open(emailBody);
+    });
+
+
+    $(window).load(function() {
+      var searchObj = G.searchToObj();
+      $('[data-type="' + searchObj.type + '"]').click();
+      setTimeout(function() {
+        $('[data-' + searchObj.type + '-id="'+ searchObj.id +'"]').click();
+      }, 300);
+    });
+    
+  </script>
+  {% include "../base/footer.html" %}
+</body>
+</html>

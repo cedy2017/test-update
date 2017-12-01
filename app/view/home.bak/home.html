@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  <script src="https://use.fontawesome.com/6d0b3b06b9.js"></script>
+  <link rel="stylesheet" href="public/css/main.css">
+  <script src="public/js/jquery.js"></script>
+  <script src="public/js/flexslider/jquery.flexslider.js"></script>
+  <style>
+  .home-header {
+    position: relative;
+
+  }
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 12;
+    background-color: rgba(0,0,0,0);
+    background-image: url(public/images/home-header-bg.png);
+  }
+
+  *{margin:0;padding:0;list-style-type:none;}
+		a,img{border:0;}
+		/* flexslider */
+		.flexslider{position:relative;height:560px;overflow:hidden;background:url(images/loading.gif) 50% no-repeat;}
+		.slides{position:relative;z-index:1;}
+		.slides li{height:560px;}
+		.flex-control-nav{position:absolute;bottom:60px;z-index:2;width:100%;text-align:center;}
+		.flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
+		.flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(public/images/dot.png) right 0 no-repeat;cursor:pointer;}
+		.flex-control-nav .flex-active{background-position:0 0;}
+
+		.flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
+		.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+		.flex-direction-nav li a.flex-prev{left:40px;background:url(public/images/prev.png) center center no-repeat;}
+		.flex-direction-nav li a.flex-next{right:40px;background:url(public/images/next.png) center center no-repeat;}
+
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="home-header">
+      <div class="header">
+        <div class="logo"></div>
+        <div class="menu">
+          <ul class="nav">
+            <li>LOG IN</li>
+            <li>繁</li>
+            <li>简</li>
+            <li><i class="fa fa-heart-o" aria-hidden="true"></i></li>
+            <li><i class="fa fa-search" aria-hidden="true"></i></li>
+          </ul>
+          <div class="clear"></div>
+          <div class="line"></div>
+          <ul class="nav">
+            <li>SOLE AGENTS</li>
+            <li>SEARCH</li>
+            <li>AGENTS</li>
+            <li>INTERNATIONAL</li>
+            <li>ABOUT</li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <section class="slider">
+      <div class="flexslider">
+        <ul class="slides">
+          <li style="background:url(public/images/slider/s1.jpeg) 50% 0 no-repeat; background-size: cover;"></li>
+          <li style="background:url(public/images/slider/s2.jpeg) 50% 0 no-repeat; background-size: cover;"></li>
+          <li style="background:url(public/images/slider/s3.jpeg) 50% 0 no-repeat; background-size: cover;"></li>
+        </ul>
+      </div>
+    </section>
+    <section class="search-house">
+      <button class="s-btn s-btn-left">FOR SALE</button>
+      <button class="s-btn s-btn-right active">FOR LEASE</button>
+      <div class="search-area">
+        <div class="form-group">
+          <label for="location">LOCATION</label>
+          <select name="location" id="location" style="width: 100%;">
+            <option value="ALL">All</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="min-price">PRICE(HKD)</label>
+          <select name="min-price" id="min-price">
+            <option value="15">15M</option>
+          </select>
+          <span>-</span>
+          <select name="max-price" id="max-price">
+            <option value="ALL">15M</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="min-saleable">SALEABLE AREA(SQ.FT.)</label>
+          <select name="min-saleable" id="min-saleable">
+            <option value="0">0</option>
+          </select>
+          <span>-</span>
+          <select name="max-saleable" id="max-saleable">
+              <option value="5000">5,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="min-saleable">BEDROOM</label>
+            <select name="" id="">
+              <option value="studio">STUDIO</option>
+            </select>
+            <span>-</span>
+            <select name="max-saleable" id="max-saleable">
+              <option value="5000">9+</option>
+            </select>
+          </div>
+          <div></div>
+          <div class="form-group">
+            <label for="location">LOCATION</label>
+            <select name="location" id="location" style="width: 100%;">
+              <option value="ALL">All</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="min-price">PRICE(HKD)</label>
+            <select name="min-price" id="min-price">
+              <option value="15">15M</option>
+            </select>
+            <span>-</span>
+            <select name="max-price" id="max-price">
+              <option value="ALL">15M</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="min-saleable">SALEABLE AREA(SQ.FT.)</label>
+            <select name="min-saleable" id="min-saleable">
+              <option value="0">0</option>
+            </select>
+            <span>-</span>
+            <select name="max-saleable" id="max-saleable">
+                <option value="5000">5,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="min-saleable">BEDROOM</label>
+              <select name="" id="">
+                <option value="studio">STUDIO</option>
+              </select>
+              <span>-</span>
+              <select name="max-saleable" id="max-saleable">
+                <option value="5000">9+</option>
+              </select>
+            </div>
+      </div>
+    </section>
+    {% include "./sole-agents.html" %}
+    {% include "./video.html" %}
+    {% include "./news.html" %}
+    {% include "../base/footer.html" %}
+  </div>
+  <script type="text/javascript">
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        slideshowSpeed: 3000,
+        pauseOnAction: false,
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+      var videoEl = document.getElementById('video-el'),
+          playBtn = document.getElementById('play-btn');
+      playBtn.onclick = function() {
+        videoEl.play();
+        $('.black-drop').fadeOut();
+      }
+      videoEl.onended = function() {
+        $('.black-drop').fadeIn();
+      }
+    });
+  </script>
+</body>
+</html>

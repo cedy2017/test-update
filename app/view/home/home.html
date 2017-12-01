@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  {% include "../base/base.html" %}
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% include "./gallery.html" %}
+  {% include "./buy-rent.html" %}
+  <div class="s-container">
+    {% include "./agent-listing.html" %}
+    {% include "./recommendation.html" %}
+  </div>
+  <div class="marketing-wrapper">
+    <div class="s-container marketing">
+      <div class="title">
+        {{__('MARKETING YOUR PROPERTY')}}
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12 m-bottom">
+            <div class="marketing-box">
+              <div class="img" style="background-image: url(/public/images/home/marketing.jpg);"></div>
+              <div class="cover">
+                <div class="text-wrapper">
+                  <h6>Unique Marketing Channels</h6>
+                  <p>A team of marketing experts could offer guidance and to propose a customized plan for a home that takes into consideration all avenues of marketing: print, digital, public relations, advertising and social media.</p>
+                  <a target="_blank" href="/marketing-property" class="button">MORE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="marketing-box m-bottom">
+              <div class="img" style="background-image: url(/public/images/home/artnhome1.jpg);"></div>
+              <div class="cover">
+                <div class="text-wrapper">
+                  <h6>Art & Home</h6>
+                  <p>Showcasing some of the most extraordinary properties with sophisticated content and beautiful images.</p>
+                  <a class="button" target="_blank" href="http://www.sothebysrealty.com/resources/siteresources/my%20folder/static_pages/arthome/art_home_2017_issue_6.html">MORE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-bottom">
+            <div class="marketing-box">
+              <div class="img" style="background-image: url(/public/images/home/auction_house.jpg);"></div>
+              <div class="cover">
+                <div class="text-wrapper">
+                  <h6>Auction House</h6>
+                  <p>Sotheby’s has been uniting collectors with world-class works of art.  Together, in the global markets our companies are able to collaborate to serve and to distinguishes our brand in a meaningful way.</p>
+                  <a class="button" target="_blank" href="/brand-heritage">MORE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-6 col-xs-12 m-bottom">
+            <div class="marketing-box">
+              <div class="img" style="background-image: url(/public/images/home/video.jpg);"></div>
+              <div class="cover">
+                <div class="text-wrapper">
+                  <h6>Video</h6>
+                  <p>Expertly curated high-definition videography, we ensures an impeccable visual experience while exploring the world’s most extraordinary properties.</p>
+                  <a class="button" target="_blank" href="/video">MORE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var texts = $('.marketing-box').find('.text-wrapper');
+        $.each(texts, function(index, item){
+          var h = $(item).height();
+          var pH = $(item).parent().height();
+          $(item).css('margin-top', (pH - h) / 2 + 'px');
+        })
+      })();
+    </script>
+  </div>
+  {% include "../base/footer.html" %}
+  {% include "./dialog.html" %}
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        $(window).resize();
+      }, 100);
+
+      var searchObj = G.searchToObj();
+      if (searchObj.list_tag) {
+        $(".btn-list", "#buy-rent-btn").click()
+        setTimeout(function() {
+          $('body,html').animate({
+            scrollTop: $("#buy-rent-btn").offset().top - 100
+          }, 800);
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

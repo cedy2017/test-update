@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Career</title>
+  {% include "../base/base.html" %}
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% import "../base/forms.html" as forms %}
+  <div class="career-bg"></div>
+  <div class="container" style="margin-top: 30px; margin-bottom: 25px; max-width: 730px;">
+    <h1 class="text-center" style="font-weight: 100;">Career</h1>
+    <p class="career-desc">
+      Since the founding of Sotheby’s International Realty in 2004, the firm has maintained an unshakable reputation for showcasing unique and distinguished properties around the world, its innovative and consistently evolving marketing strategies, and above all, the talent and diversity of its employees. <br>
+    </p>
+    <p class="career-desc">
+      Professionally, List Sotheby’s International Realty in Hong Kong prides itself on promoting leadership among its associates by providing incredible support through various educational resources and continuous training on real estate technology in order to ensure their success in the field.
+    </p>
+    <p class="career-desc">
+      With an expansive network in 70 countries featuring 900 offices worldwide, LSIR forms part of this impressive global network, creating unique opportunities for those seeking an exciting and rewarding career in luxury real estate on the international level.
+    </p>
+  </div>
+  <div class="form-wrapper">
+    <form id="recruitment-form" onsubmit="return false;" class="join-our-team">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-sm-12">
+            {{forms.field('name', 'NAME')}}
+          </div>
+          <div class="col-md-6 col-sm-6 col-sm-12">
+          {{forms.field('email', 'EMAIL')}}
+        </div>
+        <div class="col-md-6 col-sm-6 col-sm-12">
+          {{forms.field('mobile', 'MOBILE')}}
+        </div>
+        <div class="col-md-6 col-sm-6 col-sm-12">
+          {{forms.file('resume', 'UPLOAD RESUME')}}
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="send-request">
+              <button id="submit-recruitment" class="common-btn">Send</button>
+            </div>
+          </div>
+        </div>
+    </form>
+    <script>
+      var form = $('#recruitment-form').validate({
+        rules: {
+          email: 'email',
+          resume: 'required'
+        }
+      });
+      $('#submit-recruitment').click(function() {
+        if($('#recruitment-form').valid()) {
+          var fd = new FormData();
+          fd.append('name', $('input[name="name"]').val().trim());
+          fd.append('mobile', $('input[name="mobile"]').val().trim());
+          fd.append('email', $('input[name="email"]').val().trim());
+          fd.append('resume', $('input[name="resume"]')[0].files[0]);
+          $.ajax({
+            method: 'POST',
+            data: fd,
+            contentType: false,
+            processData: false,
+            url: '/api/recruitment/',
+            success: function(a, b, c) {
+              G.mNotic('Sent Successfully');
+            },
+            error: function(a, b, c) {
+              G.mNotic('Sent Error.' + a.responseText, 'error');
+            }
+          });
+        }
+      });
+    </script>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>

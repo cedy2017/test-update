@@ -1,0 +1,284 @@
+{% macro privacy(id) %}
+<div class="agree-terms-padding-left" style="position: relative">
+  <p class="agree-terms">
+    By submitting your request, you agree to and accept the terms of the <a href="javascript:void(0);" style="color: #bd9e64;" data-dialog="website-privacy">Privacy Policy</a> set out below, including the use of my personal information (Name, Phone Number, and Email) provided to you for  promotion email, e-Corporate Newsletter, Event Invitations and other information.
+    <label style="margin-left: -26px; display:none;" class="error" id="agree-privacy-{{id}}-error" for="agree-privacy-{{id}}">This field is required.</label>
+  </p>
+</div>
+{% endmacro %}
+
+
+{% macro checkbox(name, value='', label='', opt={}) %}
+<div class="mockup-checkbox">
+  <input {{'checked' if opt.checked else ''}} name="{{ name }}" value="{{ value }}" type="checkbox" id="{{ name + '-' + value }}">
+  <label class="mock-label" for="{{ name + '-' + value }}">
+    <i class="fa fa-check" aria-hidden="true"></i>
+  </label>
+  <label for="{{ name + '-' + value }}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+{% macro radio(name, value='', label='', margin={}) %}
+<div style="margin-top: {{ margin.top }};" class="mockup-radio">
+  <input name="{{ name }}" value="{{ value }}" type="radio" id="{{ name + '-' + value}}">
+  <label class="mock-label" for="{{ name + '-' + value}}">
+  </label>
+  <label class="text" for="{{ name + '-' + value}}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+{% macro field(name, label='', value='', type='text', opt = {}) %}
+<div class="input-field">
+  <label for="{{ name }}">
+    {% if opt.icon %}
+      <div class="xicon-wrapper"><i class="xicon {{opt.icon}}"></i></div>
+    {% endif %}
+    {{ label }}
+  </label>
+  <input maxlength="255" autocomplete="off" name="{{ name }}" value="{{ value }}" type="{{ type }}" id="{{ name }}">
+  <div class="xline"></div>
+</div>
+{% endmacro %}
+
+{% macro autoComplete(name, label='', opt={}) %}
+<div id="auto-wrapper-{{name}}" class="input-field auto-complete">
+  <label for="{{ name }}">
+    {% if opt.icon %}
+      <div class="xicon-wrapper"><i class="xicon {{opt.icon}}"></i></div>
+    {% endif %}
+    {{ label }}
+  </label>
+  <input autocomplete="off"  value="" type="text" id="{{ name }}">
+  <div class="xline"></div>
+  <div class="auto-select-box">
+    
+  </div>
+  <ul class="auto-dropdown">
+  </ul>
+  <input id="auto-select-{{name}}-value" type="hidden" name="keyword_search" value=""/>
+  <script>
+    ;(function(){
+      var $root = $('#auto-wrapper-{{name}}'),
+          $selected = $("#auto-select-{{name}}-value"),
+          $input = $root.find('input').first(),
+          $box = $root.find('.auto-select-box'),
+          $list = $root.find('.auto-dropdown');
+      var datasource = [], selectedValues = [];
+      var urlKeyStr = G.searchToObj('keyword_search');
+      if(urlKeyStr) {
+        selectedValues = urlKeyStr.split(',');
+      }
+
+      // init
+      $selected.val(selectedValues.join(','));
+      selectedValues.forEach(function(text) {
+        $box.append('<span class="auto-item">' + text + '<i class="close-mock"></i></span>');
+        fixedPadding();
+      });
+
+      var refreshList = function(s) {
+        datasource = $.grep(s, function(item) {
+          return selectedValues.indexOf(item.value) < 0;
+        });
+        $list.empty();
+        if(datasource.length) {
+          datasource.forEach(function(item) {
+            $list.append('<li>' + item.value + '</li>');
+          });
+        } else {
+          $list.append('<span>NO Keyword Match.</span>');
+        }
+      }
+      
+      var getKeys = jQuery.debounce(function() {
+        $.ajax({
+          url:"/api/autofill",
+          dataType: 'json',
+          data: {
+            key: encodeURIComponent($input.val().trim())
+          },
+          success: function(response) {
+            refreshList(response.data);
+          }
+        });
+      }, 250, null, true);
+      $input.blur(function() {
+        setTimeout(function() {
+          $list.hide();
+        }, 300);
+      }).focus(function(){
+        getKeys();
+        $list.show();
+      });
+      $input.keydown(getKeys);
+      $input.keyup(function(e){
+        if (e.keyCode == 13) {
+          var enterValue = $(this).val();
+          selectedValues.push(enterValue);
+          $selected.val(selectedValues.join(',')).change();
+          $box.append('<span class="auto-item">' + enterValue + '<i class="close-mock"></i></span>');
+          fixedPadding();
+        }
+      });
+      // setTimeout(function() {
+      //   $input.css('padding-left', $box.width() + 3 + 'px');
+      // }, 100);
+      $box.click(function(e){
+        e.stopPropagation();
+        $input.focus();
+        if(e.target.tagName.toLowerCase() != 'i') return false;
+        var text = $(e.target).closest('span').text();
+        selectedValues.splice(selectedValues.indexOf(text), 1);
+        $selected.val(selectedValues.join(',')).change();
+        $(e.target).parent().remove();
+        fixedPadding();
+      });
+      $list.click(function(e){
+        if(e.target.tagName.toLowerCase() != 'li') return false;
+        var text = $(e.target).text();
+        $(e.target).closest('li').remove();
+        selectedValues.push(text);
+        $selected.val(selectedValues.join(',')).change();
+        $box.append('<span class="auto-item">' + text + '<i class="close-mock"></i></span>');
+        fixedPadding();
+      });
+      function fixedPadding() {
+        var boxLastItem = $box.find('.auto-item:last-child')[0] || { offsetLeft:0 , offsetWidth: 0 };
+        $input.css({
+          'padding-left': boxLastItem.offsetLeft + boxLastItem.offsetWidth + 3 + 'px',
+          'padding-top': $box.height() - 8 + 'px',
+          'padding-bottom': '8px'
+        }).val('');
+      }
+    })();
+  </script>
+</div>
+{% endmacro %}
+
+{% macro textarea(name, label='', value='') %}
+<div class="text-area-field">
+  <label for="{{ name }}">{{ label }}</label>
+  <textarea  maxlength="20480" name="{{ name }}" id="{{ name }}">{{ value }}</textarea>
+</div>
+{% endmacro %}
+
+{% macro select(name, label='', value=[], holder='', opt={selected: ''}) %}
+<div class="select-field">
+  <label for="{{ name }}">
+    {% if opt.icon %}
+      <div class="xicon-wrapper"><span class="xicon {{opt.icon}}"></span></div>
+    {% endif %}
+    {{ label }}
+  </label>
+  <select name="{{ name }}" id="{{ name }}">
+    <option value="" disabled selected style='display:none;'>{{holder}}</option>
+    {% for item in value %}
+      {%if item.key %}
+      <option {{'selected' if item.key === opt.selected else ''}} value="{{item.key}}">{{item.value}}</option>
+      {% else %}
+      <option {{'selected' if item === opt.selected else ''}} value="{{item}}">{{item}}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+  <i class="fa fa-play" aria-hidden="true"></i>
+</div>
+{% endmacro %}
+
+{% macro inputNumber(name, label='', opt={}) %}
+<div class="input-number">
+  <label for="{{ name }}">
+    {% if opt.icon %}
+      <div class="xicon-wrapper"><span class="xicon {{opt.icon}}"></span></div>
+    {% endif %}
+    {{ label }}
+  </label>
+  <div class="input-number-content">
+    <div id="input-number-{{name}}-min" class="icon"><i class="xicon-minus" aria-hidden="true"></i></div>
+    <div class="number">
+      <input maxlength="3" name="{{name}}" id="input-number-{{name}}-input" value="{{opt.value if opt.value else 0}}" type="text">
+    </div>
+    <div id="input-number-{{name}}-plus" class="icon icon-right"><i class="xicon-plus" aria-hidden="true"></i></div>
+  </div>
+  <script>
+    ;(function() {
+      var $minBtn = $('#input-number-{{name}}-min'),
+          $input = $('#input-number-{{name}}-input'),
+          $plusBtn = $('#input-number-{{name}}-plus');
+
+      $input.keydown(function(e) {
+        if (!/[0-9]*/.test(this.value)){
+          return false;
+        }
+      });
+      $minBtn.click(function() {
+        var val = $input.val();
+        val = val.replace(/\+/g, '');
+        val = +val - 1;
+        if(val < 0) return;
+        $input.val(val).change();
+      });
+
+      $plusBtn.click(function() {
+        var val = $input.val();
+        val = val.replace(/\+/g, '');
+        val = +val + 1;
+        if(val > 100000) return;
+        $input.val(val).change();
+      });
+    })();
+    
+  </script>
+</div>
+{% endmacro %}
+
+{% macro file(name, label='', type='text') %}
+<div class="input-field mock-upload">
+  <label for="{{ name }}">{{ label }}</label>
+  <input id="{{name}}-mock-text" type="text">
+  <div class="xline"></div>
+  <input style="display: none;" type="file" name="{{name}}" id="{{ name }}">
+  <i class="fa fa-play" aria-hidden="true"></i>
+  <script>
+    (function() {
+      var $main = $('#{{name}}'),
+          $mock =  $('#{{name}}-mock-text');
+      $mock.click(function() {
+        $main.click();
+      }).keydown(function() {
+        $main.click();
+      });
+      $main.change(function() {
+        $mock.val($(this).val());
+      });
+    })();
+  </script>
+</div>
+{% endmacro %}
+
+{% macro exchangeRate(name, price, values) %}
+<div class="exchange-field">
+  <label for="exchange-{{ name }}"></label>
+  <select name="exchange-{{ name }}" id="exchange-{{ name }}">
+    {% for item in values %}
+      <option value="{{item.value}}">{{item.name}}</option>
+    {% endfor %}
+  </select>
+  <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <script>
+    (function() {
+      var $this = $('#exchange-{{ name }}'),
+          $root = $this.parent(),
+          $label = $root.find('label'),
+          price = {{price}},
+          prefix = "$";
+      $label.text('$ ' + G.toThousands({{price}}));
+      $('#exchange-{{name}}').change(function() {
+        var rate = +$this.val();
+        prefix = "$¥$£¥"[+$this.prop('selectedIndex')];;
+        $label.text(prefix + ' ' + G.toThousands((price * rate).toFixed(0)));
+      });
+    })();
+  </script>
+</div>
+{% endmacro %}
+

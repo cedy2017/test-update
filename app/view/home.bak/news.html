@@ -1,0 +1,13 @@
+<section class="news-section">
+  <div class="row">
+      {% for item in soleAgents %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card">
+              <div class="img" style="background-image:url({{item.url}})"></div>
+              <div class="title">{{item.name}}</div>
+              <div class="desc">{{item.location}}</div>
+            </div>
+          </div>
+      {% endfor %}
+  </div>
+  </section>

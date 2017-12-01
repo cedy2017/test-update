@@ -1,0 +1,307 @@
+.mockup-checkbox {
+  .mock-label {
+    width: 14px;
+    display: inline-block;
+    height: 14px;
+    font-size: 12px;
+    border: 1px solid #929292;
+    border-radius: 2px;
+    vertical-align: middle;
+    position: relative;
+    margin-bottom: 2px;
+    cursor: pointer;
+    i {
+      display: none;
+      position: absolute;
+      color: white;
+    }
+  }
+  input {
+    visibility: hidden;
+    width: 0;
+    &:checked + label {
+      border: 1px solid @primary-color;
+      background-color: @primary-color; 
+      i {
+        display: inline;
+      }
+    }
+  }
+}
+
+.mockup-radio {
+  position: relative;
+  font-size: 12px;
+  .mock-label {
+    width: 12px;
+    cursor: pointer;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #C6C6C6;
+    position: absolute;
+    top: 3px;
+  }
+  input[type="radio"] {
+    visibility: hidden;
+    width: 0;
+  }
+  input:checked + label {
+    border-color: @primary-color;
+  }
+  .text {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+}
+
+.text-area-field, .input-field{
+  width: 100%;
+  label {
+    display: block;
+    height: 19px;
+    margin-bottom: 4px;
+  }
+  .error {
+    color: red;
+  }
+  input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #000000;
+    border-radius: 0;
+    height: 22px;
+    outline: none;
+    background: transparent;
+    &:focus + .xline {
+      &:after {
+        left: 0;
+        width: 100%;
+        visibility: visible;
+      }
+    }
+  }
+  .xline {
+    position: relative;
+    &:after {
+      background-color: @primary-color;
+      content: ' ';
+      bottom: 0;
+      height: 2px;
+      left: 45%;
+      position: absolute;
+      -webkit-transition-duration: .2s;
+      transition-duration: .2s;
+      -webkit-transition-timing-function: cubic-bezier(.4,0,.2,1);
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+      visibility: hidden;
+      width: 10px;
+    }
+    
+  }
+}
+
+.select-field {
+  position: relative;
+  label {
+    display: block;
+    height: 19px;
+    margin-bottom: 4px;
+  }
+  select {
+    width: 100%;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    height: 22px;
+    border-radius: 0;
+    outline: none;
+    color: @primary-color;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-bottom: 1px solid black;
+    font-weight: 100;
+  }
+  i {
+    transform: rotate(90deg) scale(.5);
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: -1;
+  }
+}
+
+.text-area-field {
+  label {
+    display: block;
+    height: 19px;
+    margin-bottom: 4px;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 5px 8px;
+    border: 1px solid #000000;
+    border-radius: 0;
+  }
+}
+
+.input-number {
+  label {
+    display: block;
+    height: 19px;
+    margin-bottom: 4px;
+  }
+  .input-number-content {
+    position: relative;
+    .icon {
+      display: inline-block;
+      width: 21px;
+      height: 21px;
+      text-align: center;
+      border-radius: 50%;
+      position: absolute;
+      line-height: 18px;
+      top:0;
+      cursor: pointer;
+      span {
+        font-size: 14px;
+      }
+    }
+    .xicon-minus, .xicon-plus {
+      width: 21px;
+      height: 21px;
+      display: inline-block;
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    .xicon-minus {
+      background-image: url(/public/icon/icon_less.png);
+    }
+    .xicon-plus {
+      background-image: url(/public/icon/icon_add.png);
+    }
+    .icon-right {
+      right: 0;
+    }
+    .number {
+      padding-left: 22px;
+      padding-right: 22px;
+      input {
+        width: 100%;
+        background-color: transparent;
+        text-align: center;
+        border:0;
+        outline: none;
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+.common-btn {
+  height: 33px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 400;
+  border-radius: 0;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  border: 1px solid #000;
+  background-color: black;
+}
+
+.auto-complete {
+  position: relative;
+  .auto-dropdown {
+    position: absolute;
+    background: white;
+    display: none;
+    z-index: 10;
+    width: 100%;
+    padding-left: 0;
+    border: 1px solid @gray-color;
+    li {
+      padding: 3px 5px;
+      list-style: none;
+      &:hover {
+        background: @gray-lighter-color;
+      }
+    }
+  }
+  .auto-select-box {
+    position: absolute;
+    top: 22px;
+    overflow: hidden;
+    .auto-item {
+      font-size: 12px;
+      padding: 0 3px;
+      border-radius: 2px;
+      margin-top: 2px;
+      display: inline-block;
+      background: #dddddd;
+      position: relative;
+      margin-right: 4px;
+      &:after {
+        content: ' ';
+        display: inline-block;
+        position: absolute;
+        height: 13px;
+        width: 1px;
+        right: 15px;
+        top: 2px;
+        background: @gray-color;
+      }
+      i {
+        cursor: pointer;
+        margin-left: 5px;
+        display: inline-block;
+        width: 10px;
+      }
+      .close-mock {
+        width: 9px;
+        height: 9px;
+        display: inline-block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        background-image: url(/public/icon/icon_close.png);
+      }
+    }
+  }
+}
+
+.mock-upload {
+  position: relative;
+  i {
+    transform: rotate(-90deg) scale(.5);
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+  }
+}
+
+.exchange-field {
+  display: inline-block;
+  margin-left: -4px;
+  position: relative;
+  select {
+    color: @gray-color;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    color: @gray-color;
+    border: 0;
+    width: 50px;
+    padding: 3px;
+  }
+  i {
+    color: @gray-color;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+  }
+}

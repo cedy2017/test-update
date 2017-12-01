@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>International</title>
+  {% include "../base/base.html" %}
+</head>
+<body>
+  {% include "../base/header.html" %}
+  <div class="s-container ">
+    <h2 class="text-center" style="font-size: 20px;margin-top: 50px;font-weight: 100;">For  the ongoing collection of life®</h2>
+    <p class="text-center" style="font-size: 12px;">We carry some of the most prestigious and the most exclusive properties worldwide </p>
+    <div class="international-list">
+      <div class="row" style="max-width:600px; margin: 20px auto;margin-bottom: 50px;">
+       
+        {% for item in data %}
+        <div class="box-outter">
+          <div class="box">
+            <div class="box-inner">
+              <figure class="snip1100 black"> <img src="{{item.pic}}">
+                <figcaption>
+                  <div class="box-cap">
+                    <h3 style="font-size:14px;font-weight: 100;">{{item.name}}</h3>
+                    <h3 style="font-size:12px;font-weight: 100;">{{item.address}}</h3>
+                  </div>
+                </figcaption>
+                <a href="/international?id={{item.id}}"> </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+      
+        {% endfor %}
+      </div>
+      </div>
+    </div>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>

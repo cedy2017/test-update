@@ -1,0 +1,155 @@
+@import 'var.less';
+@import 'gird.less';
+
+@import 'header.less';
+@import 'footer.less';
+@import 'home.less';
+@import 'notification.less';
+@import 'xicon.less';
+@import 'mockup-checkbox.less';
+@import 'about.less';
+@import 'dialog.less';
+@import 'buy-rent-search.less';
+@import 'result.less';
+@import 'property-detail';
+@import 'tooltip.less';
+@import 'international.less';
+
+
+html, body {
+  padding: 0;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+* {
+  margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+::-ms-clear{display: none;}
+::-ms-reveal{display: none;}
+select::-ms-expand { display: none; }
+
+body {
+  padding-top: 82px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.s-container {
+  max-width: @container-width;
+  margin: 0 auto;
+}
+.clear {
+  clear: both;
+}
+
+.horizon-line {
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.text-lighter {
+  font-weight: 100;
+}
+
+.text-strong {
+  font-weight: 900;
+}
+
+.text-center {
+  text-align: center;
+}
+
+label.error {
+  color: red;
+  display: block;
+}
+
+//临时模块
+.agent-detail-box {
+  padding-top: 100px;
+  height: 100%;
+  
+  .bg {
+    height: 100%;
+    background: #F4F4F4;
+    position: relative;
+    padding-bottom: 30px;
+    padding-top: 20px;
+  }
+  .img {
+    position: absolute;
+    width: 50%;
+    left: 20px;
+    bottom: 30px;
+  }
+  .text {
+    padding: 10px;
+    padding-left: 60%;
+  }
+  .name {
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .com-title {
+    margin-bottom: 22px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .detail-info {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: @gray-color;
+    position: relative;
+    span {
+      display: inline-block;
+      position: absolute;
+      left: 95px;
+    }
+  }
+}
+
+.captcha {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 30px;
+  .cap-cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .agent-detail-box {
+    padding-top: 20px;
+    height: 100%;
+    .bg {
+      height: 100%;
+      background: #F4F4F4;
+      padding: 20px;
+    }
+    .img {
+      width: 100%;
+      position: inherit;
+      left: 0;
+    }
+    .text {
+      padding: 10px;
+      position: inherit;
+    }
+  }
+}

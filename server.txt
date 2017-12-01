@@ -1,0 +1,13 @@
+//test server
+Username: admin
+Password: 9?G'zg*R$n@pv9V2
+
+Outside office
+IP: 59.148.200.68
+Username: sothebys
+Password: b5PH4Fb8R3RuLGQE
+Port: 20022
+ 
+Inside office
+IP: 192.168.5.102
+Other same as above

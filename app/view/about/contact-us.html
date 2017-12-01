@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Us</title>
+  {% include "../base/base.html" %}
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% import "../base/forms.html" as forms %}
+  <div class="s-container" >
+    <div class="contact-block">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="contact-service">
+          <h2 class="contact-us-h2">Contact Us</h2>
+          <div class="item">
+            <div class="img tel"></div>
+            <label>+852 3793 3688</label>
+          </div>
+
+          <div class="item">
+            <div class="img email"></div>
+            <label>info@listsirhk.com</label>
+          </div>
+
+          <div class="item">
+            <div class="img address"></div>
+            <p class="address-desc">1/F,33 Des Voeux Road Central,<br>Central,Hong Kong</p>
+          </div>
+          <div class="item contact-map">
+            <div id="map" class="google-map"></div>
+            <script>
+              var map;
+              function initMap() {
+                var xx = {lat: 22.2830065, lng: 114.1571989};
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: xx,
+                  zoom: 15,
+                  streetViewControl: false,
+                  mapTypeControl: false,
+                  styles: [{
+                    "featureType": "administrative",
+                    "elementType": "labels.text.fill",
+                    "stylers": [{
+                      "color": "#444444"
+                    }]
+                  },
+                  {
+                    "featureType": "landscape",
+                    "elementType": "all",
+                    "stylers": [{
+                      "color": "#f2f2f2"
+                    }]
+                  },
+                  {
+                    "featureType": "poi",
+                    "elementType": "all",
+                    "stylers": [{
+                      "visibility": "off"
+                    }]
+                  },
+                  {
+                    "featureType": "road",
+                    "elementType": "all",
+                    "stylers": [{
+                        "saturation": -100
+                    },
+                    {
+                      "lightness": 45
+                    }]
+                  },
+                  {
+                    "featureType": "road.highway",
+                    "elementType": "all",
+                    "stylers": [{
+                      "visibility": "simplified"
+                    }]
+                  },
+                  {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.icon",
+                    "stylers": [{
+                      "visibility": "off"
+                    }]
+                  },
+                  {
+                    "featureType": "transit",
+                    "elementType": "all",
+                    "stylers": [{
+                      "visibility": "off"
+                    }]
+                  },
+                  {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [{
+                        "color": "#E2EBED"
+                    },
+                    {
+                      "visibility": "on"
+                    }]
+                  }]
+                });
+                var marker = new google.maps.Marker({
+                  position: xx,
+                  map: map,
+                  icon: '/public/icon/pinmap_s.png'
+                });
+              }
+            </script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXiaoE3w9cp4esXGPQdkX1hpZ7TuZVR7w&callback=initMap"></script>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <form id="contact-us-form" method="post" onsubmit="return false;" class="container">
+          <div class="row" style="margin-bottom: 22px;">
+            <div class="col-md-12">
+              <h2 class="contact-us-h2">Get more information from our team of professionals</h2>
+            </div>
+            <div class="col-md-12">
+              <p class="enqury-desc">
+                  Please complete the form below and one of our specialized agents will contact you.
+              </p>
+            </div>
+            <div class="contact-us-bg"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 field-row">
+              {{ forms.field('name', 'NAME') }}
+            </div>
+            <div class="col-md-6 field-row">
+              {{ forms.field('mobile', 'MOBILE') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 field-row">
+              {{ forms.field('email', 'EMAIL') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 field-row">
+              {{ forms.textarea('message', 'MESSAGE TO US') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 field-row">
+              <!-- global.js -->
+              <div id="captcha" class="captcha">
+                <div data-toggle="tooltip" data-placement="top" title="Refresh Captcha" class="cap-cover"></div>
+                <iframe  src="/captcha" frameborder="0" width="150" height="50"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-md-6">
+              {{ forms.field('captcha', 'CAPTCHA') }}
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-md-12">
+              <button id="submit-enquiry" class="common-btn" style="max-width: 300px;margin-top: 30px;">Submit</button>
+            </div>
+          </div>
+        </form>
+        <script>
+          $(document).ready(function() {
+            var form = $('#contact-us-form').validate({
+              rules: {
+                email: {
+                  required: true,
+                  email: true
+                },
+                name: {
+                  required: true
+                },
+                mobile: {
+                  required: true,
+                  mobile: true
+                },
+                captcha: {
+                  required: true,
+                  cap: true
+                }
+              }
+            });
+
+            $('#submit-enquiry').click(function() {
+              if($('#contact-us-form').valid()) {
+                var data = {
+                  name: $('input[name="name"]').val().trim(),
+                  mobile: $('input[name="mobile"]').val().trim(),
+                  email: $('input[name="email"]').val().trim(),
+                  message: $('textarea[name="message"]').val().trim(),
+                };
+                $.ajax({
+                  method: 'post',
+                  data: data,
+                  dataType: 'json',
+                  url: '/api/enquiry/',
+                  success: function() {
+                    G.mNotic('Sent Successfully');
+                  },
+                  error: function(err) {
+                    G.mNotic('Sent Error.' + err.responseText, 'error');
+                  }
+                });
+              }
+            });
+          });
+          
+        </script>
+      </div>
+    </div>
+    </div>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>

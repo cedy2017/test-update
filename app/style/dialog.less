@@ -1,0 +1,92 @@
+.dialog-wrapper {
+  position: fixed;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: @dialog-z-index;
+  background: rgba(0,0,0,.7);
+  .dialog-scroll {
+    overflow-y: scroll;
+    height: 100%;
+  }
+  .dialog {
+    background: #fff;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    /* position: absolute; */
+    min-height: 300px;
+    margin-top: 100px;
+    /* left: 50%; */
+    /* margin-left: -450px; */
+    margin-bottom: 100px;
+    &.sm-dialog {
+      max-width: 400px;
+    }
+    .dialog-header {
+      position: relative;
+      h2 {
+        text-align: center;
+        // border-bottom: 1px solid @gray-color;
+        padding: 0 20px;
+        padding-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        font-weight: 100;
+      }
+      .dialog-close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        line-height: 20px;
+        z-index: 22222;
+        color: @gray-color;
+        cursor: pointer;
+      }
+      .bottom-line {
+        height: 1px;
+        margin-top: 8px;
+        margin-left: 20px;
+        margin-right: 20px;
+        background-color: @gray-color;
+      }
+    }
+    .dialog-body {
+      padding: 20px;
+    }
+  }
+}
+
+.terms-btns {
+  .btn {
+    display: inline-block;
+    border-bottom: 2px solid white;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    font-size: 16px;
+    &:last-child {
+      margin-left: 34px;
+    }
+    &.active {
+      border-color: @primary-color;
+      color: @primary-color;
+    }
+  }
+}
+
+.terms {
+  border: 1px solid @gray-color;
+  min-height: 400px;
+}
+
+@media (max-width: 700px) {
+  .dialog-wrapper .dialog {
+    margin: 10px;
+    width: auto;
+  }
+}

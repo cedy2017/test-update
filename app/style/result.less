@@ -1,0 +1,186 @@
+// buy, rent page
+.result-page {
+  padding: 10px;
+  .sub-slider {
+    margin: 0 -12px;
+    height: 170px;
+    position: relative;
+    overflow: hidden;
+    .result-s-lbtn, .result-s-rbtn {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      text-align: center;
+      text-align: 0;
+      margin-top: -20px;
+      font-size: 30px;
+      line-height: 40px;
+      color: white;
+      z-index: 1;
+      text-shadow: 0 0 10px white;
+      cursor: pointer;
+    }
+    .result-s-lbtn {
+      left: 0px;
+    }
+    .result-s-rbtn {
+      right: 0px;
+    }
+    .result-slider {
+      height: 100%;
+      transition: all .4s;
+      padding-left: 0;
+      li {
+        height: 100%;
+        display: inline-block;
+        width: 100%;
+        float: left;
+        background-size: cover;
+      }
+    }
+  }
+}
+.search-header {
+  margin-top: 10px;
+  font-size: 12px;
+  margin-bottom: 4px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.search-field {
+  float: right;
+  margin-bottom: 5px;
+}
+
+.search-side {
+  display: inline-block;
+  position: absolute;
+  margin-top: 10px;
+  min-height: 400px;
+  width: 240px;
+  .mockup-checkbox {
+    margin-bottom: 2px;
+  }
+}
+
+.search-condition-box {
+  margin-bottom: 12px;
+  &.hide {
+    .min {
+      display: none
+    }
+    .plus {
+      display: inline;
+    }
+  }
+  .plus {
+    display: none;
+  }
+  .box-title {
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: white;
+    background-color: black;
+    padding: 0 10px;
+    &.toggle {
+      cursor: pointer;
+      color: @primary-color;
+    }
+  }
+  .box-body {
+    background-color: #F4F4F4;
+    font-size: 12px;
+    padding: 10px;
+    max-height: 1000px;
+  }
+  .select-field, .input-number, .input-field {
+    margin-bottom: 8px;
+  }
+}
+
+.search-result {
+  margin-left: 252px;
+  margin-bottom: 10px;
+  min-height: 1130px;
+}
+
+.search-pager {
+  margin-left: 248px;
+  margin-right: -4px;
+  margin-bottom: 20px;
+  height: 50px;
+  text-align: center;
+}
+
+.pagination {
+  padding: 15px;
+  display:display-block;
+  li {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    display: inline-block;
+    padding: 0 6px; 
+    font-size: 12px;
+    text-align: center;
+    border-radius: 50%;
+    a {
+      color: black;
+      text-decoration: none;
+    }
+    &.arrow {
+      border: 1px solid @primary-color;
+      height: 32px;
+      width: 32px;
+      font-size: 12px;
+      a {
+        color: @primary-color;
+      }
+    }
+    &.active {
+      background-color: @primary-color;
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
+.no-result {
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+@media (max-width: 920px) {
+  .result-page {
+    .search-side {
+      display: none;
+    }
+    .search-result {
+      margin-left: 0;
+    }
+    .search-pager {
+      margin-left: 0;
+    }
+  }
+  .search-header {
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 720px) {
+  .result-page {
+    .sub-slider {
+      height: 215px;
+    }
+  }
+  .card {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}

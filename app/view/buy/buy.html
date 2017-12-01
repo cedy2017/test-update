@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Result</title>
+  {% include "../base/base.html" %}
+</head>
+<body>
+  {% import "../base/forms.html" as forms %}
+  {% include "../base/header.html" %}
+  <div class="s-container result-page">
+    <div class="search-header">
+      <a href="/">Home &gt;</a>
+      <a href="/{{activeMenu}}-search">Search &gt;</a>
+      <a href="#">{{"Buy" if activeMenu == 'buy' else 'Rent'}}</a>
+    </div>
+    <!-- <div class="search-field">
+      <select >
+        <option value="">Sorting</option>
+        <option value="">Sole Agent</option>
+        <option value="">New Listing</option>
+        <option value="">Recommendations</option>
+      </select>
+    </div> -->
+    <div class="clear"></div>
+    <div class="horizon-line" style="margin-top: 20px;"></div>
+    {% include "./search-side.html" %}
+    {% include "./search-result.html" %}
+    <div class="search-pager">
+      {% if pages.pagination.length > 1 %}
+      <ul class="pagination">
+        <li class="arrow">
+          <a href="{{activeMenu}}-result?{{pages.prevUrl}}" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+          </a>
+        </li>
+        {% for item in pages.pagination %}
+          {% if pages.currPage == item.page %}
+            <li class="active"><a href="{{activeMenu}}-result?{{item.params}}">{{item.page}}</a></li>
+          {% else %}
+            <li><a href="{{activeMenu}}-result?{{item.params}}">{{item.page}}</a></li>
+          {% endif %}
+        {% endfor %}
+        <li class="arrow">
+          <a href="{{activeMenu}}-result?{{pages.nextUrl}}" aria-label="Next">
+            <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+          </a>
+        </li>
+        <li><a href="{{activeMenu}}-result?{{item.params}}">{{pages.currPage}}/{{pages.totalPages}}</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>

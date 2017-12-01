@@ -1,0 +1,115 @@
+<div class="search-result">
+  <div class="row">
+    {% for item in result %}
+    <div class="col-sm-12 col-md-6">
+      <div class="card">
+        <a href="/property-detail?search_type={{activeMenu}}&id={{item.id}}">
+          <div class="sub-slider">
+            <div class="result-s-lbtn">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </div>
+            <div class="result-s-rbtn">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </div>
+            <ul class="result-slider">
+              {% for img in item.images %}
+              <li style="background-image: url(https://www.listsothebysrealtyhk.com{{img}})"></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="name">{{item.name}}</div>
+          <div class="location">{{item.location}}</div>
+          <div class="price">{{item.sqft}}(SQ FT.)|HKD {{item.price}}</div>
+          <!-- <div class="time">{{item.time}}</div> -->
+        </a>
+        <!-- <div data-favorite="{{item.id}}" data-value="{{item.loveValue}}" class="favorite">
+          <i class="fa fa-heart-o"></i>
+          <i class="fa fa-heart"></i>
+        </div> -->
+      </div>
+    </div>
+    {% endfor %}
+
+    {% if result.length == 0 %}
+    <div class="col-md-12">
+      <div class="no-result text-center">
+        <span>No Data.</span>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <script>
+    var cards = $('.card');
+    $.each(cards, function(index, card) {
+      var $root = $(card),
+          $lbtn = $root.find('.result-s-lbtn'),
+          $rbtn = $root.find('.result-s-rbtn'),
+          $wrapper = $root.find('.sub-slider'),
+          width = $wrapper.width(),
+          $slider = $root.find('.result-slider'),
+          $lis = $slider.children(),
+          activeIndex = 0,
+          slideWidth = width * $lis.length;
+      
+      // 比例
+      $wrapper.height(width * 2 / 3);
+      $('.card').height(width * 2 / 3 + 80);
+
+      $(window).resize(function() {
+        width = $wrapper.width();
+        slideWidth = width * $lis.length;
+        $slider.css('width', slideWidth + 'px');
+        $.each($lis, function(index, li) {
+          $(li).css('width', width + 'px');
+        });
+
+        // 比例
+        $wrapper.height(width * 2 / 3);
+        $('.card').height(width * 2 / 3 + 80);
+      });
+      $slider.css('width', slideWidth + 'px');
+      $.each($lis, function(index, li) {
+        $(li).css('width', width + 'px');
+      });
+
+      $lbtn.click(function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        activeIndex--;
+        if(activeIndex < 0) {
+          return activeIndex = 0;
+        }
+        var offset = -(activeIndex * width);
+        $slider.css('transform', 'translateX(' + offset + 'px)');
+      });
+
+      $rbtn.click(function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(activeIndex);
+        activeIndex++;
+        if(activeIndex > ($lis.length - 1)) {
+          return activeIndex = $lis.length - 1;
+        }
+        var offset = -(activeIndex * width);
+        $slider.css('transform', 'translateX(' + offset + 'px)');
+      });
+    });
+    $.each($('[data-favorite]'), function(index, item) {
+      var $loveEl = $(item),
+          id = $loveEl.data('favorite');
+      if(localStorage.getItem('fid-' + id)) {
+        $loveEl.addClass('love');
+      }
+    });
+    $('.favorite').click(function() {
+      if($(this).hasClass('love')) {
+        localStorage.removeItem('fid-' + $(this).data('favorite'));
+        $(this).removeClass('love');
+      } else {
+        localStorage.setItem('fid-' + $(this).data('favorite'), $(this).data('value'));
+        $(this).addClass('love');
+      }
+    });
+  </script>
+</div>

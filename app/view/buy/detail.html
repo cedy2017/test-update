@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Property Detail - {{property.name}}</title>
+  <meta property="og:title" content="Property Detail - {{property.name}}" />
+  <meta property="og:image" content="property.gallery[0].image" />
+  {% include "../base/base.html" %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>  
+  <script src="/public/js/jquery.iosslider.min.js"></script>
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% include "../our-team/member-detail.html" %}
+  {% import "../base/forms.html" as forms %}
+  <div class="s-container" style="position: relative;">
+    <div style="padding-left: 8px; margin-bottom: 0px;" class="link-map">
+      <a href="/">Home &gt;</a> 
+      <a href="/{{activeMenu}}-search">Search &gt;</a> 
+      <a href="#">{{property.name}}</a>
+    </div>
+    <div style="padding-left: 8px;color: #858585;font-size: 12px;margin-top:18px;">
+      PROPERTY INFO - {{property.id}}
+    </div>
+    <a href="/{{activeMenu}}-result"> <button class="common-btn back-to-results">&lt; Back to Results</button></a>
+  </div>
+
+  <div class="detail-banner">
+    <div class="banner">
+      <div class="s-container banner-wrapper">
+        <h3>{{property.name}}</h2>
+        <span>{{property.address}}</span>
+        <div class="love_share">
+          <!-- <div class="btn">
+            <div class="icon icon_love"></div>
+          </div> -->
+          <div data-dialog='share-dialog' class="btn">
+            <div class="icon icon_share"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "../international/gallery.html" %}
+
+  <div class="property-info ">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-6 info-block">
+        <div class="icon-box">
+          <img src="/public/icon/icon120x120_area_sf.png" width="80">
+        </div>
+        <div class="text">
+          <div class="title">AREA(SQ FT)</div>
+          <div class="count">{{property.areaSqft}}</div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-6 info-block">
+        <div class="icon-box">
+          <img src="/public/icon/icon120x120_bedroom.png" width="80">
+        </div>
+        <div class="text">
+          <div class="title">BED</div>
+          <div class="count">{{property.bed}}</div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6 info-block">
+        <div class="icon-box">
+          <img src="/public/icon/icon120x120_bathroom.png" width="80">
+        </div>
+        <div class="text">
+          <div class="title">BATH</div>
+          <div class="count">{{property.bath}}</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-6 info-block">
+        <div class="icon-box">
+          <img src="/public/icon/icon120x120_carpark_2.png" width="80">
+        </div>
+        <div class="text">
+          <div class="title">CAR PARK</div>
+          <div class="count">{{property.carPark}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="property-desc">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="left-box">
+          <div class="property-box">
+            <div class="title toggle">
+              <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+              <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+              Unit Description
+            </div>
+            <div class="body">
+              {% if property.unitDesc.vi and property.unitDesc.vi.length %}
+                <h2>View</h2>
+                {% for item in property.unitDesc.vi %}
+                  <span> - {{ item.caption_value }}</span> <br>
+                {% endfor %}
+              {% endif %}
+
+              {% if property.unitDesc.ic and property.unitDesc.ic.length %}
+                <h2>Internal Condition</h2>
+                {% for item in property.unitDesc.ic %}
+                 <span> - {{ item.caption_value }}</span> <br>
+                {% endfor %}
+              {% endif %}
+              
+              {% if property.unitDesc.od and property.unitDesc.od.length %}
+                <h2>Outdoor Area</h2>
+                {% for item in property.unitDesc.od %}
+                  <span> - {{ item.caption_value }}</span> <br>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+    
+          <div class="property-box">
+            <div class="title toggle">
+              <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+              <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+              Building Information
+            </div>
+            <div class="body">
+              {% for item in property.buildInfo %}
+                <h2>{{ __(item.key) }}</h2>
+                <span>{{ item.value }}</span>
+              {% endfor %}
+            </div>
+          </div>
+    
+          <div class="property-box" style="border-bottom: 1px solid #cccccc;">
+            <div class="title toggle">
+              <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+              <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+              District Information
+            </div>
+            <div class="body"></div>
+          </div>
+          <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-top: 20px; margin-bottom: 20px;">
+            <div class="body google-map-wrapper">
+              <div id="map" class="google-map"></div>
+              <script>
+                var map;
+                function initMap() {
+                  var xx = {lat: {{property.position.lat}}, lng: {{property.position.lng}}};
+                  map = new google.maps.Map(document.getElementById('map'), {
+                    center: xx,
+                    zoom: 13,
+                    streetViewControl: false,
+                    mapTypeControl: false,
+                    styles: [{
+                      "featureType": "administrative",
+                      "elementType": "labels.text.fill",
+                      "stylers": [{
+                        "color": "#444444"
+                      }]
+                    },
+                    {
+                      "featureType": "landscape",
+                      "elementType": "all",
+                      "stylers": [{
+                        "color": "#f2f2f2"
+                      }]
+                    },
+                    {
+                      "featureType": "poi",
+                      "elementType": "all",
+                      "stylers": [{
+                        "visibility": "off"
+                      }]
+                    },
+                    {
+                      "featureType": "road",
+                      "elementType": "all",
+                      "stylers": [{
+                          "saturation": -100
+                      },
+                      {
+                        "lightness": 45
+                      }]
+                    },
+                    {
+                      "featureType": "road.highway",
+                      "elementType": "all",
+                      "stylers": [{
+                        "visibility": "simplified"
+                      }]
+                    },
+                    {
+                      "featureType": "road.arterial",
+                      "elementType": "labels.icon",
+                      "stylers": [{
+                        "visibility": "off"
+                      }]
+                    },
+                    {
+                      "featureType": "transit",
+                      "elementType": "all",
+                      "stylers": [{
+                        "visibility": "off"
+                      }]
+                    },
+                    {
+                      "featureType": "water",
+                      "elementType": "all",
+                      "stylers": [{
+                          "color": "#E2EBED"
+                      },
+                      {
+                        "visibility": "on"
+                      }]
+                    }]
+                  });
+                  var marker = new google.maps.Marker({
+                    position: xx,
+                    map: map,
+                    icon: '/public/icon/pinmap_property.png'
+                  });
+                }
+              </script>
+              <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXiaoE3w9cp4esXGPQdkX1hpZ7TuZVR7w&callback=initMap"></script>
+            </div>
+          </div>
+          
+          <script>
+            $('.toggle').on('click', function(e) {
+              $(e.currentTarget).parent().toggleClass('hide').children().last().slideToggle(200);
+            });
+          </script>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="right-box">
+          {% if property.sale.show %}
+          <div class="sale-info-box">
+            <div class="title">SALE</div>
+            <div class="body">
+              {% if property.sale.price ==0 %}
+              <span>Price Upon Request</span>
+              {% else %}
+              <div class="price">
+                <label>Price</label>{{forms.exchangeRate('sale-price', property.sale.price, rateInfo)}}
+              </div>
+              <div class="price">
+                <label>Price/SQ FT</label><span id="sale-sqft-price">$ {{property.sale.sqft}}</span>
+                <script>
+                  (function() {
+                    var price = {{property.sale.sqft}},
+                        $label = $('#sale-sqft-price'),
+                        $node = $('#exchange-sale-price');
+                    $label.text('$ ' + G.toThousands(price));
+                    $node.change(function() {
+                      var prefix = "$¥$£¥"[+$node.prop('selectedIndex')];;
+                      var rate = +$node.val();
+                      $label.text(prefix + ' ' + G.toThousands((price * rate).toFixed(0)));
+                    });
+                  })()
+                </script>
+              </div>
+              <div class="text-center">
+                <!-- <button class="common-btn" style="width: 180px;">Mortgage Calculator</button> -->
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if property.rent.show %}
+          <div class="sale-info-box">
+            <div class="title">LEASE</div>
+            <div class="body">
+              {% if property.rent.price ==0 %}
+              <span>Price Upon Request</span>
+              {% else %}
+              <div class="price">
+                <label>Rental</label>{{forms.exchangeRate('rent', property.rent.price, rateInfo)}}
+              </div>
+              <div class="price">
+                <label>Rental/SQ FT</label><span id="rent-sqft-price">$ {{property.rent.sqft}}</span>
+                <script>
+                  (function() {
+                    var price = {{property.rent.sqft}},
+                        $label = $('#rent-sqft-price'),
+                        $node = $('#exchange-rent');
+                    $label.text('$ ' + G.toThousands(price));
+                    $node.change(function() {
+                      var prefix = "$¥$£¥"[+$node.prop('selectedIndex')];;
+                      var rate = +$node.val();
+                      $label.text(prefix + ' ' + G.toThousands((price * rate).toFixed(0)));
+                    });
+                  })()
+                  
+                </script>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
+          
+
+          {% if property.agentObj.showEnquiry %}
+            <div class="sale-info-box"> 
+              <div class="title">
+               ENQUIRIES
+              </div> 
+              <div class="body"> 
+               <div style="position: relative;"> 
+                <form id="enquiry-box-form" onsubmit="return false;" class="container enquiry-form"> 
+                 <div class="row"> 
+                  <div class="col-md-12 field-row"> 
+                   <div class="input-field"> 
+                    <label for="enquiry-box-name"> Name </label> 
+                    <input maxlength="255" autocomplete="off" name="enquiry-box-name" value="" type="text" id="enquiry-box-name" /> 
+                    <div class="xline"></div> 
+                   </div> 
+                  </div> 
+                  <div class="col-md-12 field-row"> 
+                   <div class="input-field"> 
+                    <label for="enquiry-box-mobile">Phone </label> 
+                    <input maxlength="255" autocomplete="off" name="enquiry-box-mobile" value="" type="text" id="enquiry-box-mobile" /> 
+                    <div class="xline"></div> 
+                   </div> 
+                  </div> 
+                </div> 
+                <div class="row"> 
+                  <div class="col-md-12 field-row"> 
+                    <div class="input-field"> 
+                    <label for="enquiry-box-email">Email </label> 
+                    <input maxlength="255" autocomplete="off" name="enquiry-box-email" value="" type="text" id="enquiry-box-email" /> 
+                    <div class="xline"></div> 
+                   </div> 
+                  </div> 
+                 </div>
+                <div class="row"> 
+                  <div class="col-md-12 field-row"> 
+                   <div class="input-field"> 
+                    <label for="enquiry-box-budget">Budget </label> 
+                    <input maxlength="255" autocomplete="off" name="enquiry-box-budget" value="" type="text" id="enquiry-box-budget" /> 
+                    <div class="xline"></div> 
+                   </div> 
+                  </div> 
+                </div> 
+                <div class="row"> 
+                  <div class="col-md-12 field-row"> 
+                    <div class="text-area-field"> 
+                      <textarea maxlength="20480" name="enquiry-box-message" id="enquiry-box-message" placeholder="Please let us know more about the type of property you are looking for⋯"></textarea> 
+                    </div> 
+                  </div> 
+                </div> 
+                <div class="row"> 
+                  <div class="col-md-1 chekbox-width-10"> 
+                  <div class="mockup-checkbox  enquiry-checkbox-area"> 
+                    <input name="enquiry-box-has_enquiry" value="enquiry-box-has_enquiry-true" type="checkbox" id="enquiry-box-has_enquiry-true" /> 
+                      <label class="mock-label" for="enquiry-box-has_enquiry-true"> <i class="fa fa-check" aria-hidden="true"></i> </label> 
+                    </div> 
+                  </div>
+                  <style>
+                  .mockup-checkbox input:checked+label {
+                    border: 1px solid #002b5c;
+                    background-color: #002b5c;
+                  }
+                  .mockup-checkbox .mock-label {
+                    border: 1px solid #002b5c;
+                    background-color: #002b5c;
+                  }
+                  </style>
+                  <div class="col-md-11  col-xs-12 field-row checkbox-area mgl10"> 
+                    <div class="mockup-checkbox"> 
+                      <label for="enquiry-box-has_enquiry-true">Stay tuned with our new listings and be the first one to preview our magazine, COLLECTION. </label> 
+                    </div> 
+                  </div> 
+                </div>
+                <div class="row"> 
+                  <div class="col-md-12"> 
+                    <div class="enquiriy-request"> 
+                      <button id="submit-enquiry-box" style="max-width:140px;" class="common-btn">Let’s Connect </button> 
+                    </div> 
+                  </div> 
+                 </div> 
+                </form> 
+               </div> 
+              </div> 
+            </div>
+            <script>
+              $(document).ready(function() {
+                $('#enquiry-box-form').validate({
+                  rules: {
+                    "enquiry-box-email": {
+                      required: true,
+                      email: true
+                    },
+                    "enquiry-box-name": {
+                      required: true
+                    },
+                    "enquiry-box-budget": {
+                      required: true,
+                      number: true
+                    },
+                    "enquiry-box-mobile": {
+                      mobile: true
+                    }
+                  }
+                });
+                $('#submit-enquiry-box').click(function() {
+                  if($('#enquiry-box-form').valid()) {
+                    var data = {
+                      unit: $('input[name="unitId"]').val().trim(),
+                      agent: $('input[name="agentId"]').val().trim(),
+                      name: $('input[name="enquiry-box-name"]').val().trim(),
+                      mobile: $('input[name="enquiry-box-mobile"]').val().trim(),
+                      email: $('input[name="enquiry-box-email"]').val().trim(),
+                      message: $('textarea[name="enquiry-box-message"]').val().trim(),
+                      budget: $('input[name="enquiry-box-budget"]').val().trim(),
+                    };
+                    $.ajax({
+                      method: 'post',
+                      data: data,
+                      dataType: 'json',
+                      url: '/api/enquiry/',
+                      success: function() {
+                        G.mNotic('Sent Successfully');
+                      },
+                      error: function(err) {
+                        G.mNotic('Sent Error.' + err.responseText, 'error');
+                      }
+                    });
+    
+                    $.ajax({
+                      method: 'post',
+                      data: {
+                        email: $('input[name="enquiry-box-email"]').val().trim(),
+                        is_subscribed: $('input[name="enquiry-box-has_enquiry"]:checked').length > 0
+                      },
+                      dataType: 'json',
+                      url: '/api/subscription/',
+                      success: function() {
+                        
+                      },
+                      error: function(err) {
+                        
+                      }
+                    });
+                  }
+                });
+              });
+            </script>
+            <style>
+           
+              .enquiriy-request {
+                margin:0 auto;
+                text-align:center;
+              }
+              .enquiry-checkbox-area{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+              .enquiry-form .checkbox-area label{
+                font-size:12px;font-weight:100;
+              }
+              .chekbox-width-10{
+                font-size:12px;
+                width:10px;
+              }
+              .mgl10{
+                margin-left:25px;
+              }
+            </style>
+          {% else %}
+            <div class="sale-info-box">
+              <div class="title">AGENT</div>
+              <div class="body">
+                <div style="position: relative;">
+                  <div class="name">{{property.agentObj.first_name}}&nbsp;{{property.agentObj.last_name}}</div>
+                  <div class="com-title">{{property.agentObj.title}}&nbsp;</div>
+                  <div class="detail-info">Licence No. <span>{{property.agentObj.agent_number}}</span></div>
+                  <div class="detail-info">Direct <span>{{property.agentObj.general_line}}</span></div>
+                  <div class="detail-info">Mobile <span>{{property.agentObj.mobile}}</span></div>
+                  <div class="avatar">
+                    <img src="{{property.agentObj.profile_pic}}" alt="">
+                  </div>
+                  <div class="row" style="margin-top: 15px;">
+                    <div 
+                      class="col-md-6 col-xs-6"
+                      style="padding-right: 4px;"
+                      data-id="{{property.agentObj.id}}"
+                      data-name="{{property.agentObj.first_name}} {{property.agentObj.last_name}}"
+                      data-title="{{property.agentObj.title}}"
+                      data-licence="{{property.agentObj.agent_number}}"
+                      data-direct="{{property.agentObj.general_line}}"
+                      data-mobile="{{property.agentObj.mobile}}"
+                      data-image="{{property.agentObj.profile_pic}}"
+                    >
+                      <button id="agent-profile-detail" class="common-btn">Profile</button>
+                    </div>
+                    <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn">Enquiry</button></div>
+                  </div>
+                  <script>
+                    $('#agent-profile-detail').click(function(e) {
+                      var $target = $(e.target).closest('.col-md-6');
+                      var id = $target.data('id');
+                      if (id) {
+                        $('#agent-detail-dialog-name').text($target.data('name'));
+                        $('#agent-detail-dialog-title').text($target.data('title'));
+                        $('#agent-detail-dialog-licence').text($target.data('licence'));
+                        $('#agent-detail-dialog-direct').text($target.data('direct'));
+                        $('#agent-detail-dialog-mobile').text($target.data('mobile'));
+                        $('#agent-detail-dialog-image').attr('src', $target.data('image'));
+                        $('#agent-detail-dialog').fadeIn(400);
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include "./detail-dialog.html" %}
+  {% include "../base/footer.html" %}
+</body>
+</html>

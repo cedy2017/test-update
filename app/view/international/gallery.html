@@ -1,0 +1,390 @@
+
+  <div id="gallary-full-wrapper" class="full-cover" style="display: none;">
+    <div class="close-full"></div>
+      <div class="gallery" id="gallery-full-real" style="margin: 100px auto;max-width: 1400px;">
+        <div class="slider-wrapper">
+          <ul id="slider" class="slider" >
+            {% for item in property.gallery %}
+              <li data-index="{{loop.index0}}" style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"></li>
+            {% endfor %}
+          </ul>
+          <div id="side-left-btn" class="left-button">
+            
+          </div>
+          <div id="side-right-btn" class="right-button">
+            
+          </div>
+        </div>
+        <script>
+          
+            var activeIndex = 0,
+                galleryTimerId;
+      
+            function setPosition(active) {
+              var $slider = $('#slider'),
+                  stageWidth = $slider.width(),
+                  $lis = $slider.children();
+                var preEl = $lis[active - 1];
+                var activeEl = $lis[active];
+                var nextEl = $lis[active + 1];
+                $.each($lis, function(index, $li) {
+                    $($li).css({'transform': 'translateX(' + (index > active ? stageWidth : -stageWidth) * 2 + 'px)', 'z-index': '-1'});
+                });
+                if(!nextEl) {
+                  nextEl = $lis[0];
+                }
+                if(!preEl) {
+                  preEl = $lis[$lis.length - 1];
+                }
+                $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
+                $(preEl).addClass('side').css({'transform': 'translateX(' + -stageWidth + 'px)', 'z-index': '2'});
+                $(nextEl).addClass('side').css({'transform': 'translateX(' + stageWidth + 'px)' , 'z-index': '1'});
+            }
+      
+            function autoFLash() {
+              return false;
+              galleryTimerId = setInterval(function(){
+                $('#side-right-btn').click();
+              }, 5000);
+            }
+      
+            setPosition(0);
+            autoFLash();
+            $('#side-right-btn').on('click', function() {
+              if(++activeIndex >= $('#slider').children().length) {
+                activeIndex = 0;
+              }
+              setPosition(activeIndex);
+              clearInterval(galleryTimerId);
+              autoFLash();
+            })
+            $('#side-left-btn').on('click', function() {
+              if(--activeIndex < 0) {
+                activeIndex = $('#slider').children().length - 1;
+              }
+              setPosition(activeIndex);
+              clearInterval(galleryTimerId);
+              autoFLash();
+            });
+            
+            //16 * 9;
+            $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+            $(window).resize(function() {
+              $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+            });
+          
+        </script>
+      </div>
+  </div>
+
+  <div id="gallary-wrapper" class="detail-gallary">    
+    <div id="gallery">
+      <div class='slider'>
+        {% for item in property.gallery %}
+          {% if item.video %}
+          <div class="gallery-wrapper">
+            <div
+              class="gallery-item video"
+              data-index="{{loop.index0}}"
+              data-caption="{{item.caption}}"
+              data-video="{{item.video}}"
+              data-img="url({{host}}{{item.image}})"
+              style="background: black;"
+            />
+              <video
+                autobuffer
+                preload="auto"
+                controls
+                style="width: 100%;margin-top: 45px; padding: 10px;"
+                id="video-el-{{loop.index0}}"
+                poster="{{host}}{{item.image}}"
+                height="535"
+                width="900"
+              >
+                <source src="{{item.video}}" preload="auto" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          {% else %}
+            <div
+              class="gallery-wrapper"
+              data-img="url({{host}}{{item.image}})"
+              data-index="{{loop.index0}}"
+              data-caption="{{item.caption}}"
+            >
+              <div
+                class="gallery-item"
+                style="background:url({{host}}{{item.image}}) 50% 50% no-repeat; background-size: cover;"
+              >
+              </div>
+              <div class="cover"> </div>
+              <div data-index="{{loop.index0}}" id="" class="scale require-full-gallery"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div id="control-left" class="control left">
+        <div class="img"></div>
+        <div style="float: right;" class="arrow">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div id="control-right" class="control right">
+        <div style="float: left;" class="arrow">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+        <div class="img"></div>
+      </div>
+    </div>
+
+    <div id="mobile-gallery">
+      <div class="row">
+        {% for item in property.gallery %}
+          {% if item.video %}
+          <span class="gallery-wrapper">
+            <div
+              class="gallery-item"
+              data-index="{{loop.index0}}"
+              data-caption="{{item.caption}}"
+              data-img="url({{host}}{{item.image}})"
+              data-video="{{item.video}}"
+              class="video"
+              style="background:url({{item.image}}) 50% 50% no-repeat; background-size: cover;"
+            />
+              
+            </div>
+          </span>
+          {% else %}
+            <div
+              class="col-xs-3 mobile-box"
+              data-img="url({{host}}{{item.image}})"
+              data-index="{{loop.index0}}"
+              data-caption="{{item.caption}}"
+            >
+              <img src="{{host}}{{item.image}}" width="100%"/>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="gallery-caption" class="desc">{{property.gallery[0].caption if property.gallery[0] else ''}}</div>
+    <div class="images-wrapper">
+      <div style="margin-left: 50px; margin-right: 50px; overflow: hidden;">
+        <ul id="detail-images" class="images" >
+          {% for item in property.gallery %}
+            {% if item.video %}
+              <li
+                data-index="{{loop.index0}}"
+                data-caption="{{item.caption}}"
+                data-video="{{item.video}}"
+                class="video"
+                style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"
+              />
+                <div class="img"/>
+              </li>
+            {% else %}
+              <li data-index="{{loop.index0}}" data-caption="{{item.caption}}" style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div id="slide-left" class="slide-left">
+        
+      </div>
+      <div id="slide-right" class="slide-right">
+      </div>
+    </div>
+
+    <script>
+      var galleryLength = $('.gallery-wrapper').length;
+      $('#gallery').iosSlider({
+        snapToChildren: true,
+        desktopClickDrag: true,
+        infiniteSlider: true,
+        snapSlideCenter: true,
+        navPrevSelector: $('#control-left'),
+        navNextSelector: $('#control-right'),
+        onSlideChange: slideChange
+      });
+
+      $('.control.left').find('.img').css('background-image',$('.gallery-wrapper:eq(' + (galleryLength - 1) + ')').data('img'));
+      $('.control.right').find('.img').css('background-image',$('.gallery-wrapper:eq(1)').data('img'));
+
+      $('.gallery-wrapper:eq(0)').addClass('selected');
+
+      function slideChange(args) {
+        $('.gallery-wrapper').removeClass('selected');
+        $('.gallery-wrapper:eq(' + (args.currentSlideNumber-1) + ')').addClass('selected');
+        var $current = $('.gallery-wrapper:eq(' + (args.currentSlideNumber-1) + ')');
+
+        $('#gallery-caption').text($current.data('caption'));
+
+        $('.control.left').find('.img').css('background-image', $current.prev().data('img'));
+        $('.control.right').find('.img').css('background-image', $current.next().data('img'));
+
+        try {
+          console.log('changed: ' + (args.currentSlideNumber - 1));
+        } catch(err) {
+        }
+      }
+
+      //$("#gallary-full-wrapper").fadeOut();
+      
+      $('.require-full-gallery,.mobile-box').click(function(){
+        var index = $(this).data('index');
+        setPosition(index || 0);
+        
+        $('#gallary-full-wrapper').fadeIn(400);
+        setTimeout(function() {
+          $(window).resize();
+        }, 200);
+      });
+
+      $('.close-full', '#gallary-full-wrapper').click(function() {
+        $('#gallary-full-wrapper').fadeOut(400);
+      });
+
+      // video
+      var $videos = $('.gallery-wrapper').find('video');
+      $.each($videos, function(index, vi){
+        if(index == 0) {
+          vi.play();
+          console.log(index);
+        } else {
+          
+        }
+      });
+
+      var $images = $('#detail-images'),
+          $lis = $images.children(),
+          $stageWrapper = $('#detail-stage'),
+          $stage = $('#stage-screen'),
+          currIndex = 0,
+          imagesOffset = 0,
+          $lbtn = $('#left-btn'),
+          $rbtn = $('#right-btn'),
+          $slideLeftBtn = $('#slide-left'),
+          $slideRightBtn = $('#slide-right'),
+          detailGallaryId;
+      // var lastBgs = $lis.last().css('background-image');
+      // init
+      var bgs = $lis.first().addClass('active').css('background-image');
+      $stage.css('background-image', bgs);
+
+      $stage.height($stage.width() * 2 / 3);
+      $('#detail-stage').height($stage.width() * 2 / 3)
+
+      if(!$lis.first().hasClass('video')) {
+        $stage.addClass('scale-active');
+      }
+      if ($($lis[currIndex]).hasClass('video')) {
+        $stageWrapper.addClass('video');
+      } else {
+        $stageWrapper.removeClass('video');
+      }
+      var imagesWidth = 154 * $lis.length + 134;
+      $images.css('width', imagesWidth);
+      $lbtn.on('click', function(e){
+        currIndex --;
+        if(currIndex < 0) {
+          currIndex = $lis.length - 1;
+        }
+        changeStage(currIndex);
+      });
+      $rbtn.on('click', function() {
+        currIndex ++
+        if(currIndex > $lis.length - 1) {
+          currIndex = 0;
+        }
+        changeStage(currIndex);
+      });
+      $images.on('click', function(e) {
+        var $target = $(e.target).closest('li'),
+            activeIndex = $target.data('index'),
+            caption = $target.data('caption');
+        currIndex = activeIndex;
+        $('#gallery').iosSlider("goToSlide", currIndex + 1);
+        changeStage(activeIndex);
+      });
+      $slideLeftBtn.on('click', function(e) {
+        var pWidth = $images.parent().width();
+        imagesOffset = imagesOffset + (pWidth - 100) / 2;
+        if(imagesOffset > 0) {
+          imagesOffset = 0;
+        }
+        $images.css('transform', 'translateX(' + imagesOffset + 'px)');
+      });
+      $slideRightBtn.on('click', function(e) {
+        var pWidth = $images.parent().width() + 50;
+        imagesOffset = imagesOffset - pWidth / 2;
+        if(imagesWidth < Math.abs(imagesOffset) + pWidth) {
+          imagesOffset = pWidth - imagesWidth;
+        }
+        $images.css('transform', 'translateX(' + imagesOffset + 'px)');
+      });
+
+      // show image, vedio
+      $stage.click(function() {
+        var current = $lis[currIndex],
+            videoPath = $(current).data('video');
+        if(videoPath) {
+          $('#video-dialog').fadeIn(400);
+          var $media = $('#full-image-view'),
+              mWidth = $media.width(),
+              mHeight = 720/1280 * mWidth;
+          $media.height(mHeight);
+          var video = document.getElementById('video-el'),
+              sources = video.getElementsByTagName('source');
+          sources[0].src = videoPath;
+          video.load();
+          video.play();
+        } else {
+          $('#images-dialog').fadeIn(400);
+          var $media = $('#full-image-view'),
+              mWidth = $media.width(),
+              mHeight = 2/3 * mWidth;
+          $media.height(mHeight).css('background-image', $(this).css('background-image'));
+        }
+      });
+
+      $('#close-full-dialog').click(function(e) {
+        var video = document.getElementById('video-el');
+        video.pause();
+      });
+
+      // 
+      autoPlay();
+      function autoPlay() {
+        detailGallaryId = setInterval(function() {
+          $rbtn.click();
+        }, 8000);
+      }
+
+      function changeStage(activeIndex) {
+        $lis.removeClass('active');
+        var current = $lis[activeIndex],
+            $current = $(current);
+        if ($current.hasClass('video')) {
+          $stageWrapper.addClass('video');
+        } else {
+          $stageWrapper.removeClass('video');
+        }
+        $('#gallery-caption').text($current.data('caption'));
+        $stage.removeClass('scale-active').css('background-image', $current.addClass('active').css('background-image'));
+        if(!$current.hasClass('video')) {
+          $stage.addClass('scale-active');
+        }
+        clearInterval(detailGallaryId);
+        autoPlay();
+      }
+
+      $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
+      $(window).resize(function() {
+        $stage.height($stage.width() * 2 / 3);
+        $('#detail-stage').height($stage.width() * 2 / 3);
+
+        $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
+      });
+    </script>
+  </div>

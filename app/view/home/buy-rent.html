@@ -1,0 +1,222 @@
+{% import "../base/forms.html" as forms %}
+<div class="buy-rent">
+  <div id="buy-rent-btn" class="btns">
+    <div data-type="buy" class="btn-buy">{{__('BUY')}}</div>
+    <div data-type="rent" class="btn-rent">{{__('RENT')}}</div>
+    <div data-type="property" class="btn-list">{{__('List Your Property')}}</div>
+  </div>
+  <div id="buy-rent-content" class="content" style="display: none;">
+    <div id="buy-search">
+      <form action="/buy-result" method="get">
+      <div class="row">
+        <div class="col-md-4 col-xs-12">
+          {{forms.autoComplete('keyword_search_buy', 'KEYWORDS')}}
+        </div>
+        <div class="col-md-4 col-xs-12">
+          {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('budget_min', 'BUDGET(HKD)', BUY_BUDGET_MIN, 'MIN M(ILLION)')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('budget_max', ' ', BUY_BUDGET_MAX, 'MAX M(ILLION)')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'MIN')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('saleable_size_sqft_max', ' ', AREA_MAX, 'MAX')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.inputNumber('bedroom_min', 'BEDS')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.inputNumber('bathroom_min', 'BATHS')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 agree-terms-padding-left">
+            {{forms.privacy('buy')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-wrapper">
+            <button style="max-width: 230px;" class="common-btn">SEARCH</button>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div id="rent-search">
+      <form action="/rent-result" method="get">
+      <div class="row">
+        <div class="col-md-4 col-xs-12">
+          {{forms.autoComplete('keyword_search_rent', 'KEYWORDS')}}
+        </div>
+        <div class="col-md-4 col-xs-12">
+          {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('budget_min', 'BUDGET(HKD)', RENT_BUDGET_MIN, 'MIN(K)')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('budget_max', ' ', RENT_BUDGET_MAX, 'MAX(K)')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'MIN')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.select('saleable_size_sqft_max', ' ', AREA_MAX, 'MAX')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.inputNumber('bedroom_min', 'BEDS')}}
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6">
+          {{forms.inputNumber('bathroom_min', 'BATHS')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 agree-terms-padding-left">
+          {{forms.privacy('rent')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-wrapper">
+            <button style="max-width: 230px;" class="common-btn">SEARCH</button>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div id="property-search">
+      <form id="list_property_form" onsubmit="return false;">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            LIST YOUR PROPERTY
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div style="display: inline-block; margin-right: 10px;">
+              {{forms.radio('listing_type', 'SA', 'SALE', {top: '16px'})}}
+            </div>
+            <div  style="display: inline-block;">
+              {{forms.radio('listing_type', 'LA', 'RENT', {top: '16px'})}}
+            </div>
+            <label id="listing_type-error" style="display:none;margin-top: 12px;" class="error" for="listing_type">This field is required.</label>
+          </div>
+          
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            {{forms.field('price_ask', 'ASKING(HKD)')}}
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            {{forms.field('address', 'ADDRESS')}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            {{forms.field('name', 'NAME')}}
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            {{forms.field('mobile', 'MOBILE')}}
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            {{forms.field('email', 'EMAIL')}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 agree-terms-padding-left">
+            {{forms.privacy('list')}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="search-wrapper">
+              <button id="sumbmit_list" style="max-width: 230px;" class="common-btn">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function() {
+            $('#list_property_form').validate({
+              rules: {
+                listing_type: "required",
+                email: {
+                  required: true,
+                  email: true
+                },
+                name: {
+                  required: true,
+                },
+                price_ask: {
+                  required: true,
+                  number: true
+                },
+                mobile: {
+                  required: true,
+                  mobile: true
+                },
+                address: "required"
+              }
+            });
+            $('#sumbmit_list').click(function() {
+              if($('#list_property_form').valid()) {
+                $.ajax({
+                  method: 'post',
+                  data: {
+                    listing_type: $('input[name="listing_type"]').val(),
+                    email: $('input[name="email"]').val(),
+                    price_ask: $('input[name="price_ask"]').val(),
+                    address: $('input[name="address"]').val(),
+                    mobile: $('input[name="mobile"]').val(),
+                    name: $('input[name="name"]').val()
+                  },
+                  dataType: 'json',
+                  url: '/api/list_property/',
+                  success: function() {
+                    G.mNotic('Sent Successfully.');
+                  },
+                  error: function(err) {
+                    G.mNotic('Sent Error.' + err.responseText, 'error');
+                  }
+                });
+              }
+            });
+          });
+        </script>
+      </form>
+    </div>
+  </div>
+  <script>
+    $('#buy-rent-btn').on('click', function(e) {
+      e.stopPropagation();
+      var $currentEl = $(e.target);
+      $currentEl.siblings().removeClass('s-active');
+      var type = $currentEl.addClass('s-active').data('type');
+
+      console.log(type);
+      $('#buy-rent-content').slideDown(500);
+    });
+    $("#buy-rent-btn").click(function(e) {
+      e.stopPropagation();
+      var type = $(e.target).data('type');
+      switch(type) {
+        case 'buy': 
+          $('#buy-search').show(), $('#rent-search').hide(), $('#property-search').hide();
+          break;
+        case 'rent':
+          $('#buy-search').hide(), $('#rent-search').show(), $('#property-search').hide();
+          break;
+        case 'property':
+          $('#buy-search').hide(), $('#rent-search').hide(), $('#property-search').show();
+          break;
+      }
+    });
+  </script>
+</div>

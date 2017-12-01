@@ -1,0 +1,76 @@
+<div class="gallery">
+  <div class="slider-wrapper">
+    <ul id="slider" class="slider" >
+      <li style="background:url(public/images/slider/01.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+      <li data-index="0" style="background:url(public/images/slider/s2.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+      <li data-index="1" style="background:url(public/images/slider/s3.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+      <li data-index="2" style="background:url(public/images/slider/s4.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+      <li data-index="3" style="background:url(public/images/slider/s5.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+      <li data-index="4" style="background:url(public/images/slider/s6.jpg) 50% 60% no-repeat; background-size: cover;"></li>
+    </ul>
+    <div id="side-left-btn" class="left-button">
+      
+    </div>
+    <div id="side-right-btn" class="right-button">
+      
+    </div>
+  </div>
+  <script>
+    (function(){
+      var activeIndex = 0,
+          galleryTimerId;
+
+      function setPosition(active) {
+        var $slider = $('#slider'),
+            stageWidth = $slider.width(),
+            $lis = $slider.children();
+          var preEl = $lis[active - 1];
+          var activeEl = $lis[active];
+          var nextEl = $lis[active + 1];
+          $.each($lis, function(index, $li) {
+              $($li).css({'transform': 'translateX(' + (index > active ? stageWidth : -stageWidth) * 2 + 'px)', 'z-index': '-1'});
+          });
+          if(!nextEl) {
+            nextEl = $lis[0];
+          }
+          if(!preEl) {
+            preEl = $lis[$lis.length - 1];
+          }
+          $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
+          $(preEl).addClass('side').css({'transform': 'translateX(' + -stageWidth + 'px)', 'z-index': '2'});
+          $(nextEl).addClass('side').css({'transform': 'translateX(' + stageWidth + 'px)' , 'z-index': '1'});
+      }
+
+      function autoFLash() {
+        galleryTimerId = setInterval(function(){
+          $('#side-right-btn').click();
+        }, 5000);
+      }
+
+      setPosition(0);
+      autoFLash();
+      $('#side-right-btn').on('click', function() {
+        if(++activeIndex >= $('#slider').children().length) {
+          activeIndex = 0;
+        }
+        setPosition(activeIndex);
+        clearInterval(galleryTimerId);
+        autoFLash();
+      })
+      $('#side-left-btn').on('click', function() {
+        if(--activeIndex < 0) {
+          activeIndex = $('#slider').children().length - 1;
+        }
+        setPosition(activeIndex);
+        clearInterval(galleryTimerId);
+        autoFLash();
+      });
+      
+      //16 * 9;
+      $('.slider-wrapper').height($('#slider').width() * 1 / 2);
+      $(window).resize(function() {
+        $('.slider-wrapper').height($('#slider').width() * 1 / 2);
+      });
+    })()
+  </script>
+</div>

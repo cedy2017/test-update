@@ -1,0 +1,195 @@
+<div class="detail-gallary">
+  <div id="detail-stage" class="stage">
+    <div id="left-btn" class="left-btn">
+    </div>
+    <div id="right-btn" class="right-btn">
+    </div>
+    <div id="stage-screen" class="screen active">
+
+    </div>
+    <div class="banner">
+      <div class="s-container banner-wrapper">
+        <h3>{{property.name}}</h2>
+        <span>{{property.address}}</span>
+        <div class="love_share">
+          <!-- <div id="favorite-btn"
+            data-favorite="{{property.id}}"
+            data-value="{{property.loveValue}}"
+            class="btn"
+          >
+            <div class="icon icon_love"></div>
+            <div class="icon icon_unlove"></div>
+          </div> -->
+          <div data-dialog='share-dialog' class="btn">
+            <div class="icon icon_share"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="detail-gallery"></div>
+
+  <div id="gallery-caption" class="desc">{{property.gallery[0].caption if property.gallery[0] else ''}}</div>
+  <div class="images-wrapper">
+    <div style="margin-left: 50px; margin-right: 50px; overflow: hidden;">
+      <ul id="detail-images" class="images" >
+        {% for item in property.gallery %}
+          <li data-index="{{loop.index0}}" data-caption="{{item.caption}}" style="background:url(https://www.listsothebysrealtyhk.com/{{item.image}}) 50% 60% no-repeat; background-size: cover;"></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div id="slide-left" class="slide-left">
+    </div>
+    <div id="slide-right" class="slide-right">
+    </div>
+  </div>
+  <script>
+
+  $('#gallery').iosSlider({
+      snapToChildren: true,
+      desktopClickDrag: true,
+      infiniteSlider: true,
+      snapSlideCenter: true,
+      onSlideChange: slideChange
+    });
+
+    function slideChange(args) {
+    
+      try {
+        console.log('changed: ' + (args.currentSlideNumber - 1));
+      } catch(err) {
+      }
+      
+      $('.indicators .item').removeClass('selected');
+      $('.indicators .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+    
+    }
+
+    var $images = $('#detail-images'),
+        $lis = $images.children(),
+        $stage = $('#stage-screen'),
+        currIndex = 0,
+        imagesOffset = 0,
+        $lbtn = $('#left-btn'),
+        $rbtn = $('#right-btn'),
+        $slideLeftBtn = $('#slide-left'),
+        $slideRightBtn = $('#slide-right'),
+        detailGallaryId;
+    var bgs = $lis.first().addClass('active').css('background-image');
+    var lastBgs = $lis.last().css('background-image');
+    $stage.css('background-image', bgs).addClass('scale-active');
+    
+    $stage.height($stage.width() * 2 / 3);
+    $('#detail-stage').height($stage.width() * 2 / 3)
+
+    var imagesWidth = 154 * $lis.length + 134;
+    $images.css('width', imagesWidth);
+    $lbtn.on('click', function(e){
+      currIndex --;
+      if(currIndex < 0) {
+        currIndex = $lis.length - 1;
+      }
+      $lis.removeClass('active');
+      var current = $lis[currIndex];
+      $('#gallery-caption').text($(current).data('caption'));
+      $stage.removeClass('scale-active').css('background-image', $(current).addClass('active').css('background-image')).addClass('scale-active');
+      clearInterval(detailGallaryId);
+      autoPlay();
+    });
+    $rbtn.on('click', function() {
+      currIndex ++
+      if(currIndex > $lis.length - 1) {
+        currIndex = 0;
+      }
+      $lis.removeClass('active');
+      var current = $lis[currIndex];
+      $('#gallery-caption').text($(current).data('caption'));
+      $stage.removeClass('scale-active').css('background-image', $(current).addClass('active').css('background-image')).addClass('scale-active');
+      clearInterval(detailGallaryId);
+      autoPlay();
+    });
+    $images.on('click', function(e) {
+      var activeIndex = $(e.target).data('index'),
+          caption = $(e.target).data('caption');
+      $('#gallery-caption').text(caption);
+      $lis.removeClass('active');
+      var current = $lis[activeIndex];
+      $stage.removeClass('scale-active').css('background-image', $(current).addClass('active').css('background-image')).addClass('scale-active');
+      clearInterval(detailGallaryId);
+      autoPlay();
+    });
+    $slideLeftBtn.on('click', function(e) {
+      var pWidth = $images.parent().width();
+      imagesOffset = imagesOffset + (pWidth - 100) / 2;
+      if(imagesOffset > 0) {
+        imagesOffset = 0;
+      }
+      $images.css('transform', 'translateX(' + imagesOffset + 'px)');
+    });
+    $slideRightBtn.on('click', function(e) {
+      var pWidth = $images.parent().width() + 50;
+      imagesOffset = imagesOffset - pWidth / 2;
+      if(imagesWidth < Math.abs(imagesOffset) + pWidth) {
+        imagesOffset = pWidth - imagesWidth;
+      }
+      $images.css('transform', 'translateX(' + imagesOffset + 'px)');
+    });
+
+    // show image, vedio
+    $stage.click(function() {
+      var current = $lis[currIndex],
+          videoPath = $(current).data('video');
+      if(videoPath) {
+        $('#video-dialog').fadeIn(400);
+        var $media = $('#full-image-view'),
+            mWidth = $media.width(),
+            mHeight = 720/1280 * mWidth;
+        $media.height(mHeight);
+        var video = document.getElementById('video-el'),
+            sources = video.getElementsByTagName('source');
+        sources[0].src = videoPath;
+        video.load();
+        video.play();
+      } else {
+        $('#images-dialog').fadeIn(400);
+        var $media = $('#full-image-view'),
+            mWidth = $media.width(),
+            mHeight = 2/3 * mWidth;
+        $media.height(mHeight).css('background-image', $(this).css('background-image'));
+      }
+    });
+    autoPlay();
+    function autoPlay() {
+      detailGallaryId = setInterval(function() {
+        $rbtn.click();
+      }, 8000);
+    }
+
+    // favorite
+
+    $.each($('[data-favorite]'), function(index, item) {
+      var $loveEl = $(item),
+          id = $loveEl.data('favorite');
+      if(localStorage.getItem('fid-' + id)) {
+        $loveEl.addClass('love');
+      }
+    });
+
+    $('#favorite-btn').click(function() {
+      if($(this).hasClass('love')) {
+        localStorage.removeItem('fid-' + $(this).data('favorite'));
+        $(this).removeClass('love');
+      } else {
+        localStorage.setItem('fid-' + $(this).data('favorite'), $(this).data('value'));
+        $(this).addClass('love');
+      }
+    });
+
+    $(window).resize(function() {
+      $stage.height($stage.width() * 2 / 3);
+      $('#detail-stage').height($stage.width() * 2 / 3);
+    });
+  </script>
+</div>

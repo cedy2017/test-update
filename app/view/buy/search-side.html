@@ -1,0 +1,154 @@
+{% import "../base/forms.html" as forms %}
+<form action="/{{activeMenu}}-result" id="search-side-form">
+
+<div class="search-side">
+  <!-- <div class="search-condition-box">
+    <div class="box-title">
+      SEARCH HISTORY
+    </div>
+    <div class="box-body">
+      <div class="xicon-wrapper">
+        <i class="xicon save"></i>
+      </div>
+       Save this Search
+    </div>
+  </div> -->
+
+  <div class="search-condition-box">
+    <div class="box-title">
+      REFINE SEARCH
+    </div>
+    <div class="box-body">
+      {{forms.autoComplete('keywords', 'KEYWORDS', {icon: 'search'})}}
+      {{forms.select('location', 'LOCATION', LOCATIONS, '', {icon: 'location', selected: query.location})}}
+      {{forms.select('district', 'DISTRICT', DISTRICTS, '', {icon: 'district', selected: query.district})}}
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          {{forms.select('budget_min', 'BUDGET(HKD)', BUDGET_MIN, 'Min M(illion)' if activeMenu == 'buy' else 'MIN (K)', {icon: 'budget', selected: query.budget_min})}}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          {{forms.select('budget_max', ' ', BUDGET_MAX, 'Min M(illion)' if activeMenu == 'buy' else 'MIN (K)', {selected: query.budget_max})}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-6">{{forms.select('saleable_size_sqft_min', 'AREA(SQ FT.)', AREA_MIN, 'Min', {icon: 'areaft', selected: +query.saleable_size_sqft_min})}}</div>
+        <div class="col-md-6 col-xs-6">{{forms.select('saleable_size_sqft_max', '', AREA_MAX, 'Max', {selected: +query.saleable_size_sqft_max})}}</div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            {{forms.inputNumber('bedroom_min', 'BEDS', {icon: 'bedroom', value: query.bedroom_min})}}
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            {{forms.inputNumber('bathroom_min', 'BATHS', {icon: 'bathroom', value: query.bathroom_min})}}
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            {{forms.inputNumber('car_park_min', 'CAR PARK', {icon: 'carpark', value: query.car_park_min})}}
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-condition-box">
+    <div class="box-title toggle">
+        <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+        <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+      PROPERTY TYPE
+    </div>
+    <div class="box-body">
+      {{forms.checkbox('is_simplex', 'true', 'Simplex', {checked: query.is_simplex})}}
+      {{forms.checkbox('is_duplex', 'true', 'Duplex', {checked: query.is_duplex})}}
+      {{forms.checkbox('is_triplex', 'true', 'Triplex', {checked: query.is_triplex})}}
+      {{forms.checkbox('is_penthouse', 'true', 'Penthouse', {checked: query.is_penthouse})}}
+      {{forms.checkbox('is_townhouse', 'true', 'Townhouse', {checked: query.is_townhouse})}}
+      {{forms.checkbox('is_detached_house', 'true', 'detached-house', {checked: query.is_detached_house})}}
+      <!-- {{forms.checkbox('is_village_house', 'true', 'Village House', {checked: query.is_village_house})}} -->
+    </div>
+  </div>
+
+  <div class="search-condition-box">
+    <div class="box-title toggle">
+        <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+        <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+      FEATURES
+    </div>
+    <div class="box-body">
+      {% if activeMenu == 'rent' %}
+      {{forms.checkbox('is_serviced_apartment', 'true', 'Service Apartment', {checked: query.is_serviced_apartment})}}
+      {% endif %}
+      {{forms.checkbox('has_maid_room', 'true', 'Maid Room', {checked: query.has_maid_room})}}
+      {{forms.checkbox('has_terrace', 'true', 'Terrace', {checked: query.has_terrace})}}
+      {{forms.checkbox('has_garden', 'true', 'Garden', {checked: query.has_garden})}}
+      {{forms.checkbox('has_balcony', 'true', 'Balcony', {checked: query.has_balcony})}}
+      {{forms.checkbox('has_roof', 'true', 'Roof', {checked: query.has_roof})}}
+      <!-- {{forms.checkbox('has_study_room', 'true', 'Study Room', {checked: query.has_study_room})}}
+      {{forms.checkbox('has_internal_staircase', 'true', 'Internal Staircase', {checked: query.has_internal_staircase})}}
+      {{forms.checkbox('has_private_lift', 'true', 'Private Lift', {checked: query.has_private_lift})}} -->
+    </div>
+  </div>
+
+  <div class="search-condition-box">
+    <div class="box-title toggle">
+      <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+      <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+        FACILITIES
+    </div>
+    <div class="box-body">
+      {{forms.checkbox('has_gym', 'true', 'Gymnasium', {checked: query.has_gym})}}
+      {{forms.checkbox('has_indoor_swimming_pool', 'true', 'Swimming Pool (Indoor)',{checked: query.has_indoor_swimming_pool})}}
+      {{forms.checkbox('has_outdoor_swimming_pool', 'true', 'Swimming Pool (Outdoor)', {checked: query.has_outdoor_swimming_pool})}}
+      {{forms.checkbox('has_tennis_court', 'true', 'Tennis Court', {checked: query.has_tennis_court})}}
+      {{forms.checkbox('has_childrens_playground', 'true', 'Children’s Playground', {checked: query.has_childrens_playground})}}
+      {{forms.checkbox('has_barbecue_area', 'true', 'Barbecue', {checked: query.has_barbecue_area})}}
+      {{forms.checkbox('has_shuttle_service', 'true', 'Shuttle Service', {checked: query.has_shuttle_service})}}
+    </div>
+  </div>
+
+  <div class="search-condition-box">
+    <div class="box-title toggle">
+      <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+      <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+       EXCLUDE
+    </div>
+    <div class="box-body">
+      {{forms.checkbox('walk_up', 'true', 'Walk-Up', {checked: query.walk_up})}}
+      {{forms.checkbox('is_under_renovation', 'true', 'External Renovation', {checked: query.is_under_renovation})}}
+    </div>
+  </div>
+  <script>
+    $('.toggle').on('click', function(e) {
+      $(e.currentTarget).parent().toggleClass('hide').children().last().slideToggle(200);
+    });
+  </script>
+</div>
+
+</form>
+
+<script>
+  (function() {
+    var $searchForm = $('#search-side-form');
+    $searchForm.change(function() {
+      $(this).submit();
+    });
+
+    $('#input-number-car-park-input').change(function() {
+      console.log('hahah');
+    });
+
+    var districtMapping = {{districtSource|safe}};
+    var $dist = $('#district');
+    $('#location').change(function() {
+      var loc = $(this).val()
+      if(loc == ' ') {
+        loc = 'ALL';
+      }
+      $dist.empty();
+      var dist = districtMapping[loc];
+      for(var i = 0; i < dist.length; i++) {
+        var item = dist[i];
+        $dist.append('<option value="'+ (item.key ? item.key : item) +'">'+ (item.value ? item.value : item) +'</option>');
+      }
+    });
+  })();
+</script>

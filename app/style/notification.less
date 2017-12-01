@@ -1,0 +1,45 @@
+.m-notification {
+  width: 330px;
+  padding: 20px;
+  min-height: 80px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  position: fixed;
+  top: 100px;
+  right: -350px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
+  transition: opacity .3s,transform .3s,right .3s,top .4s;
+  overflow: hidden;
+  z-index: @notic-z-index;
+  .n-icon {
+    position: absolute;
+    text-align: center;
+    width: 40px;
+    line-height: 38px;
+    font-size: 22px;
+    color: white;
+    height: 40px;
+    border-radius: 50%;
+    &.success {
+      background-color: #13ce66;
+    }
+    &.error {
+      background-color: #ff4949;
+    }
+  }
+  .n-message {
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+  .n-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    color: @gray-color;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}

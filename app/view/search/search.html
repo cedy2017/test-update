@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search</title>
+  {% include "../base/base.html" %}
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% import "../base/forms.html" as forms %}
+  <div class="container">
+    <div class="link-map">
+      <a href="/">Home ></a>
+      <a href="#">{{"Buy" if activeMenu == 'buy' else 'Rent'}} ></a>
+      <a href="#">Property Search</a>
+    </div>
+    <form action="/{{activeMenu}}-result" method="get" class="search-form">
+      <div class="row">
+        <div class="col-md-12">{{forms.autoComplete('keyword_search', 'KEYWORDS')}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">{{forms.field('id', 'UNIT ID')}}</div>
+        <div class="col-md-6">{{forms.select('location', 'LOCATION', LOCATIONS, 'Please select')}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{forms.select('district', 'DISTRICT', DISTRICTS.ALL, 'Please select')}}
+        </div>
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'Min')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('saleable_size_sqft_max', '', AREA_MAX, 'Max')}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('budget_min', 'BUDGET (HKD)', BUDGET_MIN, 'Min M(illion)' if activeMenu == 'buy' else 'Min (K)')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('budget_max', '', BUDGET_MAX, 'Max M(illion)' if activeMenu == 'buy' else 'Max (K)')}}</div>
+
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('bedroom_min', 'BEDS', BED_MIN, 'Min')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('bedroom_max', '', BED_MAX, 'Max')}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('bathroom_min', 'BATHS', BATH_MIN, 'Min')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('bathroom_max', '', BATH_MAX, 'Max')}}</div>
+
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('car_park_min', 'CAR PARK', CAR_MIN, 'Min')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('car_park_max', '', CAR_MAX, 'Max')}}</div>
+      </div>
+      {% if activeMenu == 'rent' %}
+      <div class="row">
+        <div class="col-md-6">
+          {{forms.select('condition_status', 'CONDITION', CONDITION_STATUS, 'Please select')}}
+        </div>
+      </div>
+      {% endif %}
+      <div style="margin-top: 44px;" class="row">
+        <div class="col-md-3 col-sm-6 checkbox-area">
+          <label >Property Type</label>
+          {{forms.checkbox('is_simplex', 'true', 'Simplex')}}
+          {{forms.checkbox('is_duplex', 'true', 'Duplex')}}
+          {{forms.checkbox('is_triplex', 'true', 'Triplex')}}
+          {{forms.checkbox('is_penthouse', 'true', 'Penthouse')}}
+          {{forms.checkbox('is_townhouse', 'true', 'Townhouse')}}
+          {{forms.checkbox('is_detached_house', 'true', 'Detached-house')}}
+          <!-- {{forms.checkbox('is_village_house', 'true', 'Village House')}} -->
+        </div>
+        <div class="col-md-3 col-sm-6 checkbox-area">
+          <label>Features</label>
+          {% if activeMenu == 'rent' %}
+          {{forms.checkbox('is_serviced_apartment', 'true', 'Serviced Apartment')}}
+          {% endif %}
+
+          {{forms.checkbox('has_maid_room', 'true', 'Maid\'s Room')}}
+          {{forms.checkbox('has_terrace', 'true', 'Terrace')}}
+          {{forms.checkbox('has_garden', 'true', 'Garden')}}
+          {{forms.checkbox('has_balcony', 'true', 'Balcony')}}
+          {{forms.checkbox('has_roof', 'true', 'Roof')}}
+          <!-- {{forms.checkbox('has_study_room', 'true', 'Study Room')}}
+          {{forms.checkbox('has_internal_staircase', 'true', 'Internal Staircase')}}
+          {{forms.checkbox('has_private_lift', 'true', 'Private Lift')}} -->
+        </div>
+        <div class="col-md-3 col-sm-6 checkbox-area">
+          <label>Facilities</label>
+          {{forms.checkbox('has_gym', 'true', 'Gymnasium')}}
+          {{forms.checkbox('has_indoor_swimming_pool', 'true', 'Swimming Pool (Indoor)')}}
+          {{forms.checkbox('has_outdoor_swimming_pool', 'true', 'Swimming Pool (Outdoor)')}}
+          {{forms.checkbox('has_tennis_court', 'true', 'Tennis Court')}}
+          {{forms.checkbox('has_childrens_playground', 'true', 'Children’s Playground')}}
+          {{forms.checkbox('has_barbecue_area', 'true', 'Barbecue')}}
+          {{forms.checkbox('has_shuttle_service', 'true', 'Shuttle Service')}}
+        </div>
+        <div class="col-md-3 col-sm-6 checkbox-area">
+          <label>Exclude</label>
+          {{forms.checkbox('walk_up', 'true', 'Walk-Up')}}
+          {{forms.checkbox('is_under_renovation', 'true', 'External Renovation')}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="search-btn-wrapper">
+            <button type="reset" class="common-btn">CLEAR</button>
+          </div>
+          <div class="search-btn-wrapper">
+            <button class="common-btn">SEARCH</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script>
+      (function () {
+        var districtMapping = {{districtSource|safe}};
+        var $dist = $('#district');
+        $('#location').change(function() {
+          var loc = $(this).val()
+          if(loc == ' ') {
+            loc = 'ALL';
+          }
+          $dist.empty();
+          var dist = districtMapping[loc];
+          for(var i = 0; i < dist.length; i++) {
+            var item = dist[i];
+            $dist.append('<option value="'+ (item.key ? item.key : item) +'">'+ (item.value ? item.value : item) +'</option>');
+          }
+        });
+      })();
+      $(document).ready(function() {
+        $(window).keydown(function(event){
+          if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+          }
+        });
+      });
+    </script>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>

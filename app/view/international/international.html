@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>International</title>
+  {% include "../base/base.html" %}
+  <script src="/public/js/jquery.iosslider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>  
+</head>
+<body>
+  {% include "../base/header.html" %}
+  {% import "../base/forms.html" as forms %}
+  {% include "../our-team/member-detail.html" %}
+  {% include "./detail-dialog.html" %}
+  <div class="s-container" style="position: relative;">
+    <div style="padding-left: 8px; margin-bottom: 0px;" class="link-map">
+      <a href="/">Home &gt;</a> 
+      <a href="">Search &gt;</a> 
+      <a href="/buy-result">Buy &gt;</a>
+      <a href="javascript:void(0);">{{property.urlName}}</a>
+    </div>
+    <div style="padding-left: 8px;color: #858585;font-size: 12px;margin-top:18px;">
+      PROPERTY INFO
+    </div>
+    <a href="/international-list"> <button class="common-btn back-to-results">&lt; Back to Results</button></a>
+  </div>
+
+  <div class="detail-banner">
+    <div class="banner">
+      <div class="s-container banner-wrapper">
+        <h3>{{property.name}}</h2>
+        <span>{{property.address}}</span>
+        <div class="love_share">
+          <!-- <div class="btn">
+            <div class="icon icon_love"></div>
+          </div> -->
+          <div data-dialog='share-dialog' class="btn">
+            <div class="icon icon_share"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% include "./gallery.html" %}
+
+  <div class="property-desc" style="margin-top: 40px;">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="left-box">
+          <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;">
+            <div class="title toggle">
+              <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+              <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+              Property Description
+            </div>
+            <div class="body">
+              {% for item in property.propertyDesc %}
+                <span style="margin-left: 0; margin-bottom: 10px; margin-top: 10px; display: inline-block;">{{item}}</span>  <br>
+              {% endfor %}
+            </div>
+          </div>
+          <script>
+            $('.toggle').on('click', function(e) {
+              $(e.currentTarget).parent().toggleClass('hide').children().last().slideToggle(200);
+            });
+          </script>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="right-box">
+          <div class="sale-info-box">
+            <div class="title">BUY</div>
+            <div class="body">
+              Price Upon Request
+            </div>
+          </div>
+          <div class="sale-info-box">
+              <div class="title">AGENT</div>
+              <div class="body">
+                <div style="position: relative;">
+                  <div class="name">{{property.agentObj.first_name}}&nbsp;{{property.agentObj.last_name}}</div>
+                  <div class="com-title">{{property.agentObj.title}}&nbsp;</div>
+                  <div class="detail-info">Licence No. <span>{{property.agentObj.agent_number}}</span></div>
+                  <div class="detail-info">Direct <span>{{property.agentObj.general_line}}</span></div>
+                  <div class="detail-info">Mobile <span>{{property.agentObj.mobile}}</span></div>
+                  <div class="avatar">
+                    <img src="{{property.agentObj.profile_pic}}" alt="">
+                  </div>
+                  <div class="row" style="margin-top: 15px;">
+                    <div 
+                      class="col-md-6 col-xs-6"
+                      style="padding-right: 4px;"
+                      data-id="{{property.agentObj.id}}"
+                      data-name="{{property.agentObj.first_name}} {{property.agentObj.last_name}}"
+                      data-title="{{property.agentObj.title}}"
+                      data-licence="{{property.agentObj.agent_number}}"
+                      data-direct="{{property.agentObj.general_line}}"
+                      data-mobile="{{property.agentObj.mobile}}"
+                      data-image="{{property.agentObj.profile_pic}}"
+                    >
+                      <button id="agent-profile-detail" class="common-btn">Profile</button>
+                    </div>
+                    <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn">Enquiry</button></div>
+                  </div>
+                  <script>
+                    $('#agent-profile-detail').click(function(e) {
+                      var $target = $(e.target).closest('.col-md-6');
+                      var id = $target.data('id');
+                      if (id) {
+                        $('#agent-detail-dialog-name').text($target.data('name'));
+                        $('#agent-detail-dialog-title').text($target.data('title'));
+                        $('#agent-detail-dialog-licence').text($target.data('licence'));
+                        $('#agent-detail-dialog-direct').text($target.data('direct'));
+                        $('#agent-detail-dialog-mobile').text($target.data('mobile'));
+                        $('#agent-detail-dialog-image').attr('src', $target.data('image'));
+                        $('#agent-detail-dialog').fadeIn(400);
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include "../base/footer.html" %}
+</body>
+</html>
