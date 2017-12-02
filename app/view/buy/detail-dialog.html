@@ -82,6 +82,7 @@
                   url: '/api/enquiry/',
                   success: function() {
                     G.mNotic('Sent Successfully');
+                    $('#enquiry-dialog-form')[0].reset();
                   },
                   error: function(err) {
                     G.mNotic('Sent Error.' + err.responseText, 'error');

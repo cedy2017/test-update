@@ -77,53 +77,172 @@
               Price Upon Request
             </div>
           </div>
-          <div class="sale-info-box">
-              <div class="title">AGENT</div>
-              <div class="body">
-                <div style="position: relative;">
-                  <div class="name">{{property.agentObj.first_name}}&nbsp;{{property.agentObj.last_name}}</div>
-                  <div class="com-title">{{property.agentObj.title}}&nbsp;</div>
-                  <div class="detail-info">Licence No. <span>{{property.agentObj.agent_number}}</span></div>
-                  <div class="detail-info">Direct <span>{{property.agentObj.general_line}}</span></div>
-                  <div class="detail-info">Mobile <span>{{property.agentObj.mobile}}</span></div>
-                  <div class="avatar">
-                    <img src="{{property.agentObj.profile_pic}}" alt="">
-                  </div>
-                  <div class="row" style="margin-top: 15px;">
-                    <div 
-                      class="col-md-6 col-xs-6"
-                      style="padding-right: 4px;"
-                      data-id="{{property.agentObj.id}}"
-                      data-name="{{property.agentObj.first_name}} {{property.agentObj.last_name}}"
-                      data-title="{{property.agentObj.title}}"
-                      data-licence="{{property.agentObj.agent_number}}"
-                      data-direct="{{property.agentObj.general_line}}"
-                      data-mobile="{{property.agentObj.mobile}}"
-                      data-image="{{property.agentObj.profile_pic}}"
-                    >
-                      <button id="agent-profile-detail" class="common-btn">Profile</button>
-                    </div>
-                    <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn">Enquiry</button></div>
-                  </div>
-                  <script>
-                    $('#agent-profile-detail').click(function(e) {
-                      var $target = $(e.target).closest('.col-md-6');
-                      var id = $target.data('id');
-                      if (id) {
-                        $('#agent-detail-dialog-name').text($target.data('name'));
-                        $('#agent-detail-dialog-title').text($target.data('title'));
-                        $('#agent-detail-dialog-licence').text($target.data('licence'));
-                        $('#agent-detail-dialog-direct').text($target.data('direct'));
-                        $('#agent-detail-dialog-mobile').text($target.data('mobile'));
-                        $('#agent-detail-dialog-image').attr('src', $target.data('image'));
-                        $('#agent-detail-dialog').fadeIn(400);
-                      }
-                    });
-                  </script>
+          <div class="sale-info-box"> 
+            <div class="title">
+              ENQUIRIES
+            </div> 
+            <div class="body"> 
+              <div style="position: relative;"> 
+              <form id="enquiry-box-form" onsubmit="return false;" class="container enquiry-form"> 
+                <div class="row"> 
+                <div class="col-md-12 field-row"> 
+                  <div class="input-field"> 
+                  <label for="enquiry-box-name"> Name </label> 
+                  <input maxlength="255" autocomplete="off" name="enquiry-box-name" value="" type="text" id="enquiry-box-name" /> 
+                  <div class="xline"></div> 
+                  </div> 
+                </div> 
+                <div class="col-md-12 field-row"> 
+                  <div class="input-field"> 
+                  <label for="enquiry-box-mobile">Phone </label> 
+                  <input maxlength="255" autocomplete="off" name="enquiry-box-mobile" value="" type="text" id="enquiry-box-mobile" /> 
+                  <div class="xline"></div> 
+                  </div> 
+                </div> 
+              </div> 
+              <div class="row"> 
+                <div class="col-md-12 field-row"> 
+                  <div class="input-field"> 
+                  <label for="enquiry-box-email">Email </label> 
+                  <input maxlength="255" autocomplete="off" name="enquiry-box-email" value="" type="text" id="enquiry-box-email" /> 
+                  <div class="xline"></div> 
+                  </div> 
+                </div> 
                 </div>
+              <div class="row"> 
+                <div class="col-md-12 field-row"> 
+                  <div class="input-field"> 
+                  <label for="enquiry-box-budget">Budget </label> 
+                  <input maxlength="255" autocomplete="off" name="enquiry-box-budget" value="" type="text" id="enquiry-box-budget" /> 
+                  <div class="xline"></div> 
+                  </div> 
+                </div> 
+              </div> 
+              <div class="row"> 
+                <div class="col-md-12 field-row"> 
+                  <div class="text-area-field"> 
+                    <textarea maxlength="20480" name="enquiry-box-message" id="enquiry-box-message" placeholder="Please let us know more about the type of property you are looking for⋯"></textarea> 
+                  </div> 
+                </div> 
+              </div> 
+              <div class="row"> 
+                <div class="col-md-1 chekbox-width-10"> 
+                <div class="mockup-checkbox  enquiry-checkbox-area"> 
+                  <input checked name="enquiry-box-has_enquiry" value="enquiry-box-has_enquiry-true" type="checkbox" id="enquiry-box-has_enquiry-true" /> 
+                    <label class="mock-label" for="enquiry-box-has_enquiry-true"> <i class="fa fa-check" aria-hidden="true"></i> </label> 
+                  </div> 
+                </div>
+                <style>
+                .mockup-checkbox input:checked+label {
+                  border: 1px solid #002b5c;
+                  background-color: #002b5c;
+                }
+                .mockup-checkbox .mock-label {
+                  border: 1px solid #002b5c;
+                  background-color: #002b5c;
+                }
+                </style>
+                <div class="col-md-11  col-xs-12 field-row checkbox-area mgl10"> 
+                  <div class="mockup-checkbox"> 
+                    <label for="enquiry-box-has_enquiry-true">Stay tuned with our new listings and be the first one to preview our magazine, COLLECTION. </label> 
+                  </div> 
+                </div> 
               </div>
-            </div>
-        </div>
+              <div class="row"> 
+                <div class="col-md-12"> 
+                  <div class="enquiriy-request"> 
+                    <button id="submit-enquiry-box" style="max-width:140px;" class="common-btn">Let’s Connect </button> 
+                  </div> 
+                </div> 
+                </div> 
+              </form> 
+              </div> 
+            </div> 
+          </div>
+          <script>
+            $(document).ready(function() {
+              $('#enquiry-box-form').validate({
+                rules: {
+                  "enquiry-box-email": {
+                    required: true,
+                    email: true
+                  },
+                  "enquiry-box-name": {
+                    required: true
+                  },
+                  "enquiry-box-budget": {
+                    required: true,
+                    number: true
+                  },
+                  "enquiry-box-mobile": {
+                    mobile: true
+                  }
+                }
+              });
+              $('#submit-enquiry-box').click(function() {
+                if($('#enquiry-box-form').valid()) {
+                  var data = {
+                    name: $('input[name="enquiry-box-name"]').val().trim(),
+                    mobile: $('input[name="enquiry-box-mobile"]').val().trim(),
+                    email: $('input[name="enquiry-box-email"]').val().trim(),
+                    message: $('textarea[name="enquiry-box-message"]').val().trim(),
+                    budget: $('input[name="enquiry-box-budget"]').val().trim(),
+                  };
+                  $.ajax({
+                    method: 'post',
+                    data: data,
+                    dataType: 'json',
+                    url: '/api/enquiry/',
+                    success: function() {
+                      G.mNotic('Sent Successfully');
+                      $('#enquiry-box-form')[0].reset();
+                    },
+                    error: function(err) {
+                      G.mNotic('Sent Error.' + err.responseText, 'error');
+                    }
+                  });
+  
+                  $.ajax({
+                    method: 'post',
+                    data: {
+                      email: $('input[name="enquiry-box-email"]').val().trim(),
+                      is_subscribed: $('input[name="enquiry-box-has_enquiry"]:checked').length > 0
+                    },
+                    dataType: 'json',
+                    url: '/api/subscription/',
+                    success: function() {
+                      
+                    },
+                    error: function(err) {
+                      
+                    }
+                  });
+                }
+              });
+            });
+          </script>
+          <style>
+          
+            .enquiriy-request {
+              margin:0 auto;
+              text-align:center;
+            }
+            .enquiry-checkbox-area{
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+            .enquiry-form .checkbox-area label{
+              font-size:12px;font-weight:100;
+            }
+            .chekbox-width-10{
+              font-size:12px;
+              width:10px;
+            }
+            .mgl10{
+              margin-left:25px;
+            }
+          </style>
       </div>
     </div>
   </div>

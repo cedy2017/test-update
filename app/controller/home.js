@@ -1,6 +1,6 @@
 'use strict';
 const { LOCATIONS, REGION, DISTRICTS } = require('./options');
-const { toThousands } = require('./util');
+const { toThousands,  splitPhone } = require('./util');
 const _ = require('lodash');
 var moment = require('moment');
 
@@ -237,6 +237,11 @@ module.exports = app => {
       } catch(e) {
         console.log(e);
       }
+      members = members.map((item)=>{
+        item.general_line = splitPhone(item.general_line);
+        item.general_line = splitPhone(item.mobile);
+        return item;
+      });
       members = _.sortBy(members, 'first_name').filter((item)=> item.id != 1);
       let data = {
         activeMenu: 'our-team',

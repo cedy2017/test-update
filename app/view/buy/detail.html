@@ -142,7 +142,11 @@
               <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
               District Information
             </div>
-            <div class="body"></div>
+            <div class="body">
+              {% for item in property.districtInfo %}
+                <h2>{{ item.value }}</h2>
+              {% endfor %}
+            </div>
           </div>
           <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-top: 20px; margin-bottom: 20px;">
             <div class="body google-map-wrapper">
@@ -359,7 +363,7 @@
                 <div class="row"> 
                   <div class="col-md-1 chekbox-width-10"> 
                   <div class="mockup-checkbox  enquiry-checkbox-area"> 
-                    <input name="enquiry-box-has_enquiry" value="enquiry-box-has_enquiry-true" type="checkbox" id="enquiry-box-has_enquiry-true" /> 
+                    <input checked name="enquiry-box-has_enquiry" value="enquiry-box-has_enquiry-true" type="checkbox" id="enquiry-box-has_enquiry-true" /> 
                       <label class="mock-label" for="enquiry-box-has_enquiry-true"> <i class="fa fa-check" aria-hidden="true"></i> </label> 
                     </div> 
                   </div>
@@ -428,6 +432,7 @@
                       url: '/api/enquiry/',
                       success: function() {
                         G.mNotic('Sent Successfully');
+                        $('#enquiry-box-form')[0].reset();
                       },
                       error: function(err) {
                         G.mNotic('Sent Error.' + err.responseText, 'error');
@@ -516,6 +521,11 @@
                         $('#agent-detail-dialog-mobile').text($target.data('mobile'));
                         $('#agent-detail-dialog-image').attr('src', $target.data('image'));
                         $('#agent-detail-dialog').fadeIn(400);
+                        if($target.data('licence') === '0' || $target.data('licence') === '') {
+                          $('#agent-detail-dialog-licence-wrapper').css('visibility', 'hidden');
+                        } else {
+                          $('#agent-detail-dialog-licence-wrapper').css('visibility', 'visible');
+                        }
                       }
                     });
                   </script>

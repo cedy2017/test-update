@@ -96,6 +96,7 @@
                       G.mNotic('Subscribe Success.');
                       setTimeout(function() {
                         $('#subscribe-dialog').fadeOut(400);
+                        $('#subscribe-form')[0].reset();
                       }, 2000);
                     },
                     error: function(err) {

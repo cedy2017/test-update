@@ -69,6 +69,7 @@
             url: '/api/recruitment/',
             success: function(a, b, c) {
               G.mNotic('Sent Successfully');
+              $('#recruitment-form')[0].reset();
             },
             error: function(a, b, c) {
               G.mNotic('Sent Error.' + a.responseText, 'error');

@@ -181,6 +181,7 @@
                   url: '/api/list_property/',
                   success: function() {
                     G.mNotic('Sent Successfully.');
+                    $('#list_property_form')[0].reset();
                   },
                   error: function(err) {
                     G.mNotic('Sent Error.' + err.responseText, 'error');

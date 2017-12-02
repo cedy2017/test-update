@@ -68,14 +68,14 @@ const buildInfoFilterKey = [
   'close_to_wet_market',
   'close_to_shopping_arcade',
   'close_to_supermarket',
-  'kindergarten_network',
-  'international_school_network',
   'developer',
 ];
 
 const districtFilterKey = [
+  'kindergarten_network',
   'primary_school_network',
-  'secondary_school_network'
+  'secondary_school_network',
+  'international_school_network',
 ];
 
 module.exports = app => {
@@ -396,7 +396,7 @@ module.exports = app => {
           price = +item.lease[0].rent_ask;
         }
 
-        price = price === 0 ? 'Price Upon Request' : toThousands(price);
+        price = price === 0 ? 'Price Upon Request' : 'HKD ' + toThousands(price);
         
         if (item.image_gallery.length) {
           url = item.image_gallery[2]["600x400"][0].image;
@@ -524,6 +524,7 @@ module.exports = app => {
         carPark: res.num_car_park || 0,
         unitDesc,
         buildInfo,
+        districtInfo,
         loveValue: [res.id, url, res.name, res.address, areaSqft, toThousands(+saleObj.price_ask || +rentObj.rent_ask)].join('|_|'),
         sale: {
           show: !!res.sale[0],

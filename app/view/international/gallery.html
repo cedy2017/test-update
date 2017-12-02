@@ -1,7 +1,7 @@
 
   <div id="gallary-full-wrapper" class="full-cover" style="display: none;">
     <div class="close-full"></div>
-      <div class="gallery" id="gallery-full-real" style="margin: 100px auto;max-width: 1400px;">
+      <div class="gallery" id="gallery-full-real" style="margin: 0 auto;max-width: 1400px;">
         <div class="slider-wrapper">
           <ul id="slider" class="slider" >
             {% for item in property.gallery %}
@@ -68,10 +68,30 @@
             });
             
             //16 * 9;
-            $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+            setFullPhotoCenter();
             $(window).resize(function() {
-              $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+              // $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+              setFullPhotoCenter();
             });
+
+            function setFullPhotoCenter() {
+              var $root = $('#gallary-full-wrapper'),
+                  $gallery = $('.slider-wrapper'),
+                  width = $root.width(),
+                  height = $root.height();
+              if(width * 2/3 > height) {
+                $gallery.height(height);
+                $gallery.width(height * 3 / 2);
+                $('#gallery-full-real').css('max-width', height * 3 / 2);
+                $('#gallery-full-real').css('margin-top', 0);
+              } else {
+                $gallery.width(width);
+                $gallery.height(width * 2 / 3);
+                $('#gallery-full-real').css('max-width', width);
+                var margin = (height - (width * 2 / 3)) / 2; 
+                $('#gallery-full-real').css('margin-top', margin);
+              }
+            }
           
         </script>
       </div>
@@ -259,30 +279,17 @@
       var $images = $('#detail-images'),
           $lis = $images.children(),
           $stageWrapper = $('#detail-stage'),
-          $stage = $('#stage-screen'),
           currIndex = 0,
           imagesOffset = 0,
           $lbtn = $('#left-btn'),
           $rbtn = $('#right-btn'),
           $slideLeftBtn = $('#slide-left'),
-          $slideRightBtn = $('#slide-right'),
-          detailGallaryId;
+          $slideRightBtn = $('#slide-right');
       // var lastBgs = $lis.last().css('background-image');
       // init
       var bgs = $lis.first().addClass('active').css('background-image');
-      $stage.css('background-image', bgs);
 
-      $stage.height($stage.width() * 2 / 3);
-      $('#detail-stage').height($stage.width() * 2 / 3)
-
-      if(!$lis.first().hasClass('video')) {
-        $stage.addClass('scale-active');
-      }
-      if ($($lis[currIndex]).hasClass('video')) {
-        $stageWrapper.addClass('video');
-      } else {
-        $stageWrapper.removeClass('video');
-      }
+      //$('#detail-stage').height($stage.width() * 2 / 3)
       var imagesWidth = 154 * $lis.length + 134;
       $images.css('width', imagesWidth);
       $lbtn.on('click', function(e){
@@ -324,42 +331,10 @@
         $images.css('transform', 'translateX(' + imagesOffset + 'px)');
       });
 
-      // show image, vedio
-      $stage.click(function() {
-        var current = $lis[currIndex],
-            videoPath = $(current).data('video');
-        if(videoPath) {
-          $('#video-dialog').fadeIn(400);
-          var $media = $('#full-image-view'),
-              mWidth = $media.width(),
-              mHeight = 720/1280 * mWidth;
-          $media.height(mHeight);
-          var video = document.getElementById('video-el'),
-              sources = video.getElementsByTagName('source');
-          sources[0].src = videoPath;
-          video.load();
-          video.play();
-        } else {
-          $('#images-dialog').fadeIn(400);
-          var $media = $('#full-image-view'),
-              mWidth = $media.width(),
-              mHeight = 2/3 * mWidth;
-          $media.height(mHeight).css('background-image', $(this).css('background-image'));
-        }
-      });
-
       $('#close-full-dialog').click(function(e) {
         var video = document.getElementById('video-el');
         video.pause();
       });
-
-      // 
-      autoPlay();
-      function autoPlay() {
-        detailGallaryId = setInterval(function() {
-          $rbtn.click();
-        }, 8000);
-      }
 
       function changeStage(activeIndex) {
         $lis.removeClass('active');
@@ -371,19 +346,11 @@
           $stageWrapper.removeClass('video');
         }
         $('#gallery-caption').text($current.data('caption'));
-        $stage.removeClass('scale-active').css('background-image', $current.addClass('active').css('background-image'));
-        if(!$current.hasClass('video')) {
-          $stage.addClass('scale-active');
-        }
-        clearInterval(detailGallaryId);
-        autoPlay();
+        
       }
 
       $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
       $(window).resize(function() {
-        $stage.height($stage.width() * 2 / 3);
-        $('#detail-stage').height($stage.width() * 2 / 3);
-
         $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
       });
     </script>

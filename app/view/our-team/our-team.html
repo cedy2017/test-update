@@ -54,6 +54,11 @@
           $('#agent-detail-dialog-mobile').text($target.data('mobile'));
           $('#agent-detail-dialog-image').attr('src', $target.data('image'));
           $('#agent-detail-dialog').fadeIn(400);
+          if($target.data('licence') === '0' || $target.data('licence') === '') {
+            $('#agent-detail-dialog-licence-wrapper').css('visibility', 'hidden');
+          } else {
+            $('#agent-detail-dialog-licence-wrapper').css('visibility', 'visible');
+          }
         }
       });
     </script>
@@ -106,6 +111,7 @@
             url: '/api/recruitment/',
             success: function(a, b, c) {
               G.mNotic('Sent Successfully');
+              $('#recruitment-form')[0].reset();
             },
             error: function(a, b, c) {
               G.mNotic('Sent Error.' + a.responseText, 'error');
