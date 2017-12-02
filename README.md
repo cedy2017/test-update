@@ -1,3 +1,7 @@
+# version 1.1.12  
+1: fixe detail gallery issue.
+2: update style.
+
 # version 1.1.9  
 1: create new detail gallery.
 2: update style. 
