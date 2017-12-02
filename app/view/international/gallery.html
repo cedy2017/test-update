@@ -1,100 +1,133 @@
+  <div id="video-full-wrapper" class="full-cover" style="display: none;z-index:9999999">
+    <div class="close-full"></div>
+    <div class="fulll-video-layer">
+      <div style="max-width: 1280px; margin: 100px auto;">
+        <video
+          autobuffer
+          preload="auto"
+          controls
+          style="width: 100%;margin-top: 45px; padding: 10px;"
+          id="full-video-page"
+          poster=""
+          type="video/mp4"
+        >
+      </video>
+    </div>
+    </div>
+  </div>
 
   <div id="gallary-full-wrapper" class="full-cover" style="display: none;">
     <div class="close-full"></div>
-      <div class="gallery" id="gallery-full-real" style="margin: 0 auto;max-width: 1400px;">
-        <div class="slider-wrapper">
-          <ul id="slider" class="slider" >
-            {% for item in property.gallery %}
-              <li data-index="{{loop.index0}}" style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"></li>
-            {% endfor %}
-          </ul>
-          <div id="side-left-btn" class="left-button">
-            
-          </div>
-          <div id="side-right-btn" class="right-button">
-            
-          </div>
+    <div class="gallery" id="gallery-full-real" style="margin: 0 auto;">
+      <div class="slider-wrapper">
+        <ul id="slider" class="slider" >
+          {% for item in property.gallery %}
+            {% if item.video %}
+              <li
+                class="video gallery-item"
+                data-video-pop="pop"
+                data-index="{{loop.index0}}"
+                data-video="{{item.video}}"
+                style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"
+              >
+                <div class="img"></div>
+              </li>
+            {% else %}
+              <li
+                data-index="{{loop.index0}}"
+                style="background:url({{host}}{{item.image}}) 50% 60% no-repeat; background-size: cover;"
+              >
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        <div id="side-left-btn" class="left-button">
+          
         </div>
-        <script>
+        <div id="side-right-btn" class="right-button">
           
-            var activeIndex = 0,
-                galleryTimerId;
-      
-            function setPosition(active) {
-              var $slider = $('#slider'),
-                  stageWidth = $slider.width(),
-                  $lis = $slider.children();
-                var preEl = $lis[active - 1];
-                var activeEl = $lis[active];
-                var nextEl = $lis[active + 1];
-                $.each($lis, function(index, $li) {
-                    $($li).css({'transform': 'translateX(' + (index > active ? stageWidth : -stageWidth) * 2 + 'px)', 'z-index': '-1'});
-                });
-                if(!nextEl) {
-                  nextEl = $lis[0];
-                }
-                if(!preEl) {
-                  preEl = $lis[$lis.length - 1];
-                }
-                $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
-                $(preEl).addClass('side').css({'transform': 'translateX(' + -stageWidth + 'px)', 'z-index': '2'});
-                $(nextEl).addClass('side').css({'transform': 'translateX(' + stageWidth + 'px)' , 'z-index': '1'});
-            }
-      
-            function autoFLash() {
-              return false;
-              galleryTimerId = setInterval(function(){
-                $('#side-right-btn').click();
-              }, 5000);
-            }
-      
-            setPosition(0);
-            autoFLash();
-            $('#side-right-btn').on('click', function() {
-              if(++activeIndex >= $('#slider').children().length) {
-                activeIndex = 0;
-              }
-              setPosition(activeIndex);
-              clearInterval(galleryTimerId);
-              autoFLash();
-            })
-            $('#side-left-btn').on('click', function() {
-              if(--activeIndex < 0) {
-                activeIndex = $('#slider').children().length - 1;
-              }
-              setPosition(activeIndex);
-              clearInterval(galleryTimerId);
-              autoFLash();
-            });
-            
-            //16 * 9;
-            setFullPhotoCenter();
-            $(window).resize(function() {
-              // $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
-              setFullPhotoCenter();
-            });
-
-            function setFullPhotoCenter() {
-              var $root = $('#gallary-full-wrapper'),
-                  $gallery = $('.slider-wrapper'),
-                  width = $root.width(),
-                  height = $root.height();
-              if(width * 2/3 > height) {
-                $gallery.height(height);
-                $gallery.width(height * 3 / 2);
-                $('#gallery-full-real').css('max-width', height * 3 / 2);
-                $('#gallery-full-real').css('margin-top', 0);
-              } else {
-                $gallery.width(width);
-                $gallery.height(width * 2 / 3);
-                $('#gallery-full-real').css('max-width', width);
-                var margin = (height - (width * 2 / 3)) / 2; 
-                $('#gallery-full-real').css('margin-top', margin);
-              }
-            }
-          
-        </script>
+        </div>
       </div>
+      <script>
+        
+          var activeIndex = 0,
+              galleryTimerId;
+    
+          function setPosition(active) {
+            var $slider = $('#slider'),
+                stageWidth = $slider.width(),
+                $lis = $slider.children();
+              var preEl = $lis[active - 1];
+              var activeEl = $lis[active];
+              var nextEl = $lis[active + 1];
+              $.each($lis, function(index, $li) {
+                  $($li).css({'transform': 'translateX(' + (index > active ? stageWidth : -stageWidth) * 2 + 'px)', 'z-index': '-1'});
+              });
+              if(!nextEl) {
+                nextEl = $lis[0];
+              }
+              if(!preEl) {
+                preEl = $lis[$lis.length - 1];
+              }
+              $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
+              $(preEl).addClass('side').css({'transform': 'translateX(' + -stageWidth + 'px)', 'z-index': '2'});
+              $(nextEl).addClass('side').css({'transform': 'translateX(' + stageWidth + 'px)' , 'z-index': '1'});
+          }
+    
+          function autoFLash() {
+            return false;
+            galleryTimerId = setInterval(function(){
+              $('#side-right-btn').click();
+            }, 5000);
+          }
+    
+          setPosition(0);
+          autoFLash();
+          $('#side-right-btn').on('click', function() {
+            if(++activeIndex >= $('#slider').children().length) {
+              activeIndex = 0;
+            }
+            setPosition(activeIndex);
+            clearInterval(galleryTimerId);
+            autoFLash();
+          })
+          $('#side-left-btn').on('click', function() {
+            if(--activeIndex < 0) {
+              activeIndex = $('#slider').children().length - 1;
+            }
+            setPosition(activeIndex);
+            clearInterval(galleryTimerId);
+            autoFLash();
+          });
+          
+          //16 * 9;
+          setFullPhotoCenter();
+          $(window).resize(function() {
+            // $('.slider-wrapper').height($('#gallery-full-real').width() * 2 / 3);
+            setFullPhotoCenter();
+          });
+
+          function setFullPhotoCenter() {
+            var $root = $('#gallary-full-wrapper'),
+                $gallery = $('.slider-wrapper'),
+                width = $root.width(),
+                height = $root.height();
+            if(width * 2/3 > height) {
+              $gallery.height(height);
+              $gallery.width(height * 3 / 2);
+              $('#gallery-full-real').css('max-width', height * 3 / 2);
+              $('#gallery-full-real').css('margin-top', 0);
+            } else {
+              $gallery.width(width);
+              $gallery.height(width * 2 / 3);
+              $('#gallery-full-real').css('max-width', width);
+              var margin = (height - (width * 2 / 3)) / 2; 
+              $('#gallery-full-real').css('margin-top', margin);
+            }
+          }
+        
+      </script>
+    </div>
   </div>
 
   <div id="gallary-wrapper" class="detail-gallary">    
@@ -102,27 +135,21 @@
       <div class='slider'>
         {% for item in property.gallery %}
           {% if item.video %}
-          <div class="gallery-wrapper">
+          <div class="gallery-wrapper"
+            data-img="url({{host}}{{item.image}})"
+            data-caption="{{item.caption}}"
+          >
             <div
+              data-video-pop="pop"
               class="gallery-item video"
               data-index="{{loop.index0}}"
-              data-caption="{{item.caption}}"
               data-video="{{item.video}}"
-              data-img="url({{host}}{{item.image}})"
-              style="background: black;"
+              style="background:url({{host}}{{item.image}}) 50% 50% no-repeat; background-size: cover;"
             />
-              <video
-                autobuffer
-                preload="auto"
-                controls
-                style="width: 100%;margin-top: 45px; padding: 10px;"
-                id="video-el-{{loop.index0}}"
-                poster="{{host}}{{item.image}}"
-                height="535"
-                width="900"
+              <div
+                class="img"
               >
-                <source src="{{item.video}}" preload="auto" type="video/mp4">
-              </video>
+              </div>
             </div>
           </div>
           {% else %}
@@ -161,17 +188,17 @@
       <div class="row">
         {% for item in property.gallery %}
           {% if item.video %}
-          <span class="gallery-wrapper">
+          <span>
             <div
-              class="gallery-item"
+              class="col-xs-3 mobile-box video"
               data-index="{{loop.index0}}"
               data-caption="{{item.caption}}"
               data-img="url({{host}}{{item.image}})"
               data-video="{{item.video}}"
-              class="video"
               style="background:url({{item.image}}) 50% 50% no-repeat; background-size: cover;"
             />
-              
+              <img src="{{host}}{{item.image}}" width="100%"/>
+              <div class="img"></div>
             </div>
           </span>
           {% else %}
@@ -252,28 +279,40 @@
       //$("#gallary-full-wrapper").fadeOut();
       
       $('.require-full-gallery,.mobile-box').click(function(){
-        var index = $(this).data('index');
-        setPosition(index || 0);
-        
-        $('#gallary-full-wrapper').fadeIn(400);
+        var index = $(this).data('index'),
+            videoPath = $(this).data('video');
         setTimeout(function() {
-          $(window).resize();
-        }, 200);
+          activeIndex = index || 0;
+          setPosition(activeIndex);
+        });
+        if(videoPath) {
+          var videoEl = document.getElementById('full-video-page');
+          videoEl.src = videoPath;
+          videoEl.play();
+          $('#video-full-wrapper').fadeIn(400);
+        } else {
+          $('#gallary-full-wrapper').fadeIn(400);
+        }
+        
       });
 
       $('.close-full', '#gallary-full-wrapper').click(function() {
         $('#gallary-full-wrapper').fadeOut(400);
       });
 
+      $('.close-full', '#video-full-wrapper').click(function() {
+        $('#video-full-wrapper').fadeOut(400);
+        var videoEl = document.getElementById('full-video-page');
+        videoEl.pause();
+      });
+
       // video
-      var $videos = $('.gallery-wrapper').find('video');
-      $.each($videos, function(index, vi){
-        if(index == 0) {
-          vi.play();
-          console.log(index);
-        } else {
-          
-        }
+      $('[data-video-pop="pop"]').click(function(e) {
+        var videoPath = $(e.target).closest('.gallery-item').data('video');
+        var videoEl = document.getElementById('full-video-page');
+        videoEl.src = videoPath;
+        videoEl.play();
+        $('#video-full-wrapper').fadeIn(400);
       });
 
       var $images = $('#detail-images'),
@@ -329,11 +368,6 @@
           imagesOffset = pWidth - imagesWidth;
         }
         $images.css('transform', 'translateX(' + imagesOffset + 'px)');
-      });
-
-      $('#close-full-dialog').click(function(e) {
-        var video = document.getElementById('video-el');
-        video.pause();
       });
 
       function changeStage(activeIndex) {

@@ -31,7 +31,7 @@ const DETAIL_DATA = {
     gallery: [
       {
         caption: '',
-        video: '/public/international/woolworth/woolworth01.m4v',
+        video: '/public/sotheby_videos/international/woolworth01.m4v',
         image: '/public/international/woolworth/video1.png',
       },{
         caption: '',
