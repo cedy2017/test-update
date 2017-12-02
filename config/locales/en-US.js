@@ -81,5 +81,9 @@ module.exports = {
   'primary_school_network': 'Primary School Network',
   'secondary_school_network': 'Secondary School Network',
   'international_school_network': 'International Sschool Network',
+
+
+  //
+  'facilities_display': 'Facilities',
   'developer': 'Developer'
 };
