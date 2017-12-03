@@ -15,13 +15,14 @@ module.exports = app => {
             url = '',
             type = 'buy';
         if (item.sale[0]) {
-          price = item.sale[0].price_ask / 1000000 + 'M';
+          price = +item.sale[0].price_ask;
         } else if(item.lease[0]) {
-          price = item.lease[0].rent_ask / 1000 + 'K';
+          price = +item.lease[0].rent_ask;
           type = 'rent';
         } else {
           price = 0;
         }
+        price = price === 0 ? 'Price Upon Request' : 'HKD ' + toThousands(price);
         // if (item.image_gallery.length) {
         //   if (item.image_gallery[2]["600x400"][0]) {
         //     url = item.image_gallery[2]["600x400"][0].image;
@@ -43,7 +44,7 @@ module.exports = app => {
           location: item.district,
           sqft: toThousands(+item.saleable_size_sqft || 0),
           time: moment(new Date(item.modified_at)).fromNow(),
-          price: toThousands(price),
+          price,
           avatar: 'http://img5.imgtn.bdimg.com/it/u=484928903,1094087196&fm=26&gp=0.jpg',
         };
       });

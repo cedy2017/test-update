@@ -1,19 +1,43 @@
-  <div id="video-full-wrapper" class="full-cover" style="display: none;z-index:9999999">
+  <div id="video-full-wrapper" class="full-cover" style="display: none;z-index:9999999;background:rgba(0,0,0,.8)">
     <div class="close-full"></div>
     <div class="fulll-video-layer">
-      <div style="max-width: 1280px; margin: 100px auto;">
+      <div id="video-full-wrapper-box" style="max-width: 1280px; margin: 0 auto;">
         <video
           autobuffer
           preload="auto"
           controls
-          style="width: 100%;margin-top: 45px; padding: 10px;"
+          style="width: 100%;"
           id="full-video-page"
           poster=""
           type="video/mp4"
         >
-      </video>
+        </video>
+      </div>
     </div>
-    </div>
+    <script>
+      $(window).resize(function() {
+        setFullVideoCenter();
+      });
+
+      function setFullVideoCenter() {
+        var $root = $('#video-full-wrapper'),
+            $videoBox = $('#video-full-wrapper-box'),
+            width = $root.width(),
+            height = $root.height();
+        if(width * 720/1280 > height) {
+          $videoBox.height(height);
+          $videoBox.width(height * 1280 / 720);
+          $videoBox.css('max-width', height * 1280 / 720);
+          $videoBox.css('margin-top', 0);
+        } else {
+          $videoBox.width(width);
+          $videoBox.height(width * 720 / 1280);
+          $videoBox.css('max-width', width);
+          var margin = (height - $('#full-video-page').height()) / 2; 
+          $videoBox.css('margin-top', margin);
+        }
+      }
+    </script>
   </div>
 
   <div id="gallary-full-wrapper" class="full-cover" style="display: none;">
@@ -290,6 +314,9 @@
           videoEl.src = videoPath;
           videoEl.play();
           $('#video-full-wrapper').fadeIn(400);
+          setTimeout(function() {
+            $(window).resize();
+          }, 500);
         } else {
           $('#gallary-full-wrapper').fadeIn(400);
         }
@@ -313,6 +340,9 @@
         videoEl.src = videoPath;
         videoEl.play();
         $('#video-full-wrapper').fadeIn(400);
+        setTimeout(function() {
+          $(window).resize();
+        }, 500);
       });
 
       var $images = $('#detail-images'),

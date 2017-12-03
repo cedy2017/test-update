@@ -77,8 +77,6 @@ const DISTRICTS = {
 
   "ALL": [
     {key: ' ', value: 'ALL'},
-    'Aberdeen', 
-    'Ap Lei Chau', 
     'Castle Peak Road', 
     'Causeway Bay', 
     'Central',
