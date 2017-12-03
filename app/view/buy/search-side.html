@@ -24,14 +24,14 @@
       {{forms.select('district', 'DISTRICT', DISTRICTS, '', {icon: 'district', selected: query.district})}}
       <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-6">
-          {{forms.select('budget_min', 'BUDGET(HKD)', BUDGET_MIN, 'Min M(illion)' if activeMenu == 'buy' else 'MIN (K)', {icon: 'budget', selected: query.budget_min})}}
+          {{forms.select('budget_min', 'BUDGET (HKD)', BUDGET_MIN, 'Min (M)' if activeMenu == 'buy' else 'MIN (K)', {icon: 'budget', selected: query.budget_min})}}
         </div>
         <div class="col-md-6 col-sm-6 col-xs-6">
-          {{forms.select('budget_max', ' ', BUDGET_MAX, 'Min M(illion)' if activeMenu == 'buy' else 'MIN (K)', {selected: query.budget_max})}}
+          {{forms.select('budget_max', ' ', BUDGET_MAX, 'Max (M)' if activeMenu == 'buy' else 'MAX (K)', {selected: query.budget_max})}}
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-xs-6">{{forms.select('saleable_size_sqft_min', 'AREA(SQ FT.)', AREA_MIN, 'Min', {icon: 'areaft', selected: +query.saleable_size_sqft_min})}}</div>
+        <div class="col-md-6 col-xs-6">{{forms.select('saleable_size_sqft_min', 'AREA (SQ FT)', AREA_MIN, 'Min', {icon: 'areaft', selected: +query.saleable_size_sqft_min})}}</div>
         <div class="col-md-6 col-xs-6">{{forms.select('saleable_size_sqft_max', '', AREA_MAX, 'Max', {selected: +query.saleable_size_sqft_max})}}</div>
       </div>
       <div class="row">
@@ -62,7 +62,7 @@
       {{forms.checkbox('is_triplex', 'true', 'Triplex', {checked: query.is_triplex})}}
       {{forms.checkbox('is_penthouse', 'true', 'Penthouse', {checked: query.is_penthouse})}}
       {{forms.checkbox('is_townhouse', 'true', 'Townhouse', {checked: query.is_townhouse})}}
-      {{forms.checkbox('is_detached_house', 'true', 'detached-house', {checked: query.is_detached_house})}}
+      {{forms.checkbox('is_detached_house', 'true', 'Detached-house', {checked: query.is_detached_house})}}
       <!-- {{forms.checkbox('is_village_house', 'true', 'Village House', {checked: query.is_village_house})}} -->
     </div>
   </div>
@@ -75,7 +75,7 @@
     </div>
     <div class="box-body">
       {% if activeMenu == 'rent' %}
-      {{forms.checkbox('is_serviced_apartment', 'true', 'Service Apartment', {checked: query.is_serviced_apartment})}}
+      {{forms.checkbox('is_serviced_apartment', 'true', 'Serviced Apartment', {checked: query.is_serviced_apartment})}}
       {% endif %}
       {{forms.checkbox('has_maid_room', 'true', 'Maid Room', {checked: query.has_maid_room})}}
       {{forms.checkbox('has_terrace', 'true', 'Terrace', {checked: query.has_terrace})}}
@@ -95,7 +95,7 @@
         FACILITIES
     </div>
     <div class="box-body">
-      {{forms.checkbox('has_gym', 'true', 'Gymnasium', {checked: query.has_gym})}}
+      {{forms.checkbox('has_gym', 'true', 'Gym', {checked: query.has_gym})}}
       {{forms.checkbox('has_indoor_swimming_pool', 'true', 'Swimming Pool (Indoor)',{checked: query.has_indoor_swimming_pool})}}
       {{forms.checkbox('has_outdoor_swimming_pool', 'true', 'Swimming Pool (Outdoor)', {checked: query.has_outdoor_swimming_pool})}}
       {{forms.checkbox('has_tennis_court', 'true', 'Tennis Court', {checked: query.has_tennis_court})}}

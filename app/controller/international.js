@@ -25,7 +25,7 @@ const AGENT_CHAN = {
 
 const DETAIL_DATA = {
   woolworth: {
-    name:'The Woolworth Pinnacle Penthouse –',
+    name:'The Woolworth Pinnacle Penthouse',
     urlName: 'The Woolworth Pinnacle Penthouse',
     address: 'New York, United States',
     gallery: [
@@ -87,7 +87,7 @@ const DETAIL_DATA = {
     ]
   },
   fourseason: {
-    name:'Four Seasons Private Residences  -',
+    name:'Four Seasons Private Residences',
     urlName: 'Four Seasons Private Residences',
     address: 'Montreal, Canada',
     gallery: [

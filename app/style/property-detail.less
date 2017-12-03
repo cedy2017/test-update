@@ -280,6 +280,7 @@
     color: @primary-color;
     cursor: pointer;
     height: 20px;
+    font-size: 16px;
   }
   .body {
     height: auto;
@@ -287,14 +288,14 @@
     h2 {
       margin-left: -8px;
       margin-top: 12px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       &:first {
         margin-top: 10px;
       }
     }
     span {
-      font-size: 12px;
+      font-size: 14px;
       margin-left:-8px;
       line-height:150%;
     }
@@ -445,7 +446,7 @@
   }
 }
 
-#gallary-full-wrapper,#video-full-wrapper {
+#gallary-full-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -508,7 +509,9 @@
     margin-top: 80px;
     margin-bottom: 20px;
     .common-btn {
-      max-width: 230px;
+      max-width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 }

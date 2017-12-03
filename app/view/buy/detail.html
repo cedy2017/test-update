@@ -22,9 +22,9 @@
       <a href="#">{{property.name}}</a>
     </div>
     <div style="padding-left: 8px;color: #858585;font-size: 12px;margin-top:18px;">
-      PROPERTY INFO - {{property.id}}
+        PROPERTY ID : {{property.id}}
     </div>
-    <a href="/{{activeMenu}}-result"> <button class="common-btn back-to-results">&lt; Back to Results</button></a>
+    <a href="/{{activeMenu}}-result"> <button class="common-btn back-to-results">Back to Results</button></a>
   </div>
 
   <div class="detail-banner">
@@ -53,7 +53,7 @@
           <img src="/public/icon/icon120x120_area_sf.png" width="80">
         </div>
         <div class="text">
-          <div class="title">AREA(SQ FT)</div>
+          <div class="title">AREA (SQ FT)</div>
           <div class="count">{{property.areaSqft}}</div>
         </div>
       </div>
@@ -63,7 +63,7 @@
           <img src="/public/icon/icon120x120_bedroom.png" width="80">
         </div>
         <div class="text">
-          <div class="title">BED</div>
+          <div class="title">BEDS</div>
           <div class="count">{{property.bed}}</div>
         </div>
       </div>
@@ -73,7 +73,7 @@
           <img src="/public/icon/icon120x120_bathroom.png" width="80">
         </div>
         <div class="text">
-          <div class="title">BATH</div>
+          <div class="title">BATHS</div>
           <div class="count">{{property.bath}}</div>
         </div>
       </div>
@@ -102,21 +102,21 @@
               {% if property.unitDesc.vi and property.unitDesc.vi.length %}
                 <h2>View</h2>
                 {% for item in property.unitDesc.vi %}
-                  <span> - {{ item.caption_value }}</span> <br>
+                  <span> • {{ item.caption_value }}</span> <br>
                 {% endfor %}
               {% endif %}
 
               {% if property.unitDesc.ic and property.unitDesc.ic.length %}
                 <h2>Internal Condition</h2>
                 {% for item in property.unitDesc.ic %}
-                 <span> - {{ item.caption_value }}</span> <br>
+                 <span> • {{ item.caption_value }}</span> <br>
                 {% endfor %}
               {% endif %}
               
               {% if property.unitDesc.od and property.unitDesc.od.length %}
                 <h2>Outdoor Area</h2>
                 {% for item in property.unitDesc.od %}
-                  <span> - {{ item.caption_value }}</span> <br>
+                  <span> • {{ item.caption_value }}</span> <br>
                 {% endfor %}
               {% endif %}
             </div>
@@ -323,14 +323,14 @@
                  <div class="row"> 
                   <div class="col-md-12 field-row"> 
                    <div class="input-field"> 
-                    <label for="enquiry-box-name"> Name </label> 
+                    <label for="enquiry-box-name"> NAME</label> 
                     <input maxlength="255" autocomplete="off" name="enquiry-box-name" value="" type="text" id="enquiry-box-name" /> 
                     <div class="xline"></div> 
                    </div> 
                   </div> 
                   <div class="col-md-12 field-row"> 
                    <div class="input-field"> 
-                    <label for="enquiry-box-mobile">Phone </label> 
+                    <label for="enquiry-box-mobile">PHONE </label> 
                     <input maxlength="255" autocomplete="off" name="enquiry-box-mobile" value="" type="text" id="enquiry-box-mobile" /> 
                     <div class="xline"></div> 
                    </div> 
@@ -339,7 +339,7 @@
                 <div class="row"> 
                   <div class="col-md-12 field-row"> 
                     <div class="input-field"> 
-                    <label for="enquiry-box-email">Email </label> 
+                    <label for="enquiry-box-email">EMAIL </label> 
                     <input maxlength="255" autocomplete="off" name="enquiry-box-email" value="" type="text" id="enquiry-box-email" /> 
                     <div class="xline"></div> 
                    </div> 
@@ -348,7 +348,7 @@
                 <div class="row"> 
                   <div class="col-md-12 field-row"> 
                    <div class="input-field"> 
-                    <label for="enquiry-box-budget">Budget </label> 
+                    <label for="enquiry-box-budget">BUDGET</label> 
                     <input maxlength="255" autocomplete="off" name="enquiry-box-budget" value="" type="text" id="enquiry-box-budget" /> 
                     <div class="xline"></div> 
                    </div> 
@@ -357,7 +357,7 @@
                 <div class="row"> 
                   <div class="col-md-12 field-row"> 
                     <div class="text-area-field"> 
-                      <textarea maxlength="20480" name="enquiry-box-message" id="enquiry-box-message" placeholder="Please let us know more about the type of property you are looking for⋯"></textarea> 
+                      <textarea maxlength="20480" name="enquiry-box-message" id="enquiry-box-message" placeholder="Please let us know more about the type of property you are looking for..."></textarea> 
                     </div> 
                   </div> 
                 </div> 
@@ -368,7 +368,7 @@
                       <label class="mock-label" for="enquiry-box-has_enquiry-true"> <i class="fa fa-check" aria-hidden="true"></i> </label> 
                     </div> 
                   </div>
-                  <style>
+                  <!-- <style>
                   .mockup-checkbox input:checked+label {
                     border: 1px solid #002b5c;
                     background-color: #002b5c;
@@ -377,7 +377,7 @@
                     border: 1px solid #002b5c;
                     background-color: #002b5c;
                   }
-                  </style>
+                  </style> -->
                   <div class="col-md-11  col-xs-12 field-row checkbox-area mgl10"> 
                     <div class="mockup-checkbox"> 
                       <label for="enquiry-box-has_enquiry-true">Stay tuned with our new listings and be the first one to preview our magazine, COLLECTION. </label> 
@@ -387,7 +387,7 @@
                 <div class="row"> 
                   <div class="col-md-12"> 
                     <div class="enquiriy-request"> 
-                      <button id="submit-enquiry-box" style="max-width:140px;" class="common-btn">Let’s Connect </button> 
+                      <button id="submit-enquiry-box" style="max-width:140px;" class="common-btn">LET'S CONNECT</button> 
                     </div> 
                   </div> 
                  </div> 
@@ -471,10 +471,10 @@
                 transform: translateY(-50%);
               }
               .enquiry-form .checkbox-area label{
-                font-size:12px;font-weight:100;
+                font-size:14px;font-weight:100;
               }
               .chekbox-width-10{
-                font-size:12px;
+                font-size:14px;
                 width:10px;
               }
               .mgl10{

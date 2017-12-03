@@ -16,15 +16,15 @@
           {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('budget_min', 'BUDGET(HKD)', BUY_BUDGET_MIN, 'MIN M(ILLION)')}}
+          {{forms.select('budget_min', 'BUDGET (HKD)', BUY_BUDGET_MIN, 'MIN (M)')}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('budget_max', ' ', BUY_BUDGET_MAX, 'MAX M(ILLION)')}}
+          {{forms.select('budget_max', ' ', BUY_BUDGET_MAX, 'MAX (M)')}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'MIN')}}
+          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT)', AREA_MIN, 'MIN')}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
           {{forms.select('saleable_size_sqft_max', ' ', AREA_MAX, 'MAX')}}
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="">
           <div class="search-wrapper">
             <button style="max-width: 230px;" class="common-btn">SEARCH</button>
           </div>
@@ -60,15 +60,15 @@
           {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('budget_min', 'BUDGET(HKD)', RENT_BUDGET_MIN, 'MIN(K)')}}
+          {{forms.select('budget_min', 'BUDGET (HKD)', RENT_BUDGET_MIN, 'MIN (K)')}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('budget_max', ' ', RENT_BUDGET_MAX, 'MAX(K)')}}
+          {{forms.select('budget_max', ' ', RENT_BUDGET_MAX, 'MAX (K)')}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-2 col-sm-6 col-xs-6">
-          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'MIN')}}
+          {{forms.select('saleable_size_sqft_min', 'AREA (SQ FT)', AREA_MIN, 'MIN')}}
         </div>
         <div class="col-md-2 col-sm-6 col-xs-6">
           {{forms.select('saleable_size_sqft_max', ' ', AREA_MAX, 'MAX')}}
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="">
           <div class="search-wrapper">
             <button style="max-width: 230px;" class="common-btn">SEARCH</button>
           </div>
@@ -97,8 +97,8 @@
     <div id="property-search">
       <form id="list_property_form" onsubmit="return false;">
         <div class="row">
-          <div class="col-md-12 text-center">
-            LIST YOUR PROPERTY
+          <div class="col-md-12 text-center title-h1">
+           LIST YOUR PROPERTY
           </div>
         </div>
         <div class="row">
@@ -113,7 +113,7 @@
           </div>
           
           <div class="col-md-4 col-sm-6 col-xs-12">
-            {{forms.field('price_ask', 'ASKING(HKD)')}}
+            {{forms.field('price_ask', 'ASKING (HKD)')}}
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             {{forms.field('address', 'ADDRESS')}}
@@ -136,7 +136,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div>
             <div class="search-wrapper">
               <button id="sumbmit_list" style="max-width: 230px;" class="common-btn">SUBMIT</button>
             </div>

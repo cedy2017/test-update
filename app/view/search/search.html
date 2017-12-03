@@ -21,19 +21,19 @@
         <div class="col-md-12">{{forms.autoComplete('keyword_search', 'KEYWORDS')}}</div>
       </div>
       <div class="row">
-        <div class="col-md-6">{{forms.field('id', 'UNIT ID')}}</div>
+        <div class="col-md-6">{{forms.field('id', 'PROPERTY ID')}}</div>
         <div class="col-md-6">{{forms.select('location', 'LOCATION', LOCATIONS, 'Please select')}}</div>
       </div>
       <div class="row">
         <div class="col-md-6">
           {{forms.select('district', 'DISTRICT', DISTRICTS.ALL, 'Please select')}}
         </div>
-        <div class="col-md-3 col-xs-6 p-left">{{forms.select('saleable_size_sqft_min', 'AREA (SQ FT.)', AREA_MIN, 'Min')}}</div>
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('saleable_size_sqft_min', 'AREA (SQ FT)', AREA_MIN, 'Min')}}</div>
         <div class="col-md-3 col-xs-6 p-right">{{forms.select('saleable_size_sqft_max', '', AREA_MAX, 'Max')}}</div>
       </div>
       <div class="row">
-        <div class="col-md-3 col-xs-6 p-left">{{forms.select('budget_min', 'BUDGET (HKD)', BUDGET_MIN, 'Min M(illion)' if activeMenu == 'buy' else 'Min (K)')}}</div>
-        <div class="col-md-3 col-xs-6 p-right">{{forms.select('budget_max', '', BUDGET_MAX, 'Max M(illion)' if activeMenu == 'buy' else 'Max (K)')}}</div>
+        <div class="col-md-3 col-xs-6 p-left">{{forms.select('budget_min', 'BUDGET (HKD)', BUDGET_MIN, 'Min (M)' if activeMenu == 'buy' else 'Min (K)')}}</div>
+        <div class="col-md-3 col-xs-6 p-right">{{forms.select('budget_max', '', BUDGET_MAX, 'Max (M)' if activeMenu == 'buy' else 'Max (K)')}}</div>
 
         <div class="col-md-3 col-xs-6 p-left">{{forms.select('bedroom_min', 'BEDS', BED_MIN, 'Min')}}</div>
         <div class="col-md-3 col-xs-6 p-right">{{forms.select('bedroom_max', '', BED_MAX, 'Max')}}</div>
@@ -80,7 +80,7 @@
         </div>
         <div class="col-md-3 col-sm-6 checkbox-area">
           <label>Facilities</label>
-          {{forms.checkbox('has_gym', 'true', 'Gymnasium')}}
+          {{forms.checkbox('has_gym', 'true', 'Gym')}}
           {{forms.checkbox('has_indoor_swimming_pool', 'true', 'Swimming Pool (Indoor)')}}
           {{forms.checkbox('has_outdoor_swimming_pool', 'true', 'Swimming Pool (Outdoor)')}}
           {{forms.checkbox('has_tennis_court', 'true', 'Tennis Court')}}
