@@ -6,7 +6,7 @@ const LIST_DATA = [{
   pic: '/public/international/woolworth/thumb.jpg',
   id: 'woolworth'
 },{
-  name: 'Four Seasons Private Residences',
+  name: 'Four Seasons Private Residences Montreal',
   address: 'Montreal, Canada',
   pic: '/public/international/fourseason/thumb.jpg',
   id: 'fourseason'
@@ -81,14 +81,14 @@ const DETAIL_DATA = {
     ],
     agentObj: AGENT_CHAN,
     propertyDesc: [
-      'The Woolworth Pinnacle Penthouse is one of a kind five-floor residence atop a celebrated New York Landmark. At the peak of New York’s most iconic residential condominium, reigns over lower Manhattan like a castle in the sky. Commissioned by F.W. Woolworth, and designed by Cass Gilbert, the Woolworth Building -- a national historic landmark -- stood as the tallest structure in the world when completed in 1913 — now, its legendary crown will have an extraordinary, original penthouse residence.',
-      'The Woolworth Building was inaugurated on April 24, 1913, when President Woodrow Wilson flipped a switch in the White House, boldly illuminating the world’s then tallest building. From that moment on, Woolworth and Gilbert’s creation became an instant icon of architectural achievement for an entire city and nation. Over a century later, a rebirth is taking place at this National Historic Landmark. The Woolworth Tower Residences, developed by Alchemy Properties, will carry on the pioneering spirit and attention to detail embedded in this structure by its creators. The 33 individually crafted condominium residences start on the 29th floor and have been designed by world-renowned French architect, Thierry W Despont.',
-      'Location: The beacon of Tribeca and Downtown Manhattan, The Woolworth Pinnacle Penthouse is prominently positioned across from City Hall Park with a commanding view of the entire Manhattan skyline. Highlights of the thriving neighborhood include cobblestoned side streets, the adjacent Westfield Center, Brookfield Place with world class shopping, and superb dining choices with easy access to a stroll in Hudson River Park and Promenade.'
+      'The Woolworth Pinnacle Penthouse located in vibrant lower Manhattan in New York City, among the same avenues and cobblestone streets often frequented by visionaries, intellectuals, artists, and celebrities of the past, this iconic architectural masterpiece combines early 20th century craftsmanship with today’s modern technology, setting a new standard for exclusive luxury living. ',
+      'Ever so often, one is fortunate to witness a special moment in architectural history that sets a new standard of luxury and exclusivity. Completed in 1913, the iconic Woolworth Building was an architectural masterpiece of its time, representing an unprece-dented level of structural and artistic innovation, standing higher than any other known structure worldwide at the time of its completion. At a majestic 792 feet, this national historic landmark continues its reign as part of the iconic New York City skyline. For those seeking to own a part of the rich cultural history of this special location, one has but to witness the grandeur of The Woolworth Pinnacle Penthouse, the crowning glory of this long revered national historic landmark.',
+      'The iconic residence sits atop the 50th floor of the Woolworth Building in lower Manhattan comprising five levels creating a stately 9,710 sq ft interior, not to mention a 408 sq ft private observatory terrace with 360 degree views of the Empire State Building, Brooklyn Bridge, Hudson River, and New York Harbor. Alluding to an era of old-Hollywood glamour seldom found today, this stunning home featuring twenty-four foot high ceilings and a private elevator is the result of a careful historical renovation high-lighting grand living spaces, luxury materials and contemporary appliances and electronics. Exclusive resident amenities include full-time concierge service with a 24-hour doorman, a beautifully restored indoor pool, fitness studio, and wine cellar with a tasting room, to name a few.'
     ]
   },
   fourseason: {
-    name:'Four Seasons Private Residences',
-    urlName: 'Four Seasons Private Residences',
+    name:'Four Seasons Private Residences Montreal',
+    urlName: 'Four Seasons Private Residences Montreal',
     address: 'Montreal, Canada',
     gallery: [
       {
@@ -130,9 +130,8 @@ const DETAIL_DATA = {
     ],
     agentObj: AGENT_CHAN,
     propertyDesc: [
-      'A place like no other Four Seasons Private Residences, Montreal Canada.',
-      'The Residences sit perched atop Montreal’s newest flagship Four Seasons Hotel.  It is enveloped by the glow of Montreal’s unique “haute joie de vivre” sensibility. It is a place like no other and one reserved for only a privileged few.',
-      'Starting on the 14th floor of the Four Seasons Hotel, housing only 18 private beautiful residences, it is redefining affluent living through a modern expression of luxury, characterized by rare and original experiences and personalized comforts all in tune with the whims and desires of each of its unique inhabitants. '
+      'Located in Montreal, one of the most attractive cities with great historic culture to tell, The Four Seasons Residences chooses to sit on the Rue de la Montagne, which is the heart of this vibrant and enchanting French-speaking locale.  With 18 prominently-designed units of private residences, Carbonle is the building’s developer and the renowned Philip Hazan as her interior designer.  By the winter of 2018, The Four Seasons Residences Montreal will be celebrating the utmost joie de vivre sense of place with the Golden Square Mile in the metropolis and the opulent residence is only a corner away from the Montreal Museum of Fine Arts.  The ecosystem of the Four Seasons Hotel and Residences is connected to the Canada’s largest Ogilvy’s Department Flagship Store, where the historic building has been the iconic landmark for over a century. ',
+      'Experiencing a home called Four Seasons, as the finest luxury meets the oldest but fascinating art and culture, leading her inhabitants to a new height of an indulgence of prestige.'
     ]
   }
 }
