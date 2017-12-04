@@ -243,7 +243,7 @@ module.exports = app => {
         item.mobile = splitPhone(item.mobile);
         return item;
       });
-      members = _.sortBy(members, 'first_name').filter((item)=> item.id != 1);
+      members = _.sortBy(members, 'first_name');
       let data = {
         activeMenu: 'our-team',
         apiUrl: app.config.apiUrl,

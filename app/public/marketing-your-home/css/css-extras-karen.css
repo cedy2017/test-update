@@ -577,12 +577,12 @@ body.about-sub #main .hero h1 {
 }
 
 .agentDetails #my-listings #propList h2 a.propAddress.propLink{
-	font-size: 16px;
+	font-size: 14px;
 }
 
 #propList h3.price.propPrice {
 	font-family: Roboto, HelveticaNeue-Light, helvetica, sans-serif;
-	font-size: 16px;
+	font-size: 14px;
 	float: right;
 	padding-top: 12px;
 	bottom: 0!important;
@@ -696,7 +696,7 @@ body.home #main section.hero .grad-overlay{
 }
 
 #back_to_top i{
-	font-size: 16px;
+	font-size: 14px;
 	color:#fff;
 	position:absolute;
 	top: 16px;
@@ -1534,7 +1534,7 @@ img.temp-prop-image{
 
 .search-prop-list h3.pro-list-price{
 	color:#192e5a;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 500;
 }
 
@@ -4265,7 +4265,7 @@ body.single-mrt_lifestyle .top-slider-pro .sp-layer h2 {
 }
 
 .search-text-about h2 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #192e5a;
     margin-bottom: 19px;
@@ -4374,7 +4374,7 @@ body.community-details #main section.similiar .content h3.icon-heading .label {
 }
 
 .search-text-about h2 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #192e5a;
   margin-bottom: 19px;
@@ -4383,7 +4383,7 @@ body.community-details #main section.similiar .content h3.icon-heading .label {
 .preamble h3.bread {
     text-align: center;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 14px;
     color: #4d4d4f;
     text-transform: uppercase;
 }
@@ -4547,7 +4547,7 @@ body.agentDetails #main .preamble .row h2.top-bread-name {
     margin-bottom: -5px;
 }
 body.agentDetails #main .preamble .row h3.agent-title{
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 1.75;
 }
 body.agentDetails #main .preamble .row h2.top-bread-name, body.agentDetails #main .preamble .row h3.agent-title {
@@ -4629,7 +4629,7 @@ body #main .hentry #gallery-wrapper .major-details.sig-sales h3.price {
     margin-bottom: 0;
     background: transparent;
     color: #002B5C;
-    font-size: 16px;
+    font-size: 14px;
     float: right;
 }
 
@@ -5528,7 +5528,7 @@ body.marketing-your-home.new-marketing #main header.pre-hero {
 body.marketing-your-home.new-marketing #main .pre-hero .content h1, body.marketing-your-home.new-marketing #main .pre-hero .content h2{
 	text-align: center;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 14px;
     color: #4d4d4f;
     text-transform: uppercase;
 	}

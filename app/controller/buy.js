@@ -227,108 +227,47 @@ module.exports = app => {
     }
 
     * previewDetail() {
-      const BUILDING_KEY = [
-        'op_date',
-        'sport_list',
-        'study_room_list',
-        'transportation_list',
-        'shopping_list',
-      ];
-      const DISTRICT_KEY = ['primary_school_network', 'secondary_school_network'];
-      let ctx = this.ctx,
-          rateInfo,
-          propertyFromUrl,
-          gallery = [],
-          buildInfo = [],
-          districtInfo = [],
-          imgExp = /image/ig,
-          queryObj = ctx.request.query;
+        let ctx = this.ctx,
+            res,
+            rateInfo,
+            resData = {},
+            queryObj = ctx.request.query;
 
-      try {
-        rateInfo = yield ctx.service.rate.get();
-        for(let key in queryObj) {
-          if(imgExp.test(key)) {
-            let obj = {};
-            let capkey = key.slice(-1);
-            obj.image = queryObj[key]
-            gallery.push(obj);
-          };
+        try {
+          rateInfo = yield ctx.service.rate.get();
+          res = yield app.curl(`${app.config.apiUrl}web_units/${queryObj.unit_id}/webpage/${queryObj.page_id}/get_preview/?what_to_do=get_preview`, {
+            dataType: 'json',
+            rejectUnauthorized: false,
+            timeout: 60000
+          });
+          queryObj.id = queryObj.unit_id;
+          resData = res.data.unit;
+          resData.unit_features = res.data.descriptions;
+          resData.image_gallery = res.data.photos;
+          res = this.convertPropertyDetail(resData);
+        } catch(e) {
+          console.log(e);
+          resData = {};
         }
-        for(let key in queryObj) {
-          if (BUILDING_KEY.indexOf(key) < 0) continue;
-          let value = queryObj[key]
-          if(value !== false && value !== '' && value !== null) {
-            if(_.isBoolean(value)) { value = ''; }
-            if(key === 'op_date') {
-              value = moment(value).format('YYYY-MM');
-            }
-            buildInfo.push({key, value});
-          }
+
+        let mobileDetect = new MobileDetect(ctx.req.headers['user-agent']);
+
+        let data = {
+          apiUrl: app.config.apiUrl,
+          host: app.config.host,
+          activeMenu: queryObj['search_type'] || 'buy',
+          googleMap: app.config.googleMap,
+          rateInfo,
+          property: res,
+          unitId: queryObj.id,
+          preEmail: queryObj.email || '',
+          preName: queryObj.name || '',
+          preMobile: queryObj.mobile || '',
+          preMessage: queryObj.message || '',
+          pageUrl: encodeURIComponent(`${app.config.host}${ctx.request.originalUrl}`),
+          isMobile: mobileDetect.is('iPhone') || mobileDetect.is('AndroidOS')
         }
-        for(let key in queryObj) {
-          if(DISTRICT_KEY.indexOf(key) < 0) continue;
-          let value = queryObj[key]
-          if(value !== false && value !== '' && value !== null) {
-            districtInfo.push({key, value});
-          }
-        }
-        propertyFromUrl = {
-          name: queryObj.unit_name,
-          address: queryObj.unit_address,
-          areaSqft: queryObj.area_sqft,
-          bed: queryObj.bedroom,
-          bath: queryObj.bathroom,
-          buildInfo,
-          districtInfo,
-          carPark: queryObj.num_car_park || 0,
-          sale: {
-            show: !!queryObj.sale_price,
-            price: queryObj.sale_price,
-            tPrice: toThousands(+queryObj.sale_price),
-            sqft: (+queryObj.sale_price / +queryObj.rent_price).toFixed(0),
-          },
-          rent: {
-            show: !!queryObj.rent_price,
-            price: queryObj.rent_price,
-            tPrice: toThousands(+queryObj.rent_price),
-            sqft: (+queryObj.rent_price / +queryObj.rent_price).toFixed(0),
-          },
-          agentObj: {
-            "general_line": queryObj.agent_general_line,
-            "mobile": queryObj.agent_mobile,
-            "title": queryObj.agent_title,
-            "agent_number": queryObj.agent_number,
-            "profile_pic": queryObj.agent_pic,
-            "first_name": queryObj.agent_first_name,
-            "last_name": queryObj.Agent_last_name            
-          },
-          position: {
-            lat: queryObj.latitude || 22.2830065,
-            lng: queryObj.longtitude || 114.1571989
-          },
-          gallery
-        }
-      } catch (error) {
-        console.log(error);
-      }
-      
-      let mobileDetect = new MobileDetect(ctx.req.headers['user-agent']);
-          
-      let data = {
-        apiUrl: app.config.apiUrl,
-        activeMenu: queryObj['search_type'] || 'buy',
-        googleMap: app.config.googleMap,
-        rateInfo,
-        property: propertyFromUrl,
-        unitId: queryObj.id,
-        preEmail: queryObj.email || '',
-        preName: queryObj.name || '',
-        preMobile: queryObj.mobile || '',
-        preMessage: queryObj.message || '',
-        pageUrl: encodeURIComponent(`${app.config.host}${ctx.request.originalUrl}`),
-        isMobile: mobileDetect.is('iPhone') || mobileDetect.is('AndroidOS')
-      }
-      ctx.body = yield ctx.renderView('/buy/detail.html', data);
+        ctx.body = yield ctx.renderView('/buy/detail.html', data);
     }
 
     * detail() {

@@ -15,7 +15,7 @@
   {% include "../base/header.html" %}
   {% include "../our-team/member-detail.html" %}
   {% import "../base/forms.html" as forms %}
-  <div class="s-container" style="position: relative;">
+  <div class="s-container" style="position: relative; margin-top:15px;">
     <div style="padding-left: 8px; margin-bottom: 0px;" class="link-map">
       <a href="/">Home &gt;</a> 
       <a href="/{{activeMenu}}-search">Search &gt;</a> 
@@ -488,7 +488,7 @@
                 <div style="position: relative;">
                   <div class="name">{{property.agentObj.first_name}}&nbsp;{{property.agentObj.last_name}}</div>
                   <div class="com-title">{{property.agentObj.title}}&nbsp;</div>
-                  <div class="detail-info">Licence No. <span>{{property.agentObj.agent_number}}</span></div>
+                  <div id="detail-info-agent-number-wrapper" class="detail-info">Licence No. <span id="detail-info-agent-number">{{property.agentObj.agent_number}}</span></div>
                   <div class="detail-info">Direct <span>{{property.agentObj.general_line}}</span></div>
                   <div class="detail-info">Mobile <span>{{property.agentObj.mobile}}</span></div>
                   <div class="avatar">
@@ -511,23 +511,31 @@
                     <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn">Enquiry</button></div>
                   </div>
                   <script>
-                    $('#agent-profile-detail').click(function(e) {
-                      var $target = $(e.target).closest('.col-md-6');
-                      var id = $target.data('id');
-                      if (id) {
-                        $('#agent-detail-dialog-name').text($target.data('name'));
-                        $('#agent-detail-dialog-title').text($target.data('title'));
-                        $('#agent-detail-dialog-licence').text($target.data('licence'));
-                        $('#agent-detail-dialog-direct').text($target.data('direct'));
-                        $('#agent-detail-dialog-mobile').text($target.data('mobile'));
-                        $('#agent-detail-dialog-image').attr('src', $target.data('image'));
-                        $('#agent-detail-dialog').fadeIn(400);
-                        if($target.data('licence') === '0' || $target.data('licence') === '') {
-                          $('#agent-detail-dialog-licence-wrapper').css('visibility', 'hidden');
-                        } else {
-                          $('#agent-detail-dialog-licence-wrapper').css('visibility', 'visible');
-                        }
+                    $(document).ready(function() {
+                      var numBerText = $('#detail-info-agent-number').text()
+                      if(numBerText === '0' || numBerText === '') {
+                        $('#detail-info-agent-number-wrapper').css('visibility', 'hidden');
+                      } else {
+                        $('#detail-info-agent-number-wrapper').css('visibility', 'visible');
                       }
+                      $('#agent-profile-detail').click(function(e) {
+                        var $target = $(e.target).closest('.col-md-6');
+                        var id = $target.data('id');
+                        if (id) {
+                          $('#agent-detail-dialog-name').text($target.data('name'));
+                          $('#agent-detail-dialog-title').text($target.data('title'));
+                          $('#agent-detail-dialog-licence').text($target.data('licence'));
+                          $('#agent-detail-dialog-direct').text($target.data('direct'));
+                          $('#agent-detail-dialog-mobile').text($target.data('mobile'));
+                          $('#agent-detail-dialog-image').attr('src', $target.data('image'));
+                          $('#agent-detail-dialog').fadeIn(400);
+                          if($target.data('licence') === '0' || $target.data('licence') === '') {
+                            $('#agent-detail-dialog-licence-wrapper').css('visibility', 'hidden');
+                          } else {
+                            $('#agent-detail-dialog-licence-wrapper').css('visibility', 'visible');
+                          }
+                        }
+                      });
                     });
                   </script>
                 </div>
