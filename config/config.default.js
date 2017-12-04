@@ -29,7 +29,7 @@ module.exports = appInfo => {
     }
   };
   // test env: http://192.168.5.51:18000 uat: https://www.listsothebysrealtyhk.com
-  config.host = 'http://192.168.5.51:18000';
+  config.host = 'https://www.listsothebysrealtyhk.com';
   config.apiUrl = `${config.host}/api/`;
 
   config.googleMap = {
