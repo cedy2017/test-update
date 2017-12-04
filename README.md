@@ -1,4 +1,8 @@
 # version 1.1.13
+1: update style.
+2: update preview.
+
+# version 1.1.13
 2: update style.
 
 # version 1.1.12  
