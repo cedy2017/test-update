@@ -40,7 +40,7 @@ $(document).ready(function() {
   //   resizePrivacy();
   // });
 
-  console.log('Sotheby\'s Version: 1.1.12; Update Date: 2017-12-02');
+  console.log('Sotheby\'s Version: 1.1.13; Update Date: 2017-12-03');
 });
 
 var G = {
