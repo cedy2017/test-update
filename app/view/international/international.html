@@ -50,13 +50,14 @@
       <div class="col-md-8 col-sm-12">
         <div class="left-box">
           <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-bottom: 20px;">
-            <div class="title toggle">
-              <!-- <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-              <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
-              Property Description -->
-              {{property.title}}
-            </div>
+         
             <div class="body">
+                <div class="title toggle">
+                    <!-- <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                    Property Description -->
+                    {{property.title}}
+                  </div>
               {% for item in property.propertyDesc %}
                 <span style="margin-left: 0; margin-bottom: 10px; margin-top: 10px; display: inline-block;">{{item}}</span>  <br>
               {% endfor %}
