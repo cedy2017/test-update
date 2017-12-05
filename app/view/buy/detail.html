@@ -121,7 +121,8 @@
               {% endif %}
             </div>
           </div>
-    
+          
+          {% if property.buildInfo.length %}
           <div class="property-box">
             <div class="title toggle">
               <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -135,7 +136,9 @@
               {% endfor %}
             </div>
           </div>
+          {% endif %}
     
+          {% if property.districtInfo.length %}
           <div class="property-box" style="border-bottom: 1px solid #cccccc;">
             <div class="title toggle">
               <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -149,6 +152,8 @@
               {% endfor %}
             </div>
           </div>
+          {% endif %}
+
           <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-top: 20px; margin-bottom: 20px;">
             <div class="body google-map-wrapper">
               <div id="map" class="google-map"></div>
@@ -156,8 +161,20 @@
                 var map;
                 function initMap() {
                   var xx = {lat: {{property.position.lat}}, lng: {{property.position.lng}}};
+                  var center = {};
+                  var holder = {
+                    lat: 22.2830065,
+                    lng: 114.1571989
+                  };
+
+                  if(!xx.lat || !xx.lng) {
+                    center = holder;
+                  } else {
+                    center = xx;
+                  }
+                  
                   map = new google.maps.Map(document.getElementById('map'), {
-                    center: xx,
+                    center: center,
                     zoom: 13,
                     streetViewControl: false,
                     mapTypeControl: false,
@@ -224,11 +241,14 @@
                       }]
                     }]
                   });
-                  var marker = new google.maps.Marker({
-                    position: xx,
-                    map: map,
-                    icon: '/public/icon/pinmap_property.png'
-                  });
+                  
+                  if (xx.lat && xx.lng) {
+                    var marker = new google.maps.Marker({
+                      position: xx,
+                      map: map,
+                      icon: '/public/icon/pinmap_property.png'
+                    });
+                  }
                 }
               </script>
               <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXiaoE3w9cp4esXGPQdkX1hpZ7TuZVR7w&callback=initMap"></script>
@@ -529,7 +549,7 @@
                           $('#agent-detail-dialog-mobile').text($target.data('mobile'));
                           $('#agent-detail-dialog-image').attr('src', $target.data('image'));
                           $('#agent-detail-dialog').fadeIn(400);
-                          if($target.data('licence') === '0' || $target.data('licence') === '') {
+                          if($target.data('licence') == '0' || $target.data('licence') === '') {
                             $('#agent-detail-dialog-licence-wrapper').css('visibility', 'hidden');
                           } else {
                             $('#agent-detail-dialog-licence-wrapper').css('visibility', 'visible');

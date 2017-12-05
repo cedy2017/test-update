@@ -284,7 +284,12 @@ module.exports = app => {
         res = this.convertPropertyDetail(res.data);
       } catch(e) {
         console.log(e);
-        res = {};
+        res = {
+          position: {
+            lat: 0,
+            lng:0
+          }
+        };
       }
 
       let mobileDetect = new MobileDetect(ctx.req.headers['user-agent']);
@@ -483,8 +488,8 @@ module.exports = app => {
         },
         agentObj,
         position: {
-          lat: res.latitude || 22.2830065,
-          lng: res.longtitude || 114.1571989
+          lat: res.latitude || 0,
+          lng: res.longtitude || 0
         },
         gallery
       };
