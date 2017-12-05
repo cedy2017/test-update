@@ -28,6 +28,7 @@ const DETAIL_DATA = {
     name:'The Woolworth Pinnacle Penthouse',
     urlName: 'The Woolworth Pinnacle Penthouse',
     address: 'New York, United States',
+    title: 'Castle in the air.',
     gallery: [
       {
         caption: '',
@@ -90,6 +91,7 @@ const DETAIL_DATA = {
     name:'Four Seasons Private Residences Montreal',
     urlName: 'Four Seasons Private Residences Montreal',
     address: 'Montreal, Canada',
+    title: 'Redefining inspired living in Montreal and beyond',
     gallery: [
       {
         caption: '',

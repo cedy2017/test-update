@@ -22,7 +22,7 @@ $(document).ready(function() {
   }, "Invalid");
 
   jQuery.validator.addMethod("mobile", function(value, element) {
-    return /^\d{8,13}$/.test(value);
+    return /^(\+|\d)\d{8,13}$/.test(value);
   }, "Invalid Number");
 
   $('#captcha').click(function() {
@@ -40,7 +40,7 @@ $(document).ready(function() {
   //   resizePrivacy();
   // });
 
-  console.log('Sotheby\'s Version: 1.1.14; Update Date: 2017-12-04');
+  console.log('Sotheby\'s Version: 1.1.16; Update Date: 2017-12-05');
 });
 
 var G = {

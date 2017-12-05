@@ -416,9 +416,26 @@
         
       }
 
+      function setMobileViewHeight() {
+        var windowWidth = $(window).width(),
+            $root = $('#gallary-wrapper'),
+            $mobile = $('#mobile-gallery'),
+            mobileHeihgt = $mobile.height();
+
+        if (windowWidth < 960) {
+          $root.height(mobileHeihgt + 30);
+        } else {
+          $root.height(600);
+        }
+        
+      }
+      $(document).ready(function() {
+        setMobileViewHeight();
+      });
       $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
       $(window).resize(function() {
         $('img', '#mobile-gallery').height($('img', '#mobile-gallery').width() * 2 / 3);
+        setMobileViewHeight();
       });
     </script>
   </div>
