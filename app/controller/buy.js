@@ -243,11 +243,17 @@ module.exports = app => {
           queryObj.id = queryObj.unit_id;
           resData = res.data.unit;
           resData.unit_features = res.data.descriptions;
-          resData.image_gallery = res.data.photos;
+          resData.image_gallery[0]["1800x1200"] = res.data.photos;
           res = this.convertPropertyDetail(resData);
         } catch(e) {
           console.log(e);
           resData = {};
+          res = {
+            position: {
+              lat: 0,
+              lng:0
+            },
+          };
         }
 
         let mobileDetect = new MobileDetect(ctx.req.headers['user-agent']);
