@@ -362,13 +362,7 @@ module.exports = app => {
 
         price = price === 0 ? 'Price Upon Request' : 'HKD ' + toThousands(price);
         
-        if (item.image_gallery.length) {
-          url = item.image_gallery[2]["600x400"][0].image;
-        }
-        gallery = item.image_gallery[2]["600x400"];
-        images = gallery.map(function(item) {
-          return item.image;
-        });
+        images = item.image_gallery;
         let sqft = toThousands(+item.saleable_size_sqft || 0)
         return {
           url,

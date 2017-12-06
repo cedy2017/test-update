@@ -12,8 +12,8 @@
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </div>
             <ul class="result-slider">
-              {% for img in item.images %}
-              <li style="background-image: url(https://www.listsothebysrealtyhk.com{{img}})"></li>
+              {% for gallery in item.images %}
+              <li style="background-image: url({{gallery.image}})"></li>
               {% endfor %}
             </ul>
           </div>
