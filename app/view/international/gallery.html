@@ -242,7 +242,7 @@
       </div>
     </div>
 
-    <div id="gallery-caption" class="desc">{{property.gallery[0].caption if property.gallery[0] else ''}}</div>
+    <div id="gallery-caption" class="desc" style="height: 19px;">{{property.gallery[0].caption if property.gallery[0] else ''}}</div>
     <div class="images-wrapper">
       <div style="margin-left: 50px; margin-right: 50px; overflow: hidden;">
         <ul id="detail-images" class="images" >
@@ -382,6 +382,7 @@
         var $target = $(e.target).closest('li'),
             activeIndex = $target.data('index'),
             caption = $target.data('caption');
+        if (e.target.tagName != 'LI') return;
         currIndex = activeIndex;
         $('#gallery').iosSlider("goToSlide", currIndex + 1);
         changeStage(activeIndex);
@@ -412,7 +413,7 @@
         } else {
           $stageWrapper.removeClass('video');
         }
-        $('#gallery-caption').text($current.data('caption'));
+        $('#gallery-caption').text($current.data('caption') || ' ');
         
       }
 
@@ -422,10 +423,10 @@
             $mobile = $('#mobile-gallery'),
             mobileHeihgt = $mobile.height();
 
-        if (windowWidth < 960) {
+        if (windowWidth <= 960) {
           $root.height(mobileHeihgt + 30);
         } else {
-          $root.height(600);
+          $root.height(750);
         }
         
       }

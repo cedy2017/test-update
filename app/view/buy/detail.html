@@ -154,6 +154,7 @@
           </div>
           {% endif %}
 
+          {% if property.showMap %}
           <div class="property-box" style="border-bottom: 1px solid #cccccc; margin-top: 20px; margin-bottom: 20px;">
             <div class="body google-map-wrapper">
               <div id="map" class="google-map"></div>
@@ -254,7 +255,8 @@
               <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXiaoE3w9cp4esXGPQdkX1hpZ7TuZVR7w&callback=initMap"></script>
             </div>
           </div>
-          
+          {% endif %}
+
           <script>
             $('.toggle').on('click', function(e) {
               $(e.currentTarget).parent().toggleClass('hide').children().last().slideToggle(200);
@@ -438,8 +440,8 @@
                 $('#submit-enquiry-box').click(function() {
                   if($('#enquiry-box-form').valid()) {
                     var data = {
+                      enquiry_type: 'E2',
                       unit: $('input[name="unitId"]').val().trim(),
-                      agent: $('input[name="agentId"]').val().trim(),
                       name: $('input[name="enquiry-box-name"]').val().trim(),
                       mobile: $('input[name="enquiry-box-mobile"]').val().trim(),
                       email: $('input[name="enquiry-box-email"]').val().trim(),
