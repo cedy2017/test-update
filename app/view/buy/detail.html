@@ -98,7 +98,7 @@
               <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
               Unit Description
             </div>
-            <div class="body">
+            <div class="box-content">
               {% if property.unitDesc.vi and property.unitDesc.vi.length %}
                 <h2>View</h2>
                 {% for item in property.unitDesc.vi %}
@@ -129,7 +129,7 @@
               <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
               Building Information
             </div>
-            <div class="body">
+            <div class="box-content">
               {% for item in property.buildInfo %}
                 <h2>{{ __(item.key) }}</h2>
                 <span>{{ item.value }}</span>
@@ -145,7 +145,7 @@
               <span class="min"><i class="fa fa-minus" aria-hidden="true"></i></span>
               District Information
             </div>
-            <div class="body">
+            <div class="box-content">
               {% for item in property.districtInfo %}
                 <h2>{{ __(item.key) }}</h2>
                 <span>{{ item.value }}</span>
