@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   jQuery.validator.addMethod("mobile", function(value, element) {
     return /^(\+|\d)\d{8,13}$/.test(value);
-  }, "Invalid Number");
+  }, "Invalid Number. e.g +8529100000");
 
   $('#captcha').click(function() {
     $(this).find('iframe').attr('src', '/captcha?st=' + Date.now());
