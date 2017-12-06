@@ -68,6 +68,7 @@
             $('#submit-enquiry').click(function() {
               if($('#enquiry-dialog-form').valid()) {
                 var data = {
+                  enquiry_type: 'E3',
                   unit: $('input[name="unitId"]').val().trim(),
                   agent: $('input[name="agentId"]').val().trim(),
                   name: $('input[name="name"]').val().trim(),

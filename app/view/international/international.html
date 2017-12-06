@@ -140,6 +140,7 @@
                     <button id="submit-enquiry-box" style="max-width:140px;" class="common-btn">LET'S CONNECT</button> 
                   </div> 
                 </div> 
+                <input type="hidden" name="enquiry-box-type" value="{{property.queryType}}">
                 </div> 
               </form> 
               </div> 
@@ -168,6 +169,7 @@
               $('#submit-enquiry-box').click(function() {
                 if($('#enquiry-box-form').valid()) {
                   var data = {
+                    enquiry_type: $('input[name="enquiry-box-type"]').val().trim(),
                     name: $('input[name="enquiry-box-name"]').val().trim(),
                     mobile: $('input[name="enquiry-box-mobile"]').val().trim(),
                     email: $('input[name="enquiry-box-email"]').val().trim(),

@@ -177,13 +177,13 @@ module.exports = app => {
         pages.total = res.data.count;
         pages.totalPages = Math.ceil(res.data.count / 8);
         pages.currPage = (queryObj.offset || 0) / 8 + 1;
-        pages.prevUrl = pagesQueryStr + '&offset=' + (pages.currPage - 2) * 8;
-        pages.nextUrl = pagesQueryStr + '&offset=' + (pages.currPage) * 8;
+        pages.prevUrl = pages.currPage == 1 ? 'javascript:void(0);' : type + '-result?' + pagesQueryStr + '&offset=' + (pages.currPage - 2) * 8;
+        pages.nextUrl = pages.currPage == pages.totalPages ? 'javascript:void(0);' : type + '-result?' + pagesQueryStr + '&offset=' + (pages.currPage) * 8;
         pages.pagination = [];
 
         for(let i = Math.max(1, pages.currPage - 3); i < pages.currPage; i++) {
           let pageItem = {
-            params: 'offset=' + (i - 1) * 8 + '&' + pagesQueryStr,
+            params: type + '-result?' + 'offset=' + (i - 1) * 8 + '&' + pagesQueryStr,
             page: i
           }
           pages.pagination.push(pageItem);
@@ -191,7 +191,7 @@ module.exports = app => {
 
         for(let i = pages.currPage; i <= Math.min(pages.totalPages, pages.currPage + 3); i++) {
           let pageItem = {
-            params: 'offset=' + (i - 1) * 8 + '&' + pagesQueryStr,
+            params: type + '-result?' + 'offset=' + (i - 1) * 8 + '&' + pagesQueryStr,
             page: i
           }
           pages.pagination.push(pageItem);
@@ -242,7 +242,18 @@ module.exports = app => {
           });
           queryObj.id = queryObj.unit_id;
           resData = res.data.unit;
-          resData.unit_features = res.data.descriptions;
+          // preview data 更合适~    '_'
+          let unit_array = [];
+          for (let key in res.data.descriptions) {
+            let descArray = res.data.descriptions[key];
+            for(let i = 0; i < descArray.length; i++) {
+              var item = descArray[i];
+              item.caption_value_bak = item.caption_value;
+              item.caption_value = item.feature_value;
+            }
+            unit_array.push({[key]: res.data.descriptions[key]});
+          }
+          resData.unit_features = unit_array;
           resData.image_gallery[0]["1800x1200"] = res.data.photos;
           res = this.convertPropertyDetail(resData);
         } catch(e) {
@@ -253,6 +264,7 @@ module.exports = app => {
               lat: 0,
               lng:0
             },
+            showMap: false
           };
         }
 
@@ -293,8 +305,9 @@ module.exports = app => {
         res = {
           position: {
             lat: 0,
-            lng:0
-          }
+            lng:0,
+          },
+          showMap: false,
         };
       }
 
@@ -497,6 +510,7 @@ module.exports = app => {
           lat: res.latitude || 0,
           lng: res.longtitude || 0
         },
+        showMap: !!(res.latitude || 0),
         gallery
       };
     }

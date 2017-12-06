@@ -194,6 +194,7 @@
             $('#submit-enquiry').click(function() {
               if($('#contact-us-form').valid()) {
                 var data = {
+                  enquiry_type: 'E1',
                   name: $('input[name="name"]').val().trim(),
                   mobile: $('input[name="mobile"]').val().trim(),
                   email: $('input[name="email"]').val().trim(),
