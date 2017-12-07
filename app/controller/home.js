@@ -23,21 +23,9 @@ module.exports = app => {
           price = 0;
         }
         price = price === 0 ? 'Price Upon Request' : 'HKD ' + toThousands(price);
-        // if (item.image_gallery.length) {
-        //   if (item.image_gallery[2]["600x400"][0]) {
-        //     url = item.image_gallery[2]["600x400"][0].image;
-        //   }
-        // }
-        if (item.image_gallery.length) {
-          let images = item.image_gallery.find((ga) => {
-            if(ga.hasOwnProperty('600x400')) {
-              return true;
-            }
-          });
-          url = images['600x400'][0].image;
-        }
+        
         return {
-          url,
+          url: item.image_gallery[0],
           type,
           id: item.id,
           name: item.name,
@@ -82,6 +70,7 @@ module.exports = app => {
       let data = {
         homePage: true,
         apiUrl: app.config.apiUrl,
+        apiHost: app.config.host,
         DISTRICTS,
         AREA_MIN: [{ key: '0', value: 'below 1000' }, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000],
         AREA_MAX: [1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, { key: '1000000000000', value: '5000 above' }],

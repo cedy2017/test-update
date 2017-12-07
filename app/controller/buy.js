@@ -362,7 +362,6 @@ module.exports = app => {
 
         price = price === 0 ? 'Price Upon Request' : 'HKD ' + toThousands(price);
         
-        images = item.image_gallery;
         let sqft = toThousands(+item.saleable_size_sqft || 0)
         return {
           url,
@@ -373,7 +372,7 @@ module.exports = app => {
           sqft,
           time: moment(new Date(item.modified_at)).fromNow(),
           price,
-          images,
+          images: item.image_gallery,
           avatar: 'http://img5.imgtn.bdimg.com/it/u=484928903,1094087196&fm=26&gp=0.jpg',
         };
       });
