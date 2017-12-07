@@ -218,6 +218,12 @@
   margin-bottom: 30px;
 }
 
+.history-bg-full-width {
+  img {
+    width: 100%;
+  }
+}
+
 .career-bg {
   background-image: url(/public/images/careers_bg.jpg);
   background-position: 50% 50%;
@@ -552,10 +558,6 @@
   }
 }
 
-.history-mobile-view {
-  display: none;
-}
-
 .mobile-history-box {
   display: block;
   margin-bottom: 40px;
@@ -672,12 +674,49 @@
   .time-line {
     display: none;
   }
-  .history-wrapper {
+  .history-box {
+    margin: 16px 40px;
+    display: block;
+    .column-img {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .history-wrapper .slide-left-btn .title, .history-wrapper .slide-right-btn .title {
     display: none;
   }
-  .history-mobile-view {
-    display: block;
+
+  .history-wrapper .slide-left-btn .year, .history-wrapper .slide-right-btn .year {
+    display: none;
   }
+  .history-wrapper .slide-left-btn .icon, .history-wrapper .slide-right-btn .icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .history-wrapper .slide-left-btn .icon i, .history-wrapper .slide-right-btn .icon i {
+    font-size: 40px;
+  }
+
+  .iosslider {
+    /* required */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1140px;
+    height: 600px;
+  
+  }
+  
+  /* slide */
+  .iosslider .slider .slide {
+    height: 600px;
+  }
+
   .career-bg {
     height: 300px;
   }
