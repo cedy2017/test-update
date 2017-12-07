@@ -1,6 +1,7 @@
 logs/
 npm-debug.log*
 node_modules/
+node_modules_prod/
 coverage/
 .idea/
 run/
@@ -8,3 +9,5 @@ run/
 *.swp
 app/public/sotheby_videos/
 app/public/css/main.css
+release/
+server.txt
