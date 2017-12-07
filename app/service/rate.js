@@ -5,8 +5,7 @@ module.exports = app => {
     * get() {
       let result,
           currTime = Date.now();
-      // 两小时更新一次。
-      if ((currTime - prevTime) < 7200000) {
+      if ((currTime - prevTime) < 86400000) {
         return rateArray;
       }
       try {
