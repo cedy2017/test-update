@@ -11,16 +11,17 @@
   {% include "../base/header.html" %}
   {% include "./member-detail.html" %}
   {% import "../base/forms.html" as forms %}
-  <div class="marketing-home-wrapper" style="margin-top: 50px;margin-bottom: 30px;">
+  <div class="marketing-home-wrapper" style="margin-top: 40px;margin-bottom: 40px;">
       <span class="text-center title-parg">Our Team</span>
       <p  class="our-team-desc">
-      We at List Sotheby’s International Realty are proud to introduce our highly qualified team of associates who are poised and ready to assist you with all of your property needs. Each of our accredited agents holds a distinguished transaction record, is well-versed and up-to-date on the current local laws and regulations effecting the Hong Kong real estate market, and adheres to a strict code of ethics and confidentiality in line with our company policy. 
+        We at List Sotheby’s International Realty are proud to introduce our highly qualified sales associates and dedicated customer service team. Each of our accredited associates holds a distinguished transaction record, is well-versed and up-to-date on the current local laws and regulations effecting the Hong Kong real estate market, and adheres to a strict code of ethics and confidentiality in line with our company policy. Our customer service personnel are all well trained to provide professional and personalized after-sales service. 
       <br>
-      <br>
-      We welcome you to browse through our list of agent profiles below in order to select the professional who best suits your needs.
+      </p>
+      <p class="our-team-desc">
+      We work at our best to understand every client thoroughly and provide a one-stop hassle free service. We are ready to assist you with all your property needs.
     </p>
   </div>
-  <div class="s-container" style="margin-top: 30px;margin-bottom: 50px;">
+  <div class="s-container" style="margin-top: 40px;margin-bottom: 40px;">
   
     <div id="agent-list" class="row">
       {%for item in members%}
@@ -65,7 +66,7 @@
     </script>
   </div>
   <div class="form-wrapper" >
-    <div class="marketing-home-wrapper" style="margin-top: 20px;margin-bottom: 30px;">
+    <div class="marketing-home-wrapper" style="margin-top: 25px;margin-bottom: 30px;">
       <span class="text-center title-parg">Join Our Team</span>
     <p class="join-team-desc">List Sotheby’s International Realty is a family comprised of diverse, knowledgeable, and seasoned agents with in-depth knowledge of market trends within the luxury property market, both in Hong Kong and abroad. We are constantly in search of expanding our team of agents and excited to meet like-minded professionals with the drive and appreciation for excellence to contribute to our expanding operation. </p>
   </div> <form id="recruitment-form" onsubmit="return false;" class="join-our-team">
