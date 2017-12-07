@@ -233,7 +233,7 @@
 }
 
 .csr-bg {
-  background-image: url(/public/images/csr-bg.jpg);
+  background-image: url(/public/images/csr/csr-bg.jpg);
   background-position: 50% 50%;
   background-size: cover;
   height: 520px;
@@ -307,7 +307,7 @@
 }
 
 .brand-heritage-wrapper{
-  background-color: #FAFAFA;margin-top: 40px;padding:40px 0;
+  background-color: #FAFAFA;margin-top: 40px;padding:40px 0 5px;
   .banner-item{
     max-width:910px;
     margin:0 auto 30px;
@@ -317,6 +317,152 @@
     }
   }
 }
+
+
+
+//csr
+
+.csr-wrapper{
+
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 0;
+  font-size: 0;
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
+  .video-wrapper{
+    // position: relative;
+    width: 910px;
+    padding-bottom:27%;
+    height: 510px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+    
+  }
+  .container{
+    margin-top: 40px;
+
+  }     
+   .career-desc{
+    margin-bottom: 40px;
+  }
+  .car-desc-remark{
+    font-weight: 400;font-style: normal;color: #585858;font-size:12px ;
+    margin-top:5px;
+    line-height: 1.2em   }
+ 
+  .csr-wrapper-item{
+    display: inline-block;
+    padding-left: 0;
+    vertical-align: top;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-size: 15px;
+    font-size: 1rem;
+    position: relative;
+
+   .image-holder{max-height: 680px;
+    // min-height: 215px;
+} 
+
+    .o-smartimage,.s-title-smartimage {
+      display: block;
+      overflow: hidden;
+      -webkit-transition: all .1s ease-out;
+      transition: all .1s ease-out;
+      position: relative;
+      direction: ltr;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      font-size: 0;
+      text-align: center;
+      position: relative;
+      img{
+        border: 0;
+        max-width: none;
+        max-height: none;
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%;
+        height: auto;
+        position: relative;
+        z-index: 2;
+        margin: auto;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fff;
+      }
+ 
+    }
+    .s-title-smartimage img{
+      margin-top: -35%;
+    }
+    .s-title-on-image-sec{
+      width: 50%;
+      z-index: 3;
+      position: absolute;
+      top: 9%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      text-align: center;
+      margin-top: 70px;
+      h2{
+        padding-bottom: 40px;
+        color: #333;
+        font-size: 2.67em;
+        text-transform: uppercase;
+        line-height: 1.25;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .s-text{
+        color: #333;
+        font-size: 1.28em;
+        background-color: rgba(255,255,255,0.7);
+      }
+      img{
+        max-width: 100%;
+        height: auto;
+        border: 0;
+      }
+  }
+    .s-title-on-image{
+      text-transform: uppercase;
+      width: 50%;
+      z-index: 3;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      text-align: center;
+      h2{
+        padding-bottom: 40px;
+        font-size: 3.2em;
+        color: #fff;
+        font-weight: 400;
+        font-style: normal;
+      }
+      img{
+        max-width: 100%;
+        height: auto;
+        border: 0;
+      }
+  }
+    }
+}
+
 
 // contact us
 .contact-block {
@@ -669,6 +815,15 @@
   }
 }
 
+//careers
+
+.career-wrapper{
+  width: 100%;
+  .career-desc{
+    margin-bottom: 25px;
+  }
+
+}
 
 @media (max-width: 750px) { 
   .time-line {
@@ -726,7 +881,56 @@
   .marketing-home-bg {
     height: 300px;
   }
+  .csr-wrapper .csr-wrapper-item
+  {
+    .s-title-on-image{
+    width:75%;
+    h2{
+      font-size: 1.5em;
+      padding-bottom: 20px;
+    }
+  }
+
+} 
+
+  .csr-wrapper
+  {
+    .video-wrapper{
+      
+          padding-bottom: 0px;
+          // left: -50%;
+          // margin: 0 -18px 20px;
+          //  -webkit-transform: scale(.35)!important;
+          //   -webkit-transform-origin: 0% 0%!important;
+          width: 100%;
+          height: auto;
+          iframe{
+            height: auto;
+            min-height: 250px;
+      
+          }
+        }
+      
+   .title-parg{
+      padding:0 15px;
+    }
+ .career-desc {
+    margin-bottom: 40px;
+}
   
+
+.s-title-on-image-sec{
+  margin-top: 50px!important;
+  h2{
+    font-size: 1em!important;
+    padding-bottom: 10px!important;
+  }
+  .s-text{
+    font-size: .6em!important;
+  }
+}
+
+  }
 }
 
 @media (max-width: 600px) { 
