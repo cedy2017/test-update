@@ -202,7 +202,9 @@ module.exports = app => {
         result = [];
       }
       let distType, autoValues;
-      if (queryObj.location && queryObj.location == ' ' ) {
+      if (!queryObj.location) {
+        distType = 'ALL';
+      } else if (queryObj.location && queryObj.location == ' ' ) {
         distType = 'ALL';
       } else {
         distType = queryObj.location
@@ -235,7 +237,7 @@ module.exports = app => {
 
         try {
           rateInfo = yield ctx.service.rate.get();
-          res = yield app.curl(`${app.config.apiUrl}web_units/${queryObj.unit_id}/webpage/${queryObj.page_id}/get_preview/?what_to_do=get_preview`, {
+          res = yield app.curl(`${app.config.apiUrl}web_units/${queryObj.unit_id}/webpage/${queryObj.page_id}/?what_to_do=get_preview`, {
             dataType: 'json',
             rejectUnauthorized: false,
             timeout: 60000
@@ -477,7 +479,7 @@ module.exports = app => {
         name: res.name,
         address: res.address,
         areaSqft,
-        bed: res.bedroom_include_ensuite,
+        bed: res.bedroom_include_ensuite || 0,
         bath: +res.bathroom,
         carPark: res.num_car_park || 0,
         unitDesc,

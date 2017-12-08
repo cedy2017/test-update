@@ -166,20 +166,19 @@
       console.log('hahah');
     });
 
-    var districtMapping = {{ districtSource| safe }
-  };
-  var $dist = $('#district');
-  $('#location').change(function () {
-    var loc = $(this).val()
-    if (loc == ' ') {
-      loc = 'ALL';
-    }
-    $dist.empty();
-    var dist = districtMapping[loc];
-    for (var i = 0; i < dist.length; i++) {
-      var item = dist[i];
-      $dist.append('<option value="' + (item.key ? item.key : item) + '">' + (item.value ? item.value : item) + '</option>');
-    }
-  });
-  }) ();
+    var districtMapping = {{districtSource|safe}};
+    var $dist = $('#district');
+    $('#location').change(function () {
+      var loc = $(this).val()
+      if (loc == ' ') {
+        loc = 'ALL';
+      }
+      $dist.empty();
+      var dist = districtMapping[loc];
+      for (var i = 0; i < dist.length; i++) {
+        var item = dist[i];
+        $dist.append('<option value="' + (item.key ? item.key : item) + '">' + (item.value ? item.value : item) + '</option>');
+      }
+    });
+  })();
 </script>
