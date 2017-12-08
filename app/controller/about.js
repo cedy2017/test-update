@@ -23,6 +23,8 @@ module.exports = app => {
       if (queryObj.agent_id && queryObj.property_id) {
         type = 'E3';
       }
+
+      let mobile = (queryObj.mobile || '').replace(/\s/g, '');
       
       let data = {
         type,
@@ -33,7 +35,7 @@ module.exports = app => {
         name: queryObj.name,
         email: queryObj.email,
         message: queryObj.message,
-        mobile: queryObj.mobile,
+        mobile,
       }
       ctx.body = yield ctx.renderView('about/contact-us.html', data);
     }

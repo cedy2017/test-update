@@ -212,7 +212,13 @@
                   url: 'https://www.listsothebysrealtyhk.com/api/enquiry/',
                   success: function() {
                     G.mNotic('Sent Successfully');
-                    $('#contact-us-form')[0].reset();
+                    $('input[name="name"]').val('');
+                    $('input[name="mobile"]').val('');
+                    $('input[name="email"]').val('');
+                    $('textarea[name="message"]').val('');
+                    $('input[name="captcha"]').val('');
+                    $('#captcha').click();
+
                   },
                   error: function(err) {
                     G.mNotic('Sent Error.' + err.responseText, 'error');
