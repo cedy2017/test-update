@@ -24,7 +24,7 @@
 
           <div class="item">
             <div class="img email"></div>
-            <label><a href="mailto:info@listsirhk.com" class="a-clear">info@listsirhk.com</a></label>
+            <label><a href="mailto:info@listsirhk.com" style="color: #383838;" class="a-clear">info@listsirhk.com</a></label>
           </div>
 
           <div class="item">
@@ -133,20 +133,20 @@
           </div>
           <div class="row">
             <div class="col-md-6 field-row">
-              {{ forms.field('name', 'NAME') }}
+              {{ forms.field('name', 'NAME', name) }}
             </div>
             <div class="col-md-6 field-row">
-              {{ forms.field('mobile', 'MOBILE') }}
+              {{ forms.field('mobile', 'MOBILE', mobile) }}
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 field-row">
-              {{ forms.field('email', 'EMAIL') }}
+              {{ forms.field('email', 'EMAIL', email) }}
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 field-row">
-              {{ forms.textarea('message', 'MESSAGE TO US') }}
+              {{ forms.textarea('message', 'MESSAGE TO US', message) }}
             </div>
           </div>
           <div class="row">
@@ -163,6 +163,9 @@
               {{ forms.field('captcha', 'CAPTCHA') }}
             </div>
           </div>
+          <input name="unitId" type="hidden" value="{{unitId}}">
+          <input name="agentId" type="hidden" value="{{agentId}}">
+          <input name="enquiryType" type="hidden" value="{{type}}">
           <div class="row field-row">
             <div class="col-md-12">
               <button id="submit-enquiry" class="common-btn" style="max-width: 300px;margin-top: 30px;">Submit</button>
@@ -193,7 +196,9 @@
             $('#submit-enquiry').click(function() {
               if($('#contact-us-form').valid()) {
                 var data = {
-                  enquiry_type: 'E1',
+                  enquiry_type: $('input[name="enquiryType"]').val().trim(),
+                  unit: $('input[name="unitId"]').val().trim(),
+                  agent: $('input[name="agentId"]').val().trim(),
                   name: $('input[name="name"]').val().trim(),
                   mobile: $('input[name="mobile"]').val().trim(),
                   email: $('input[name="email"]').val().trim(),

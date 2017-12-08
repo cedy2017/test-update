@@ -1,7 +1,7 @@
 LAST_CHANGED_REV = $(shell git rev-list HEAD -n 1 | cut -c 1-8)
 
 main:
-	rm -rf ../release
+	rm -rf ./release
 	cp -r ./app ./release
 	cp -r ./config ./release
 	cp -r ./node_modules_prod ./release/node_modules

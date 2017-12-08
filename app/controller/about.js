@@ -13,10 +13,27 @@ module.exports = app => {
     }
 
     * contactUs() {
-      let ctx = this.ctx;
+      let ctx = this.ctx,
+          type = 'E1',
+          queryObj = ctx.request.query;
+
+      if (!queryObj.agent_id && queryObj.property_id) {
+        type = 'E2';
+      }
+      if (queryObj.agent_id && queryObj.property_id) {
+        type = 'E3';
+      }
+      
       let data = {
+        type,
         activeMenu: 'about',
-        apiUrl: app.config.apiUrl
+        apiUrl: app.config.apiUrl,
+        agentId: queryObj.agent_id,
+        unitId: queryObj.property_id,
+        name: queryObj.name,
+        email: queryObj.email,
+        message: queryObj.message,
+        mobile: queryObj.mobile,
       }
       ctx.body = yield ctx.renderView('about/contact-us.html', data);
     }
