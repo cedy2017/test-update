@@ -1,0 +1,23 @@
+.gallery-gird {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  .gird-item {
+    position: relative;
+  }
+  .img {
+    width: 100%;
+  }
+  figcaption {
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: white;
+  }
+  &:hover .img {
+    filter: blur(8px);
+  }
+}

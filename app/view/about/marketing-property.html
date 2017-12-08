@@ -7,7 +7,7 @@
   <title>Marketing Your Property</title>
   {% include "../base/base.html" %}
 </head>
-<body ontouchstart>
+<body ontouchstart >
   {% include "../base/header.html" %}
   <!-- <div class="container" style="margin-top: 30px; margin-bottom: 25px; max-width: 730px;">
     <h1 class="text-center">Marketing Your Property</h1>
@@ -27,13 +27,15 @@
     </p>
   </div>
 
-  <div class="grid-marley mt80 mb80">
+  <!-- <div class="grid-marley mt80 mb80">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto%3A500%2C400italic%2C100%2C700italic%2C300%2C700%2C500italic%2C100italic%2C300italic%2C400%7CRoboto+Slab%3A400%2C100%2C300%2C700">
     <figure class="effect-marley col-md-4 col-sm-6 col-xs-12  flush-left">
         <img src="/public/marketing-your-home/pic/01.jpg" alt="List Sotheby's International Realty">
         <figcaption>
             <h2>COLLECTION</h2>
-            <p>Access to many of the Hong Kong’s wealthiest clientele, including the luxury home owners and occupants in prestige locations, this exclusive publication of List Sotheby’s International Realty, Hong Kong showcases the most extraordinary homes from Hong Kong and other distinct locations around the world. COLLECTION is also distributed to Hong Kong Grade A Commercial Buildings, Private Clubs, Sotheby’s Hong Kong Auction House and participating affiliates of Sotheby’s International Realty®.<br><br>Advertising Enquiries <a href="mailto:collection@listsirhk.com?subject=Collection Enquiries">collection@listsirhk.com</a></p>
+            <p>
+                <span class="p-title">COLLECTION</span>
+                Access to many of the Hong Kong’s wealthiest clientele, including the luxury home owners and occupants in prestige locations, this exclusive publication of List Sotheby’s International Realty, Hong Kong showcases the most extraordinary homes from Hong Kong and other distinct locations around the world. COLLECTION is also distributed to Hong Kong Grade A Commercial Buildings, Private Clubs, Sotheby’s Hong Kong Auction House and participating affiliates of Sotheby’s International Realty®.<br><br>Advertising Enquiries <a href="mailto:collection@listsirhk.com?subject=Collection Enquiries">collection@listsirhk.com</a></p>
         </figcaption>			
     </figure>
       
@@ -93,19 +95,54 @@
 </figure>
 
 
-</div>
+</div> -->
+<style>
+  ::-webkit-scrollbar {
+    width: 0px;
+}
+::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    border-left: 1px solid #fff;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #fff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fff;
+}
 
-  <!-- <div class="gally-scroll"><iframe id="ifr" onload="onloadMP();" src="/marketing-your-home" scrolling="no" style="width:100%;height: 600px; margin-bottom:50px;" frameborder="0"></iframe></div> -->
+    </style>
+  <div class="gally-scroll"><iframe id="ifr" onload="onloadMP();" src="/marketing-your-home" scrolling="no" style="width:100%;height: 600px; margin-bottom:50px;" frameborder="0"></iframe></div> 
   
-  <!-- <script>
+<script>
     function onloadMP() {
-      var ifr = document.getElementById('ifr');
-      $('#ifr').css('height', ifr.contentDocument.body.offsetHeight + 70);
+        var ifr = document.getElementById('ifr');
+        if(IsPC()){
+      $('#ifr').css('height', ifr.contentDocument.body.offsetHeight + 60);
+        }
+        $('#ifr').css('height', ifr.contentDocument.body.offsetHeight + 30);
+        ifr.scrolling="yes";
     }
+
+    function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
     $(window).resize(function(){
       onloadMP();
     });
-  </script> -->
+    
+  </script> 
   {% include "../base/footer.html" %}
 </body>
 </html>

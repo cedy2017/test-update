@@ -1,6 +1,19 @@
 {% import "../base/forms.html" as forms %}
-<form action="/{{activeMenu}}-result" id="search-side-form">
 
+<form action="/{{activeMenu}}-result" id="search-side-form">
+  
+<!--[if IE]>
+  <style>
+     .xicon-wrapper {
+          width:27px;
+     }
+    .xicon-wrapper .xicon {
+    width: 25px;
+    height: 25px;
+    margin-top:-4px;
+ 
+}</style>
+  <![endif]-->
 <div class="search-side">
   <!-- <div class="search-condition-box">
     <div class="box-title">
