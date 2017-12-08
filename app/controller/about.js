@@ -24,7 +24,7 @@ module.exports = app => {
         type = 'E3';
       }
 
-      let mobile = (queryObj.mobile || '').replace(/\s/g, '');
+      let mobile = (queryObj.mobile || '').replace(/[\s\(\)-]/g, '');
       
       let data = {
         type,
