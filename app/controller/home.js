@@ -198,9 +198,8 @@ module.exports = app => {
         } else {
           res = res.slice(0, 20);
         }
+        res = res.filter((item)=> item !='');
         keywords = res.map((item)=>{
-          // convert fxck data;
-          item = item[0];
           return {
             id: item,
             value: item

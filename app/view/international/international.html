@@ -76,9 +76,9 @@
             <div class="title">
               ENQUIRIES
             </div> 
-            <div class="body"> 
+            <div class="enquiry-body"> 
               <div style="position: relative;"> 
-              <form id="enquiry-box-form" onsubmit="return false;" class="container enquiry-form"> 
+              <form id="enquiry-box-form" onsubmit="return false;" class="enquiry-form"> 
                 <div class="row"> 
                 <div class="col-md-12 field-row"> 
                   <div class="input-field"> 
@@ -210,28 +210,40 @@
             });
           </script>
           <style>
-          
-            .enquiriy-request {
-              margin:0 auto;
-              text-align:center;
-              padding: 15px 0;
+            .enquiry-body{
+              padding: 15px;
+              background-color: #F4F4F4;
             }
-            .enquiry-checkbox-area{
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
+              .enquiriy-request {
+                margin: 0 auto;
+                text-align: center;
+                padding: 15px 0;
             }
-            .enquiry-form .checkbox-area label{
-              font-size:12px;font-weight:100;
+              .mockup-checkbox{
+               width: 95%;
+              }
+              .enquiry-checkbox-area{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+              .enquiry-form .checkbox-area label{
+                font-size:12px;font-weight:100;;
+              }
+              .chekbox-width-10{
+                font-size:12px;
+                width:10px;
+              }
+              .mgl10{
+                margin-left:25px;
+              }
+              @media (max-width: 600px) { 
+                .enquiry-body{
+              padding: 15px 8px;
+           
             }
-            .chekbox-width-10{
-              font-size:12px;
-              width:10px;
-            }
-            .mgl10{
-              margin-left:25px;
-            }
-          </style>
+}
+            </style>
         </div>
       </div>
     </div>

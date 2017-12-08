@@ -132,7 +132,7 @@
             <div class="box-content">
               {% for item in property.buildInfo %}
                 <h2>{{ __(item.key) }}</h2>
-                <span style="margin-left: 0;">{{ item.value }}</span>
+                <span>{{ item.value }}</span>
               {% endfor %}
             </div>
           </div>
@@ -148,7 +148,7 @@
             <div class="box-content">
               {% for item in property.districtInfo %}
                 <h2>{{ __(item.key) }}</h2>
-                <span style="margin-left: 0;">{{ item.value }}</span>
+                <span>{{ item.value }}</span>
               {% endfor %}
             </div>
           </div>
@@ -339,9 +339,9 @@
               <div class="title">
                ENQUIRIES
               </div> 
-              <div class="body"> 
+              <div class="enquiry-body"> 
                <div style="position: relative;"> 
-                <form id="enquiry-box-form" onsubmit="return false;" class="container enquiry-form"> 
+                <form id="enquiry-box-form" onsubmit="return false;" class="enquiry-form"> 
                  <div class="row"> 
                   <div class="col-md-12 field-row"> 
                    <div class="input-field"> 
@@ -482,13 +482,17 @@
               });
             </script>
             <style>
-           
+            .enquiry-body{
+              padding: 15px;
+              background-color: #F4F4F4;
+            }
               .enquiriy-request {
                 margin: 0 auto;
                 text-align: center;
                 padding: 15px 0;
             }
-
+              .mockup-checkbox{
+               width: 95%;
               }
               .enquiry-checkbox-area{
                 position: absolute;
@@ -496,15 +500,21 @@
                 transform: translateY(-50%);
               }
               .enquiry-form .checkbox-area label{
-                font-size:14px;font-weight:100;
+                font-size:12px;font-weight:100;;
               }
               .chekbox-width-10{
-                font-size:14px;
+                font-size:12px;
                 width:10px;
               }
               .mgl10{
                 margin-left:25px;
               }
+              @media (max-width: 600px) { 
+                .enquiry-body{
+              padding: 15px 8px;
+           
+            }
+}
             </style>
           {% else %}
             <div class="sale-info-box">
@@ -531,9 +541,9 @@
                       data-mobile="{{property.agentObj.mobile}}"
                       data-image="{{property.agentObj.profile_pic}}"
                     >
-                      <button id="agent-profile-detail" class="common-btn">Profile</button>
+                      <button id="agent-profile-detail" class="common-btn" style="min-width: 145px;" >Profile</button>
                     </div>
-                    <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn">Enquiry</button></div>
+                    <div class="col-md-6 col-xs-6" style="padding-left: 4px;"><button data-dialog="enquire-dialog" class="common-btn" style="min-width: 145px;">Enquiry</button></div>
                   </div>
                   <script>
                     $(document).ready(function() {
