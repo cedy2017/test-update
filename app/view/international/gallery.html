@@ -96,9 +96,9 @@
               if(!preEl) {
                 preEl = $lis[$lis.length - 1];
               }
-              $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
               $(preEl).addClass('side').css({'transform': 'translateX(' + -stageWidth + 'px)', 'z-index': '2'});
               $(nextEl).addClass('side').css({'transform': 'translateX(' + stageWidth + 'px)' , 'z-index': '1'});
+              $(activeEl).removeClass('side').css({'transform': 'translateX(0px)', 'z-index': '3'});
           }
     
           function autoFLash() {

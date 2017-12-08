@@ -3,7 +3,7 @@ const LOCATIONS = [
   {key: 'HK', value:'Hong Kong Island'},
   {key: 'KL', value: 'Kowloon'},
   {key: 'NT', value: 'New Territories'},
-  {key: 'IL', value: 'Outlying Islands'},
+  // {key: 'IL', value: 'Outlying Islands'},
 ];
 
 const DISTRICTS = {
@@ -36,7 +36,7 @@ const DISTRICTS = {
 
    "KL": [
     {key: ' ', value: 'ALL'},
-    'Cheung Sha Wan / Sham Shui Po',
+    // 'Cheung Sha Wan / Sham Shui Po',
     'Ho Man Tin / Waterloo Road',
     'Hung Hom / To Kwa Wan',
     'Kowloon City / Yau Yat Chuen',
@@ -51,42 +51,42 @@ const DISTRICTS = {
 
    "NT": [
     {key: ' ', value: 'ALL'},
-    'Castle Peak Road',
+    // 'Castle Peak Road',
     'Clear Water Bay',
-    'Gold Coast',
+    // 'Gold Coast',
     'Sai Kung',
-    'Sham Tseng',
+    // 'Sham Tseng',
     'Shatin',
     'Fo Tan',
     'Tai Wai',
-    'Sheung Shui',
+    // 'Sheung Shui',
     'Tai Po',
     'Tseung Kwan O',
-    'Tuen Mun',
-    'Yuen Long'
+    // 'Tuen Mun',
+    // 'Yuen Long'
   ],
 
-  "IL":[
-    {key: ' ', value: 'ALL'},
-    'Discovery Bay',
-    'Ma Wan',
-    'Lantau Island',
-    'Lamma Island'
-  ],
+  // "IL":[
+  //   {key: ' ', value: 'ALL'},
+  //   'Discovery Bay',
+  //   'Ma Wan',
+  //   'Lantau Island',
+  //   'Lamma Island'
+  // ],
 
   "ALL": [
     {key: ' ', value: 'ALL'},
-    'Castle Peak Road', 
+    // 'Castle Peak Road', 
     'Causeway Bay', 
     'Central',
-    'Cheung Sha Wan / Sham Shui Po', 
+    // 'Cheung Sha Wan / Sham Shui Po', 
     'Chung Hom Kok', 
     'Clear Water Bay', 
     'Deep Water Bay', 
     'Discovery Bay', 
     'Fei Ngo Shan', 
     'Fo Tan', 
-    'Gold Coast', 
+    // 'Gold Coast', 
     'Happy Valley',
     'Ho Man Tin / Waterloo Road', 
     'Hung Hom / To Kwa Wan', 
@@ -108,10 +108,10 @@ const DISTRICTS = {
     'Repulse Bay', 
     'Sai Kung', 
     'Sai Ying Pun', 
-    'Sham Tseng', 
+    // 'Sham Tseng', 
     'Shatin', 
     'Shek O', 
-    'Sheung Shui', 
+    // 'Sheung Shui', 
     'Sheung Wan', 
     'Shouson Hill', 
     'Stanley', 
@@ -123,11 +123,11 @@ const DISTRICTS = {
     'The Peak', 
     'Tseung Kwan O', 
     'Tsim Sha Tsui', 
-    'Tuen Mun', 
+    // 'Tuen Mun', 
     'Wan Chai', 
     'Western / Kennedy Town / Sai Ying Pun', 
     'Yau Ma Tei', 
-    'Yuen Long'
+    // 'Yuen Long'
   ]
 }
 
