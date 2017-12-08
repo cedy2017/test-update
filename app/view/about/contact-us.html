@@ -193,11 +193,13 @@
                 }
               }
             });
+            // [name="agentId"] 实际是number。
             $('#submit-enquiry').click(function() {
               if($('#contact-us-form').valid()) {
                 var data = {
                   enquiry_type: $('input[name="enquiryType"]').val().trim(),
                   unit: $('input[name="unitId"]').val().trim(),
+                  agent_number: $('input[name="agentId"]').val().trim(),
                   name: $('input[name="name"]').val().trim(),
                   mobile: $('input[name="mobile"]').val().trim(),
                   email: $('input[name="email"]').val().trim(),
@@ -207,7 +209,7 @@
                   method: 'post',
                   data: data,
                   dataType: 'json',
-                  url: '/api/enquiry/',
+                  url: 'https://www.listsothebysrealtyhk.com/api/enquiry/',
                   success: function() {
                     G.mNotic('Sent Successfully');
                     $('#contact-us-form')[0].reset();
