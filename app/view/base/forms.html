@@ -92,7 +92,7 @@
       
       var getKeys = jQuery.debounce(function() {
         $.ajax({
-          url:"/api/autofill",
+          url:"/autofill",
           dataType: 'json',
           data: {
             key: encodeURIComponent($input.val().trim())

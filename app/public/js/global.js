@@ -3,10 +3,6 @@ $(document).ready(function() {
   $('[data-dialog]').click(function() {
     var id = $(this).data('dialog');
     $('#' + id).fadeIn(400);
-    // trigger some event.
-    // setTimeout(function() {
-    //   $(window).resize();
-    // },500);
   });
   $('.dialog-close').click(function(e){
     $(e.target).closest('.dialog-wrapper').fadeOut(400);
@@ -28,19 +24,8 @@ $(document).ready(function() {
   $('#captcha').click(function() {
     $(this).find('iframe').attr('src', '/captcha?st=' + Date.now());
   })
-  // privacy adjust height
-  // function resizePrivacy() {
-  //   $.each($('.agree-terms-padding-left'), function(index, el) {
-  //     var height = $(el).find('.agree-terms').height();
-  //     $(el).height(height);
-  //   });
-  // }
-  // resizePrivacy();
-  // $(window).resize(function() {
-  //   resizePrivacy();
-  // });
 
-  console.log('Sotheby\'s Version: 1.1.22; Update Date: 2017-12-08');
+  console.log('Sotheby\'s Version: 1.1.23; Update Date: 2017-12-11');
 });
 
 var G = {

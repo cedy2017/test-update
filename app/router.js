@@ -31,5 +31,5 @@ module.exports = app => {
   app.get('/full-disclaimer', 'about.fullDisclaimer')
 
   // keyword search
-  app.get('/api/autofill', 'home.getKeywords');
+  app.get('/autofill', 'home.getKeywords');
 };
