@@ -114,6 +114,7 @@
       $input.keyup(function(e){
         if (e.keyCode == 13) {
           var enterValue = $(this).val();
+          if (!enterValue) return;
           selectedValues.push(enterValue);
           $selected.val(selectedValues.join(',')).change();
           $box.append('<span class="auto-item">' + enterValue + '<i class="close-mock"></i></span>');

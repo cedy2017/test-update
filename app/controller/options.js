@@ -62,6 +62,7 @@ const DISTRICTS = {
     // 'Sheung Shui',
     'Tai Po',
     'Tseung Kwan O',
+    'Tsuen Wan',
     // 'Tuen Mun',
     // 'Yuen Long'
   ],
@@ -123,6 +124,7 @@ const DISTRICTS = {
     'The Peak', 
     'Tseung Kwan O', 
     'Tsim Sha Tsui', 
+    'Tsuen Wan',
     // 'Tuen Mun', 
     'Wan Chai', 
     'Western / Kennedy Town / Sai Ying Pun', 

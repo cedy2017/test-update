@@ -196,29 +196,38 @@
     </div>
   </div>
   <script>
-    $('#buy-rent-btn').on('click', function(e) {
-      e.stopPropagation();
-      var $currentEl = $(e.target);
-      $currentEl.siblings().removeClass('s-active');
-      var type = $currentEl.addClass('s-active').data('type');
+    $(document).ready(function() {
+      $('#buy-rent-btn').on('click', function(e) {
+        e.stopPropagation();
+        var $currentEl = $(e.target);
+        $currentEl.siblings().removeClass('s-active');
+        var type = $currentEl.addClass('s-active').data('type');
 
-      console.log(type);
-      $('#buy-rent-content').slideDown(500);
-    });
-    $("#buy-rent-btn").click(function(e) {
-      e.stopPropagation();
-      var type = $(e.target).data('type');
-      switch(type) {
-        case 'buy': 
-          $('#buy-search').show(), $('#rent-search').hide(), $('#property-search').hide();
-          break;
-        case 'rent':
-          $('#buy-search').hide(), $('#rent-search').show(), $('#property-search').hide();
-          break;
-        case 'property':
-          $('#buy-search').hide(), $('#rent-search').hide(), $('#property-search').show();
-          break;
-      }
+        $('#buy-rent-content').slideDown(500);
+      });
+      $("#buy-rent-btn").click(function(e) {
+        e.stopPropagation();
+        var type = $(e.target).data('type');
+        switch(type) {
+          case 'buy': 
+            $('#buy-search').show(), $('#rent-search').hide(), $('#property-search').hide();
+            break;
+          case 'rent':
+            $('#buy-search').hide(), $('#rent-search').show(), $('#property-search').hide();
+            break;
+          case 'property':
+            $('#buy-search').hide(), $('#rent-search').hide(), $('#property-search').show();
+            break;
+        }
+      });
+      $('#buy-search,#rent-search').keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          setTimeout(function() {
+            $(event.currentTarget).find('form').submit();
+          },200);
+        }
+      });
     });
   </script>
 </div>
