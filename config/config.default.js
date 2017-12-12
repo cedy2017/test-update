@@ -30,6 +30,7 @@ module.exports = appInfo => {
   };
   // test env: http://192.168.5.51:18000 uat: https://www.listsothebysrealtyhk.com
   config.host = 'https://www.listsothebysrealtyhk.com';
+  config.genie = 'https://genie.listsothebysrealtyhk.com'
   config.apiUrl = `${config.host}/api/`;
 
   config.googleMap = {

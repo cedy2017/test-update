@@ -256,7 +256,10 @@ module.exports = app => {
             unit_array.push({[key]: res.data.descriptions[key]});
           }
           resData.unit_features = unit_array;
-          resData.image_gallery[0]["1800x1200"] = res.data.photos;
+          let photos = _.sortBy(res.data.photos.filter((item) => {
+            return item.order !== -1;
+          }), 'order');
+          resData.image_gallery[0]["1800x1200"] = photos;
           res = this.convertPropertyDetail(resData);
         } catch(e) {
           console.log(e);
@@ -274,7 +277,7 @@ module.exports = app => {
 
         let data = {
           apiUrl: app.config.apiUrl,
-          host: app.config.host,
+          host: app.config.genie,
           activeMenu: queryObj['search_type'] || 'buy',
           googleMap: app.config.googleMap,
           rateInfo,
