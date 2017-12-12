@@ -106,6 +106,12 @@
         setTimeout(function() {
           $list.hide();
         }, 300);
+        var enterValue = $(this).val();
+        if (!enterValue) return;
+        selectedValues.push(enterValue);
+        $selected.val(selectedValues.join(',')).change();
+        $box.append('<span class="auto-item">' + enterValue + '<i class="close-mock"></i></span>');
+        fixedPadding();
       }).focus(function(){
         getKeys();
         $list.show();
