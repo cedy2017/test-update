@@ -536,6 +536,7 @@
                       data-id="{{property.agentObj.id}}"
                       data-name="{{property.agentObj.first_name}} {{property.agentObj.last_name}}"
                       data-title="{{property.agentObj.title}}"
+                      data-title="{{property.agentObj.email}}"
                       data-licence="{{property.agentObj.agent_number}}"
                       data-direct="{{property.agentObj.general_line}}"
                       data-mobile="{{property.agentObj.mobile}}"
@@ -560,6 +561,7 @@
                           $('#agent-detail-dialog-name').text($target.data('name'));
                           $('#agent-detail-dialog-title').text($target.data('title'));
                           $('#agent-detail-dialog-licence').text($target.data('licence'));
+                          $('#agent-detail-dialog-email').text($target.data('email'));
                           $('#agent-detail-dialog-direct').text($target.data('direct'));
                           $('#agent-detail-dialog-mobile').text($target.data('mobile'));
                           $('#agent-detail-dialog-image').attr('src', $target.data('image'));

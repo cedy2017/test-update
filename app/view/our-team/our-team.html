@@ -29,6 +29,7 @@
         data-id="{{item.id}}"
         data-name="{{item.first_name}} {{item.last_name}}"
         data-title="{{item.title}}"
+        data-email="{{item.email}}"
         data-licence="{{item.agent_number}}"
         data-direct="{{item.general_line}}"
         data-mobile="{{item.mobile}}"
@@ -51,6 +52,7 @@
         if (id) {
           $('#agent-detail-dialog-name').text($target.data('name'));
           $('#agent-detail-dialog-title').text($target.data('title'));
+          $('#agent-detail-dialog-email').text($target.data('email'));
           $('#agent-detail-dialog-licence').text($target.data('licence'));
           $('#agent-detail-dialog-direct').text($target.data('direct'));
           $('#agent-detail-dialog-mobile').text($target.data('mobile'));
