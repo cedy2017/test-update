@@ -35,7 +35,7 @@
     {% endif %}
     {{ label }}
   </label>
-  <input maxlength="255" autocomplete="off" name="{{ name }}" value="{{ value }}" type="{{ type }}" id="{{ name }}">
+  <input class="{{opt.class}}" maxlength="255" autocomplete="off" name="{{ name }}" value="{{ value }}" type="{{ type }}" id="{{ name }}">
   <div class="xline"></div>
 </div>
 {% endmacro %}

@@ -353,7 +353,7 @@
                   <div class="col-md-12 field-row"> 
                    <div class="input-field"> 
                     <label for="enquiry-box-mobile">PHONE </label> 
-                    <input maxlength="255" autocomplete="off" name="enquiry-box-mobile" value="" type="text" id="enquiry-box-mobile" /> 
+                    <input class="contact-group" maxlength="255" autocomplete="off" name="enquiry-box-mobile" value="" type="text" id="enquiry-box-mobile" /> 
                     <div class="xline"></div> 
                    </div> 
                   </div> 
@@ -362,7 +362,7 @@
                   <div class="col-md-12 field-row"> 
                     <div class="input-field"> 
                     <label for="enquiry-box-email">EMAIL </label> 
-                    <input maxlength="255" autocomplete="off" name="enquiry-box-email" value="" type="text" id="enquiry-box-email" /> 
+                    <input class="contact-group" maxlength="255" autocomplete="off" name="enquiry-box-email" value="" type="text" id="enquiry-box-email" /> 
                     <div class="xline"></div> 
                    </div> 
                   </div> 
@@ -422,18 +422,18 @@
                 $('#enquiry-box-form').validate({
                   rules: {
                     "enquiry-box-email": {
-                      required: true,
-                      email: true
+                      email: true,
+                      require_from_group: [1, ".contact-group"]
                     },
                     "enquiry-box-name": {
                       required: true
                     },
                     "enquiry-box-budget": {
-                      required: true,
                       number: true
                     },
                     "enquiry-box-mobile": {
-                      mobile: true
+                      mobile: true,
+                      require_from_group: [1, ".contact-group"]
                     }
                   }
                 });

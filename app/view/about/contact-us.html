@@ -136,12 +136,12 @@
               {{ forms.field('name', 'NAME', name) }}
             </div>
             <div class="col-md-6 field-row">
-              {{ forms.field('mobile', 'MOBILE', mobile) }}
+              {{ forms.field('mobile', 'MOBILE', mobile, null, {class: 'contact-group'}) }}
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 field-row">
-              {{ forms.field('email', 'EMAIL', email) }}
+              {{ forms.field('email', 'EMAIL', email, null, {class: 'contact-group'}) }}
             </div>
           </div>
           <div class="row">
@@ -177,15 +177,15 @@
             var form = $('#contact-us-form').validate({
               rules: {
                 email: {
-                  required: true,
-                  email: true
+                  email: true,
+                  require_from_group: [1, ".contact-group"]
                 },
                 name: {
                   required: true
                 },
                 mobile: {
-                  required: true,
-                  mobile: true
+                  mobile: true,
+                  require_from_group: [1, ".contact-group"]
                 },
                 captcha: {
                   required: true,

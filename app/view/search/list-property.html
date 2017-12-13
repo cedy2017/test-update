@@ -39,10 +39,10 @@
       </div>
       <div class="row">
         <div class="col-md-6">{{forms.field('name', 'NAME')}}</div>
-        <div class="col-md-6">{{forms.field('mobile', 'MOBILE')}}</div>
+        <div class="col-md-6">{{forms.field('mobile', 'MOBILE', '', null, {class: 'contact-group'})}}</div>
       </div>
       <div class="row">
-        <div class="col-md-6">{{forms.field('email', 'EMAIL')}}</div>
+        <div class="col-md-6">{{forms.field('email', 'EMAIL','' ,null, {class: 'contact-group'})}}</div>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -65,21 +65,19 @@
             rules: {
               listing_type: "required",
               email: {
-                required: true,
-                email: true
+                email: true,
+                require_from_group: [1, ".contact-group"],
               },
               name: {
                 required: true,
               },
               price_ask: {
-                required: true,
                 number: true
               },
               mobile: {
-                required: true,
-                mobile: true
+                mobile: true,
+                require_from_group: [1, ".contact-group"],
               },
-              address: "required"
             }
           });
           $('#sumbmit_list').click(function() {

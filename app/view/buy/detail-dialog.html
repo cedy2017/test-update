@@ -28,9 +28,9 @@
                 </div>
               </div>
               <div class="col-md-6">
-                {{forms.field('email', 'EMAIL', preEmail)}}
+                {{forms.field('email', 'EMAIL', preEmail, null, {class: 'contact-group'})}}
                 {{forms.field('name', 'NAME', preName)}}
-                {{forms.field('mobile', 'MOBILE', preMobile)}}
+                {{forms.field('mobile', 'MOBILE', preMobile, null, {class: 'contact-group'})}}
                 {{forms.textarea('message', 'MESSAGE', preMessage)}}
                 <input name="unitId" type="hidden" value="{{unitId}}">
                 <input name="agentId" type="hidden" value="{{property.agentObj.id}}">
@@ -54,14 +54,15 @@
             $('#enquiry-dialog-form').validate({
               rules: {
                 email: {
-                  required: true,
-                  email: true
+                  email: true,
+                  require_from_group: [1, ".contact-group"]
                 },
                 name: {
                   required: true
                 },
                 mobile: {
-                  mobile: true
+                  mobile: true,
+                  require_from_group: [1, ".contact-group"]
                 }
               }
             });

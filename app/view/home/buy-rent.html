@@ -125,10 +125,10 @@
             {{forms.field('name', 'NAME')}}
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
-            {{forms.field('mobile', 'MOBILE')}}
+            {{forms.field('mobile', 'MOBILE', '', null, {class: 'contact-group'})}}
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
-            {{forms.field('email', 'EMAIL')}}
+            {{forms.field('email', 'EMAIL', '', null, {class: 'contact-group'})}}
           </div>
         </div>
         <div class="row">
@@ -149,21 +149,19 @@
               rules: {
                 listing_type: "required",
                 email: {
-                  required: true,
-                  email: true
+                  email: true,
+                  require_from_group: [1, ".contact-group"]
                 },
                 name: {
                   required: true,
                 },
                 price_ask: {
-                  required: true,
                   number: true
                 },
                 mobile: {
-                  required: true,
-                  mobile: true
-                },
-                address: "required"
+                  mobile: true,
+                  require_from_group: [1, ".contact-group"]
+                }
               }
             });
             $('#sumbmit_list').click(function() {
