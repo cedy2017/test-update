@@ -25,7 +25,7 @@ $(document).ready(function() {
     $(this).find('iframe').attr('src', '/captcha?st=' + Date.now());
   })
 
-  console.log('Sotheby\'s Version: 1.1.24; Update Date: 2017-12-12');
+  console.log('Sotheby\'s Version: 1.1.26; Update Date: 2017-12-13');
 });
 
 var G = {

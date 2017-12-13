@@ -10,7 +10,7 @@
       <form action="/buy-result" method="get">
       <div class="row">
         <div class="col-md-4 col-xs-12">
-          {{forms.autoComplete('keyword_search_buy', 'KEYWORDS')}}
+          {{forms.singleAutoComplete('keyword_search_buy', 'KEYWORDS')}}
         </div>
         <div class="col-md-4 col-xs-12">
           {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}
@@ -54,7 +54,7 @@
       <form action="/rent-result" method="get">
       <div class="row">
         <div class="col-md-4 col-xs-12">
-          {{forms.autoComplete('keyword_search_rent', 'KEYWORDS')}}
+          {{forms.singleAutoComplete('keyword_search_rent', 'KEYWORDS')}}
         </div>
         <div class="col-md-4 col-xs-12">
           {{forms.select('district', 'DISTRICT', DISTRICTS.ALL)}}

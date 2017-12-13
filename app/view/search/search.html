@@ -18,7 +18,7 @@
     </div>
     <form id="search-form" action="/{{activeMenu}}-result" method="get" class="search-form">
       <div class="row" class="mt30">
-        <div class="col-md-12">{{forms.autoComplete('keyword_search', 'KEYWORDS')}}</div>
+        <div class="col-md-12">{{forms.singleAutoComplete('keyword_search', 'KEYWORDS')}}</div>
       </div>
       <div class="row">
         <div class="col-md-6">{{forms.field('id', 'PROPERTY ID')}}</div>

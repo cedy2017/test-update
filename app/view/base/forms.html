@@ -162,6 +162,92 @@
 </div>
 {% endmacro %}
 
+{% macro singleAutoComplete(name, label='', opt={}) %}
+<div id="auto-wrapper-{{name}}" class="input-field auto-complete">
+  <label for="{{ name }}">
+    {% if opt.icon %}
+      <div class="xicon-wrapper"><i class="xicon {{opt.icon}}"></i></div>
+    {% endif %}
+    {{ label }}
+  </label>
+  <input autocomplete="off" name="keyword_search" value="" type="text" id="{{ name }}">
+  <div class="xline"></div>
+  <ul class="auto-dropdown">
+  </ul>
+  <script>
+    ;(function(){
+      var $root = $('#auto-wrapper-{{name}}'),
+          $selected = $("#auto-select-{{name}}-value"),
+          $input = $root.find('input').first(),
+          $list = $root.find('.auto-dropdown');
+      var datasource = [], selectedValues = '';
+      var urlKeyStr = G.searchToObj('keyword_search');
+      if(urlKeyStr) {
+        selectedValues = urlKeyStr;
+      }
+
+      // init
+      $input.val(selectedValues);
+      var refreshList = function(s) {
+        // datasource = $.grep(s, function(item) {
+        //   return selectedValues.indexOf(item.value) < 0;
+        // });
+        datasource = s;
+        $list.empty();
+        if(datasource.length) {
+          datasource.forEach(function(item) {
+            $list.append('<li>' + item.value + '</li>');
+          });
+        } else {
+          $list.append('<span>NO Keyword Match.</span>');
+        }
+      }
+      
+      var getKeys = jQuery.debounce(function() {
+        $.ajax({
+          url:"/autofill",
+          dataType: 'json',
+          data: {
+            key: encodeURIComponent($input.val().trim())
+          },
+          success: function(response) {
+            refreshList(response.data);
+          }
+        });
+      }, 250, null, true);
+      $input.blur(function() {
+        setTimeout(function() {
+          $list.hide();
+        }, 300);
+        var enterValue = $(this).val();
+        if (!enterValue) return;
+        selectedValues = enterValue;
+        $input.val(selectedValues);
+      }).focus(function(){
+        getKeys();
+        $list.show();
+      });
+      $input.keydown(getKeys);
+      $input.keyup(function(e){
+        if (e.keyCode == 13) {
+          var enterValue = $(this).val();
+          if (!enterValue) return;
+          selectedValues = enterValue;
+          $input.val(selectedValues);
+        }
+      });
+      $list.click(function(e){
+        if(e.target.tagName.toLowerCase() != 'li') return false;
+        var text = $(e.target).text();
+        $(e.target).closest('li').remove();
+        selectedValues = text;
+        $input.val(selectedValues).change();
+      });
+    })();
+  </script>
+</div>
+{% endmacro %}
+
 {% macro textarea(name, label='', value='') %}
 <div class="text-area-field">
   <label for="{{ name }}">{{ label }}</label>

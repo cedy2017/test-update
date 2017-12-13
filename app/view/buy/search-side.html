@@ -37,7 +37,7 @@
         REFINE SEARCH
       </div>
       <div class="box-body">
-        {{forms.autoComplete('keywords', 'KEYWORDS', {icon: 'search'})}} {{forms.select('location', 'LOCATION', LOCATIONS, '', {icon:
+        {{forms.singleAutoComplete('keyword_search', 'KEYWORDS', {icon: 'search'})}} {{forms.select('location', 'LOCATION', LOCATIONS, '', {icon:
         'location', selected: query.location})}} {{forms.select('district', 'DISTRICT', DISTRICTS, '', {icon: 'district',
         selected: query.district})}}
         <div class="row">
@@ -159,7 +159,9 @@
   (function () {
     var $searchForm = $('#search-side-form');
     $searchForm.change(function () {
-      $(this).submit();
+      setTimeout(function() {
+        $searchForm.submit();
+      },100);
     });
 
     $('#input-number-car-park-input').change(function () {

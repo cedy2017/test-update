@@ -28,7 +28,7 @@ const DETAIL_DATA = {
     name:'The Woolworth Pinnacle Penthouse',
     urlName: 'The Woolworth Pinnacle Penthouse',
     address: 'New York, United States',
-    title: 'Castle in the air.',
+    title: 'Castle in the air',
     queryType: 'E4',
     gallery: [
       {
