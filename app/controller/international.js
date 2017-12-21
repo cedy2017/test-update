@@ -92,7 +92,7 @@ const DETAIL_DATA = {
     name:'Four Seasons Private Residences Montreal',
     urlName: 'Four Seasons Private Residences Montreal',
     address: 'Montreal, Canada',
-    title: 'Redefining inspired living in Montreal and beyond',
+    title: 'World Renowned Luxury Meets Old World Art & Culture',
     queryType: 'E5',
     gallery: [
       {
@@ -134,8 +134,12 @@ const DETAIL_DATA = {
     ],
     agentObj: AGENT_CHAN,
     propertyDesc: [
-      'Located in Montreal, one of the most attractive cities with great historic culture to tell, The Four Seasons Residences chooses to sit on the Rue de la Montagne, which is the heart of this vibrant and enchanting French-speaking locale.  With 18 prominently-designed units of private residences, Carbonle is the building’s developer and the renowned Philip Hazan as her interior designer.  By the winter of 2018, The Four Seasons Residences Montreal will be celebrating the utmost joie de vivre sense of place with the Golden Square Mile in the metropolis and the opulent residence is only a corner away from the Montreal Museum of Fine Arts.  The ecosystem of the Four Seasons Hotel and Residences is connected to the Canada’s largest Ogilvy’s Department Flagship Store, where the historic building has been the iconic landmark for over a century. ',
-      'Experiencing a home called Four Seasons, as the finest luxury meets the oldest but fascinating art and culture, leading her inhabitants to a new height of an indulgence of prestige.'
+      'Four Seasons Private Residences are centrally located on Rue de la Montagne, in the heart of Montreal. Developed by renowned Canadian developer, Carbonleo and sat atop Montreal’s new Four Seasons Hotel, the Philip Hazan designed units will offer new owners the styling and finishes that Four Seasons has become synonymous with. Limited to only eighteen exclusive apartments, residents will have their every need attended to by a dedicated Director of Residences working alongside a Four Seasons Private Residence Concierge. Once in residence, owners will be able to take advantage of Four Seasons Hotel facilities including a state-of-the-art spa, an indoor pool, fitness centre and extensive event spaces including a 6,000-square-foot ballroom. In addition, the hotel will play host to World Class dining venues all anchored by a renowned chef.', 
+      
+     'Linking directly to the ecosystem of Four Seasons Hotel and Private Residences is Canada’s iconic Ogilvy department store, which has been a landmark in Montreal for over a century while the Montreal Museum of Fine Arts is merely a block away. ',
+      
+     'Four Seasons Private Residences, Montreal offers residents the chance to experience the acclaimed luxury and prestige that Four Seasons Hotels are famed for in one of Canada’s most cosmopolitan and dynamic historical cities, blending historic European culture with modern style and sophistication.'
+     
     ]
   }
 }
